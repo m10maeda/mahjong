@@ -21,6 +21,9 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.2.0",
+    "@commitlint/config-conventional": "^17.2.0",
+    "@commitlint/config-nx-scopes": "^17.2.0",
     "@emotion/babel-plugin": "11.10.2",
     "@nrwl/cli": "15.2.1",
     "@nrwl/cypress": "15.2.1",
@@ -48,6 +51,7 @@
     "eslint-plugin-jsx-a11y": "6.6.1",
     "eslint-plugin-react": "7.31.8",
     "eslint-plugin-react-hooks": "4.6.0",
+    "husky": "^8.0.2",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
     "nx": "15.2.1",
