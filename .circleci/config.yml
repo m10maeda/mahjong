@@ -71,7 +71,7 @@ jobs:
 
       - run:
           name: Run ESLint
-          command: yarn nx affected --base=$NX_BASE --head=$NX_HEAD --target=lint --parallel=3
+          command: yarn nx affected --base=$NX_BASE --head=$NX_HEAD --target=lint --parallel=3 --configuration=ci
 
       - run:
           name: Run tests and collect coverage
