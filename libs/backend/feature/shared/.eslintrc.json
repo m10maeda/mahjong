@@ -1,5 +1,9 @@
 {
-  "extends": ["../../../../.eslintrc.json"],
+  "extends": [
+    "../../../../.eslintrc.json",
+    "../../../../tools/eslint-configs/base.js",
+    "../../../../tools/eslint-configs/+jest.js"
+  ],
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
