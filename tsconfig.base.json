@@ -18,7 +18,8 @@
       "@mahjong/backend/feature/shared": [
         "libs/backend/feature/shared/src/index.ts"
       ],
-      "@mahjong/core/tile": ["libs/core/tile/src/index.ts"]
+      "@mahjong/core/tile": ["libs/core/tile/src/index.ts"],
+      "@mahjong/core/tile-group": ["libs/core/tile-group/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
