@@ -89,6 +89,10 @@ jobs:
       - store_artifacts:
           path: ./coverage
 
+      - codecov/upload:
+          file: ./coverage/apps/web/lcov.info
+          flags: web
+
 workflows:
   version: 2
 
