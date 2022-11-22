@@ -3,7 +3,8 @@
     "plugin:@nrwl/nx/react-typescript",
     "next",
     "next/core-web-vitals",
-    "../../.eslintrc.json"
+    "../../.eslintrc.json",
+    "../../tools/eslint-configs/react.js"
   ],
   "ignorePatterns": ["!**/*", ".next/**/*"],
   "overrides": [
@@ -15,7 +16,10 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "rules": {}
+      "rules": {},
+      "parserOptions": {
+        "project": ["apps/web/tsconfig(.*)?.json"]
+      }
     },
     {
       "files": ["*.js", "*.jsx"],
