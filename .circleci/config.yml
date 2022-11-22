@@ -94,6 +94,10 @@ jobs:
           flags: core
 
       - codecov/upload:
+          file: ./coverage/libs/core/tile-group/lcov.info
+          flags: core
+
+      - codecov/upload:
           file: ./coverage/apps/web/lcov.info
           flags: web
 
