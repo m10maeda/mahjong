@@ -1,0 +1,30 @@
+# https://docs.codecov.com/docs/codecovyml-reference
+
+coverage:
+  status:
+    project:
+      default:
+        target: 70%
+        threshold: 20%
+
+    patch:
+      default:
+        target: 70%
+        threshold: 20%
+
+# https://docs.codecov.com/docs/flags
+
+flag_management:
+  default_rules:
+    carryforward: true
+
+    statuses:
+      - name_prefix: project-
+        type: project
+        target: 70%
+        threshold: 20%
+
+      - name_prefix: patch-
+        type: patch
+        target: 70%
+        threshold: 20%

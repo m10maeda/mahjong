@@ -7,6 +7,7 @@ executors:
 
 orbs:
   nx: nrwl/nx@1.6.1
+  codecov: codecov/codecov@3.2.4
 
 commands:
   prepare-dependencies:
@@ -71,7 +72,7 @@ jobs:
 
       - run:
           name: Run ESLint
-          command: yarn nx affected --base=$NX_BASE --head=$NX_HEAD --target=lint --parallel=3
+          command: yarn nx affected --base=$NX_BASE --head=$NX_HEAD --target=lint --parallel=3 --configuration=ci
 
       - run:
           name: Run tests and collect coverage
@@ -81,6 +82,12 @@ jobs:
           name: Stop all agents
           command: yarn nx-cloud stop-all-agents
           when: always
+
+      - store_test_results:
+          path: ./reports
+
+      - store_artifacts:
+          path: ./coverage
 
 workflows:
   version: 2
