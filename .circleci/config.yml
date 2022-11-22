@@ -98,6 +98,10 @@ jobs:
           flags: core
 
       - codecov/upload:
+          file: ./coverage/libs/backend/feature/shared/lcov.info
+          flags: backend
+
+      - codecov/upload:
           file: ./coverage/apps/web/lcov.info
           flags: web
 
