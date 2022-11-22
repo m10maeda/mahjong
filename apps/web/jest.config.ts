@@ -8,4 +8,15 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/apps/web',
+  reporters: [
+    'default',
+    [
+      'jest-junit',
+      {
+        suiteName: 'web app unit tests',
+        outputDirectory: 'reports/apps/web',
+        outputName: 'unit-test-results.xml',
+      },
+    ],
+  ],
 };
