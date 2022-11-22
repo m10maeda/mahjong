@@ -9,6 +9,12 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/core/tile-group/**/*.ts"]
+      },
+      "configurations": {
+        "ci": {
+          "format": "junit",
+          "outputFile": "reports/libs/core/tile-group/eslint-results.xml"
+        }
       }
     },
     "test": {

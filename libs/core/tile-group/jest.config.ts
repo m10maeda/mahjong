@@ -12,4 +12,15 @@ export default {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../../coverage/libs/core/tile-group',
+  reporters: [
+    'default',
+    [
+      'jest-junit',
+      {
+        suiteName: 'tile group unit tests',
+        outputDirectory: 'reports/libs/core/tile-group',
+        outputName: 'unit-test-results.xml',
+      },
+    ],
+  ],
 };
