@@ -56,6 +56,12 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/web/**/*.{ts,tsx,js,jsx}"]
+      },
+      "configurations": {
+        "ci": {
+          "format": "junit",
+          "outputFile": "reports/apps/web/eslint-results.xml"
+        }
       }
     }
   },
