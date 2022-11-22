@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'core-tile-group',
   preset: '../../../jest.preset.js',
