@@ -7,6 +7,7 @@ executors:
 
 orbs:
   nx: nrwl/nx@1.6.1
+  codecov: codecov/codecov@3.2.4
 
 commands:
   prepare-dependencies:
