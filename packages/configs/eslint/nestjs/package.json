@@ -1,0 +1,29 @@
+{
+  "name": "@mahjong/eslint-config-nestjs",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "exports": {
+    ".": "./index.js"
+  },
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "lint": "eslint . --max-warnings 0"
+  },
+  "dependencies": {
+    "@mahjong/eslint-config-base": "workspace:*",
+    "eslint-plugin-jest": "^27.9.0",
+    "eslint-plugin-jest-extended": "^2.0.0",
+    "eslint-plugin-jest-formatting": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.56.10"
+  },
+  "peerDependencies": {
+    "eslint": "^8.56.0",
+    "typescript": "^5.4.5"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "@mahjong/eslint-config-base",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "exports": {
+    ".": "./index.js",
+    "./rules/variables": "./rules/variables.js",
+    "./rules/imports": "./rules/imports.js",
+    "./rules/typescript": "./rules/typescript.js",
+    "./+jest": "./+jest.js"
+  },
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "rules",
+    "+jest.js"
+  ],
+  "scripts": {
+    "lint": "eslint . --max-warnings 0"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-turbo": "^1.12.5",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jest": "^28.4.0",
+    "eslint-plugin-jest-extended": "^2.4.0",
+    "eslint-plugin-jest-formatting": "^3.1.0",
+    "eslint-plugin-only-warn": "^1.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-regexp": "^2.3.0",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.56.5"
+  },
+  "peerDependencies": {
+    "eslint": "^8.56.0",
+    "typescript": "^5.4.5"
+  }
+}
