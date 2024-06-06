@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@4.1.0
+
 executors:
   base:
     docker:
@@ -69,6 +72,12 @@ jobs:
 
       - store_artifacts:
           path: ./coverage
+
+      - codecov/upload:
+          file: ./coverage/apps/game/lcov.info
+
+      - codecov/upload:
+          file: ./coverage/apps/web/lcov.info
 
 workflows:
   main:
