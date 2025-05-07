@@ -1,0 +1,33 @@
+{
+  "name": "mahjong",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "turbo run build",
+    "check-types": "turbo run check-types",
+    "dev": "turbo run dev",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --list-different --ignore-unknown .",
+    "lint": "turbo run lint",
+    "prepare": "husky",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@commitlint/config-pnpm-scopes": "^19.8.0",
+    "@commitlint/types": "^19.8.0",
+    "@repo/eslint-config": "workspace:*",
+    "eslint": "^9.26.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2",
+    "prettier": "^3.5.3",
+    "sort-package-json": "^3.2.0",
+    "turbo": "^2.5.3",
+    "typescript": "^5.8.3"
+  },
+  "packageManager": "pnpm@10.10.0",
+  "engines": {
+    "node": "^22.15.0"
+  }
+}
