@@ -1,0 +1,50 @@
+{
+  "name": "@repo/eslint-config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./base.js",
+    "./node": "./node.js",
+    "./next-js": "./next.js",
+    "./react-internal": "./react-internal.js",
+    "./+vitest": "./+vitest.js"
+  },
+  "files": [
+    "base.js",
+    "node.js",
+    "next.js",
+    "react-internal.js",
+    "+vitest.js"
+  ],
+  "scripts": {
+    "lint": "eslint . --max-warnings 0"
+  },
+  "dependencies": {
+    "@eslint-community/eslint-plugin-eslint-comments": "^4.7.1",
+    "@eslint/js": "^9.39.4",
+    "@next/eslint-plugin-next": "^16.2.4",
+    "@vitest/eslint-plugin": "^1.6.16",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-only-warn": "^1.2.1",
+    "eslint-plugin-promise": "^7.2.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-regexp": "^3.1.0",
+    "eslint-plugin-storybook": "^10.3.5",
+    "eslint-plugin-testing-library": "^7.16.2",
+    "eslint-plugin-turbo": "^2.9.6",
+    "globals": "^17.5.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.4"
+  },
+  "peerDependencies": {
+    "eslint": "^9.39.4"
+  }
+}

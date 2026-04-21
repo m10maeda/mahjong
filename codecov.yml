@@ -1,0 +1,25 @@
+# https://docs.codecov.com/docs/codecovyml-reference
+
+coverage:
+  status:
+    project:
+      default:
+        target: 75%
+        threshold: 5%
+
+    patch:
+      default:
+        target: 85%
+        threshold: 0%
+
+component_management:
+  default_rules:
+    statuses:
+      - type: project
+        target: 85%
+        threshold: 5%
+
+  individual_components:
+    - component_id: 'mahjong/core'
+      paths:
+        - './packages/@mahjong/core/'
