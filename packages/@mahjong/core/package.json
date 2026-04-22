@@ -5,7 +5,8 @@
   "license": "MIT",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./tile": "./src/tile/index.ts"
   },
   "main": "./src/index.ts",
   "scripts": {
