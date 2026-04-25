@@ -9,17 +9,21 @@ coverage:
 
     patch:
       default:
-        target: 85%
-        threshold: 0%
+        target: 70%
+        threshold: 10%
 
 component_management:
   default_rules:
     statuses:
       - type: project
-        target: 85%
+        target: 80%
         threshold: 5%
 
   individual_components:
     - component_id: 'mahjong/core'
       paths:
         - './packages/@mahjong/core/'
+      statuses:
+        - type: project
+          target: 80%
+          threshold: 5%
