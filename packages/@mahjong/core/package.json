@@ -7,7 +7,8 @@
   "exports": {
     ".": "./src/index.ts",
     "./tile": "./src/tile/index.ts",
-    "./round": "./src/round/index.ts"
+    "./round": "./src/round/index.ts",
+    "./score-ledger": "./src/score-ledger/index.ts"
   },
   "main": "./src/index.ts",
   "scripts": {
