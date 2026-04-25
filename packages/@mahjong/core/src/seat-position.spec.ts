@@ -121,4 +121,38 @@ describe('SeatPosition', () => {
       });
     });
   });
+
+  describe('valueOf メソッド', () => {
+    it('East の場合、0 を返すこと', () => {
+      const sut = SeatPosition.East;
+
+      const actual = sut.valueOf();
+
+      expect(actual).toBe(0);
+    });
+
+    it('South の場合、1 を返すこと', () => {
+      const sut = SeatPosition.South;
+
+      const actual = sut.valueOf();
+
+      expect(actual).toBe(1);
+    });
+
+    it('West の場合、2 を返すこと', () => {
+      const sut = SeatPosition.West;
+
+      const actual = sut.valueOf();
+
+      expect(actual).toBe(2);
+    });
+
+    it('North の場合、3 を返すこと', () => {
+      const sut = SeatPosition.North;
+
+      const actual = sut.valueOf();
+
+      expect(actual).toBe(3);
+    });
+  });
 });
