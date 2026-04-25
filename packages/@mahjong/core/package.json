@@ -6,7 +6,8 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./tile": "./src/tile/index.ts"
+    "./tile": "./src/tile/index.ts",
+    "./round": "./src/round/index.ts"
   },
   "main": "./src/index.ts",
   "scripts": {
