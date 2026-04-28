@@ -3,85 +3,74 @@ import { describe, expect, it } from 'vitest';
 import { RoundIndex } from './round-index';
 
 describe('RoundIndex', () => {
-  describe('不正な値で生成できないこと', () => {
-    it('小数で生成しようとした場合、エラーを投げること', () => {
-      expect(() => {
-        new RoundIndex(0.1);
-      }).toThrow(Error);
-    });
+  describe('有効な値を与えられた場合', () => {
+    it('Point として成立すること', () => {
+      const result = new RoundIndex(1);
 
-    it('1 未満の値で生成しようとした場合、エラーを投げること', () => {
-      expect(() => {
-        new RoundIndex(-1);
-      }).toThrow(Error);
-    });
-
-    it('4 より大きい値で生成しようとした場合、エラーを投げること', () => {
-      expect(() => {
-        new RoundIndex(5);
-      }).toThrow(Error);
+      expect(result.valueOf()).toBe(1);
     });
   });
 
-  describe('compareTo メソッド', () => {
-    it('同じ値を持つ RoundIndex を渡した場合、0 を返すこと', () => {
+  describe('無効な値を与えられた場合', () => {
+    it.each([0.1, -1, 5, NaN, Infinity])(
+      '%s が与えられた場合、エラーを投げること',
+      (value) => {
+        expect(() => new RoundIndex(value)).toThrow(Error);
+      },
+    );
+  });
+
+  describe('compareTo', () => {
+    it('同じ値を与えられた場合、0 を返すこと', () => {
       const sut = new RoundIndex(1);
       const target = new RoundIndex(1);
 
-      const actual = sut.compareTo(target);
-
-      expect(actual).toBe(0);
+      expect(sut.compareTo(target)).toBe(0);
     });
 
-    it('自身より小さい値を持つ RoundIndex を渡した場合、1 以上を返すこと', () => {
+    it('自身より小さい値を与えられた場合、正の数値を返すこと', () => {
       const sut = new RoundIndex(2);
       const target = new RoundIndex(1);
 
-      const actual = sut.compareTo(target);
-
-      expect(actual).toBeGreaterThanOrEqual(1);
+      expect(sut.compareTo(target)).toBeGreaterThan(0);
     });
 
-    it('自身より大きい値を持つ RoundIndex を渡した場合、-1 以下を返すこと', () => {
+    it('自身より大きい値を与えられた場合、負の数値を返すこと', () => {
       const sut = new RoundIndex(1);
       const target = new RoundIndex(2);
 
-      const actual = sut.compareTo(target);
-
-      expect(actual).lessThanOrEqual(-1);
+      expect(sut.compareTo(target)).lessThan(0);
     });
   });
 
-  describe('equals メソッド', () => {
-    it('同じ値を持つ RoundIndex を渡した場合、true を返すこと', () => {
+  describe('equals', () => {
+    it('同じ値を与えられた場合、true を返すこと', () => {
       const sut = new RoundIndex(1);
       const target = new RoundIndex(1);
 
-      const actual = sut.equals(target);
-
-      expect(actual).toBe(true);
+      expect(sut.equals(target)).toBe(true);
     });
 
-    it('別の値を持つ RoundIndex を渡した場合、false を返すこと', () => {
+    it('異なる値を与えられた場合、false を返すこと', () => {
       const sut = new RoundIndex(1);
       const target = new RoundIndex(2);
 
-      const actual = sut.equals(target);
-
-      expect(actual).toBe(false);
+      expect(sut.equals(target)).toBe(false);
     });
   });
 
-  describe('reset メソッド', () => {
-    it('1 の値を持つ RoundIndex を返すこと', () => {
+  describe('reset', () => {
+    it('初期値の新しい RoundIndex を返すこと', () => {
       const sut = new RoundIndex(2);
 
-      const actual = sut.reset();
+      const result = sut.reset();
 
-      expect(actual.valueOf()).toBe(1);
+      expect(result.valueOf()).toBe(1);
+
+      expect(result).not.toBe(sut);
     });
 
-    it('元のオブジェクトは変化しないこと', () => {
+    it('元の値は変化しないこと', () => {
       const sut = new RoundIndex(1);
 
       sut.reset();

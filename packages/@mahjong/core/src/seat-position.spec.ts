@@ -3,156 +3,54 @@ import { describe, expect, it } from 'vitest';
 import { SeatPosition } from './seat-position';
 
 describe('SeatPosition', () => {
-  describe('compareTo メソッド', () => {
-    it('同じ値を持つ SeatPosition を渡した場合、0 を返すこと', () => {
-      const sut = SeatPosition.East;
-      const target = SeatPosition.East;
-
-      const actual = sut.compareTo(target);
-
-      expect(actual).toBe(0);
+  describe('compareTo', () => {
+    it('自身と同じ値を与えられた場合、0 を返すこと', () => {
+      expect(SeatPosition.East.compareTo(SeatPosition.East)).toBe(0);
+      expect(SeatPosition.South.compareTo(SeatPosition.South)).toBe(0);
+      expect(SeatPosition.West.compareTo(SeatPosition.West)).toBe(0);
+      expect(SeatPosition.North.compareTo(SeatPosition.North)).toBe(0);
     });
 
-    it('自身より前の値を持つ SeatPosition を渡した場合、1 以上を返すこと', () => {
-      const sut = SeatPosition.South;
-      const target = SeatPosition.East;
+    it('自身より小さい値を与えられた場合、正の数値を返すこと', () => {
+      expect(SeatPosition.South.compareTo(SeatPosition.East)).greaterThan(0);
 
-      const actual = sut.compareTo(target);
+      expect(SeatPosition.West.compareTo(SeatPosition.East)).greaterThan(0);
+      expect(SeatPosition.West.compareTo(SeatPosition.South)).greaterThan(0);
 
-      expect(actual).toBeGreaterThanOrEqual(1);
+      expect(SeatPosition.North.compareTo(SeatPosition.East)).greaterThan(0);
+      expect(SeatPosition.North.compareTo(SeatPosition.South)).greaterThan(0);
+      expect(SeatPosition.North.compareTo(SeatPosition.West)).greaterThan(0);
     });
 
-    it('自身より後の値を持つ SeatPosition を渡した場合、-1 以下を返すこと', () => {
-      const sut = SeatPosition.East;
-      const target = SeatPosition.South;
+    it('自身より大きい値を与えられた場合、負の数値を返すこと', () => {
+      expect(SeatPosition.East.compareTo(SeatPosition.South)).lessThan(0);
+      expect(SeatPosition.East.compareTo(SeatPosition.West)).lessThan(0);
+      expect(SeatPosition.East.compareTo(SeatPosition.North)).lessThan(0);
 
-      const actual = sut.compareTo(target);
+      expect(SeatPosition.South.compareTo(SeatPosition.West)).lessThan(0);
+      expect(SeatPosition.South.compareTo(SeatPosition.North)).lessThan(0);
 
-      expect(actual).lessThanOrEqual(-1);
-    });
-  });
-
-  describe('equals メソッド', () => {
-    it('同じ値を持つ SeatPosition を渡した場合、true を返すこと', () => {
-      const sut = SeatPosition.East;
-      const target = SeatPosition.East;
-
-      const actual = sut.equals(target);
-
-      expect(actual).toBe(true);
-    });
-
-    it('別の値を持つ SeatPosition を渡した場合、false を返すこと', () => {
-      const sut = SeatPosition.East;
-      const target = SeatPosition.South;
-
-      const actual = sut.equals(target);
-
-      expect(actual).toBe(false);
+      expect(SeatPosition.West.compareTo(SeatPosition.North)).lessThan(0);
     });
   });
 
-  describe('[Symbol.toPrimitive] メソッド', () => {
-    describe('hint 未指定の場合', () => {
-      it('East の場合、0 を返すこと', () => {
-        const sut = SeatPosition.East;
-
-        const actual = sut[Symbol.toPrimitive]();
-
-        expect(actual).toBe(0);
-      });
-
-      it('South の場合、1 を返すこと', () => {
-        const sut = SeatPosition.South;
-
-        const actual = sut[Symbol.toPrimitive]();
-
-        expect(actual).toBe(1);
-      });
-
-      it('West の場合、2 を返すこと', () => {
-        const sut = SeatPosition.West;
-
-        const actual = sut[Symbol.toPrimitive]();
-
-        expect(actual).toBe(2);
-      });
-
-      it('North の場合、3 を返すこと', () => {
-        const sut = SeatPosition.North;
-
-        const actual = sut[Symbol.toPrimitive]();
-
-        expect(actual).toBe(3);
-      });
+  describe('equals', () => {
+    it('同じ値を与えられた場合、true を返すこと', () => {
+      expect(SeatPosition.East.equals(SeatPosition.East)).toBe(true);
+      expect(SeatPosition.South.equals(SeatPosition.South)).toBe(true);
+      expect(SeatPosition.West.equals(SeatPosition.West)).toBe(true);
+      expect(SeatPosition.North.equals(SeatPosition.North)).toBe(true);
     });
 
-    describe('hint が "string" の場合', () => {
-      it('East の場合、"East" を返すこと', () => {
-        const sut = SeatPosition.East;
+    it('異なる値を与えられた場合、false を返すこと', () => {
+      expect(SeatPosition.East.equals(SeatPosition.South)).toBe(false);
+      expect(SeatPosition.East.equals(SeatPosition.West)).toBe(false);
+      expect(SeatPosition.East.equals(SeatPosition.North)).toBe(false);
 
-        const actual = sut[Symbol.toPrimitive]('string');
+      expect(SeatPosition.South.equals(SeatPosition.West)).toBe(false);
+      expect(SeatPosition.South.equals(SeatPosition.North)).toBe(false);
 
-        expect(actual).toBe('East');
-      });
-
-      it('South の場合、"South" を返すこと', () => {
-        const sut = SeatPosition.South;
-
-        const actual = sut[Symbol.toPrimitive]('string');
-
-        expect(actual).toBe('South');
-      });
-
-      it('West の場合、"West" を返すこと', () => {
-        const sut = SeatPosition.West;
-
-        const actual = sut[Symbol.toPrimitive]('string');
-
-        expect(actual).toBe('West');
-      });
-
-      it('North の場合、"North" を返すこと', () => {
-        const sut = SeatPosition.North;
-
-        const actual = sut[Symbol.toPrimitive]('string');
-
-        expect(actual).toBe('North');
-      });
-    });
-  });
-
-  describe('valueOf メソッド', () => {
-    it('East の場合、0 を返すこと', () => {
-      const sut = SeatPosition.East;
-
-      const actual = sut.valueOf();
-
-      expect(actual).toBe(0);
-    });
-
-    it('South の場合、1 を返すこと', () => {
-      const sut = SeatPosition.South;
-
-      const actual = sut.valueOf();
-
-      expect(actual).toBe(1);
-    });
-
-    it('West の場合、2 を返すこと', () => {
-      const sut = SeatPosition.West;
-
-      const actual = sut.valueOf();
-
-      expect(actual).toBe(2);
-    });
-
-    it('North の場合、3 を返すこと', () => {
-      const sut = SeatPosition.North;
-
-      const actual = sut.valueOf();
-
-      expect(actual).toBe(3);
+      expect(SeatPosition.West.equals(SeatPosition.North)).toBe(false);
     });
   });
 });

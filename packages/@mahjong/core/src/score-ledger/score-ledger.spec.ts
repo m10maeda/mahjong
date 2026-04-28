@@ -8,7 +8,7 @@ import { Point } from '../point';
 import { Honba, Round, RoundIndex, RoundProgress, RoundWind } from '../round';
 
 describe('ScoreLedger', () => {
-  describe('record メソッド', () => {
+  describe('record', () => {
     const sut = new ScoreLedger([]);
     const transaction = new AccountingTransaction(
       [
@@ -21,16 +21,18 @@ describe('ScoreLedger', () => {
       ),
     );
 
-    it('新しい ScoreLedger を返す', () => {
-      const actual = sut.record(transaction);
+    it('与えられた AccountingTransaction を追加した新しい ScoreLedger を返すこと', () => {
+      const result = sut.record(transaction);
 
-      expect(sut).not.toBe(actual);
+      expect([...result]).toEqual([transaction]);
+
+      expect(result).not.toBe(sut);
     });
 
-    it('新しい ScoreLedger にトランザクションが追加されている', () => {
-      const actual = sut.record(transaction);
+    it('元の値は変化しないこと', () => {
+      sut.record(transaction);
 
-      expect([...actual]).toEqual([transaction]);
+      expect([...sut]).toHaveLength(0);
     });
   });
 });
