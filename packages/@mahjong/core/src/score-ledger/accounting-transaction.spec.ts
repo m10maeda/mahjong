@@ -7,8 +7,8 @@ import { AccountingEntry } from './accounting-entry';
 import { SeatAccountOwner } from './seat-account-owner';
 
 describe('AccountingTransaction', () => {
-  describe('不正な値で生成できないこと', () => {
-    it('同じ AccountOwner を持つ AccountingEntry を複数渡した場合、エラーを投げること', () => {
+  describe('無効な値を与えられた場合', () => {
+    it('同じ target を持つ値を複数与えられた場合、エラーを投げること', () => {
       expect(() => {
         new AccountingTransaction(
           [
@@ -23,7 +23,7 @@ describe('AccountingTransaction', () => {
       }).toThrow(Error);
     });
 
-    it('amount が 0 の AccountingEntry のみを渡した場合、エラーを投げること', () => {
+    it('与えられたすべての AccountingEntry の amount が 0 の場合、エラーを投げること', () => {
       expect(() => {
         new AccountingTransaction(
           [
@@ -39,7 +39,7 @@ describe('AccountingTransaction', () => {
     });
   });
 
-  describe('createTransferTransaction static メソッド', () => {
+  describe('createTransferTransaction', () => {
     it('amount の合計が 0 でない場合、エラーを投げること', () => {
       expect(() => {
         AccountingTransaction.createTransferTransaction(

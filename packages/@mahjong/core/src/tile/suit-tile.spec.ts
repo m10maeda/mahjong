@@ -8,104 +8,126 @@ import { SuitTile } from './suit-tile';
 import { TileModifier } from './tile-modifier';
 
 describe('SuitTile', () => {
-  describe('equals メソッド', () => {
-    it('すべての属性が同じ SuitTile を渡した場合、true を返すこと', () => {
+  describe('equals', () => {
+    it('同じ値を与えられた場合、true を返すこと', () => {
       const sut = new SuitTile(Suit.Character, Rank[5], TileModifier.Normal);
       const target = new SuitTile(Suit.Character, Rank[5], TileModifier.Normal);
 
       expect(sut.equals(target)).toBe(true);
     });
 
-    it('HonorTile を渡した場合、false を返すこと', () => {
-      const sut = new SuitTile(Suit.Character, Rank[5], TileModifier.Normal);
-      const target = new HonorTile(Honor.South, TileModifier.Normal);
-
-      expect(sut.equals(target)).toBe(false);
-    });
-
-    describe('属性が異なる SuitTile を渡した場合、false を返すこと', () => {
-      it('Suit が異なる SuitTile を渡した場合、false を返すこと', () => {
+    describe('異なる値を与えられた場合', () => {
+      it('HonorTile を与えられた場合、false を返すこと', () => {
         const sut = new SuitTile(Suit.Character, Rank[5], TileModifier.Normal);
-        const target = new SuitTile(Suit.Circle, Rank[5], TileModifier.Normal);
+        const target = new HonorTile(Honor.South, TileModifier.Normal);
 
         expect(sut.equals(target)).toBe(false);
       });
 
-      it('Rank が異なる SuitTile を渡した場合、false を返すこと', () => {
-        const sut = new SuitTile(Suit.Character, Rank[5], TileModifier.Normal);
-        const target = new SuitTile(
-          Suit.Character,
-          Rank[4],
-          TileModifier.Normal,
-        );
+      describe('異なる SuitTile を与えられた場合、false を返すこと', () => {
+        it('suit が異なる SuitTile を与えられた場合、false を返すこと', () => {
+          const sut = new SuitTile(
+            Suit.Character,
+            Rank[5],
+            TileModifier.Normal,
+          );
+          const target = new SuitTile(
+            Suit.Circle,
+            Rank[5],
+            TileModifier.Normal,
+          );
 
-        expect(sut.equals(target)).toBe(false);
-      });
+          expect(sut.equals(target)).toBe(false);
+        });
 
-      it('TileModifier が異なる SuitTile を渡した場合、false を返すこと', () => {
-        const sut = new SuitTile(Suit.Character, Rank[5], TileModifier.Normal);
-        const target = new SuitTile(Suit.Character, Rank[5], TileModifier.Red);
+        it('rank が異なる SuitTile を与えられた場合、false を返すこと', () => {
+          const sut = new SuitTile(
+            Suit.Character,
+            Rank[5],
+            TileModifier.Normal,
+          );
+          const target = new SuitTile(
+            Suit.Character,
+            Rank[4],
+            TileModifier.Normal,
+          );
 
-        expect(sut.equals(target)).toBe(false);
+          expect(sut.equals(target)).toBe(false);
+        });
+
+        it('modifier が異なる SuitTile を与えられた場合、false を返すこと', () => {
+          const sut = new SuitTile(
+            Suit.Character,
+            Rank[5],
+            TileModifier.Normal,
+          );
+          const target = new SuitTile(
+            Suit.Character,
+            Rank[5],
+            TileModifier.Red,
+          );
+
+          expect(sut.equals(target)).toBe(false);
+        });
       });
     });
   });
 
-  describe('isEdge メソッド', () => {
-    describe('末端の値の場合、true を返すこと', () => {
-      it('1 の場合、true を返すこと', () => {
-        const sut = new SuitTile(Suit.Character, Rank[1], TileModifier.Normal);
+  describe('isEdge', () => {
+    it('末端の値の場合、true を返すこと', () => {
+      expect(
+        new SuitTile(Suit.Character, Rank[1], TileModifier.Normal).isEdge(),
+      ).toBe(true);
+      expect(
+        new SuitTile(Suit.Circle, Rank[1], TileModifier.Normal).isEdge(),
+      ).toBe(true);
+      expect(
+        new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal).isEdge(),
+      ).toBe(true);
 
-        const actual = sut.isEdge();
+      expect(
+        new SuitTile(Suit.Character, Rank[9], TileModifier.Normal).isEdge(),
+      ).toBe(true);
 
-        expect(actual).toBe(true);
-      });
-
-      it('9 の場合、true を返すこと', () => {
-        const sut = new SuitTile(Suit.Character, Rank[9], TileModifier.Normal);
-
-        const actual = sut.isEdge();
-
-        expect(actual).toBe(true);
-      });
+      expect(
+        new SuitTile(Suit.Character, Rank[1], TileModifier.Red).isEdge(),
+      ).toBe(true);
     });
 
-    describe('末端の値ではない場合、false を返すこと', () => {
-      it('2 の場合、false を返すこと', () => {
-        const sut = new SuitTile(Suit.Character, Rank[2], TileModifier.Normal);
+    it('末端の値ではない場合、false を返すこと', () => {
+      expect(
+        new SuitTile(Suit.Character, Rank[2], TileModifier.Normal).isEdge(),
+      ).toBe(false);
+      expect(
+        new SuitTile(Suit.Circle, Rank[2], TileModifier.Normal).isEdge(),
+      ).toBe(false);
+      expect(
+        new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal).isEdge(),
+      ).toBe(false);
 
-        const actual = sut.isEdge();
+      expect(
+        new SuitTile(Suit.Character, Rank[8], TileModifier.Normal).isEdge(),
+      ).toBe(false);
 
-        expect(actual).toBe(false);
-      });
-
-      it('8 の場合、false を返すこと', () => {
-        const sut = new SuitTile(Suit.Character, Rank[8], TileModifier.Normal);
-
-        const actual = sut.isEdge();
-
-        expect(actual).toBe(false);
-      });
+      expect(
+        new SuitTile(Suit.Character, Rank[2], TileModifier.Red).isEdge(),
+      ).toBe(false);
     });
   });
 
-  describe('types メソッド', () => {
-    it('同じ Suit の値を持つ SuitTile を渡した場合、true を返すこと', () => {
+  describe('types', () => {
+    it('同じ Suit の SuitTile を与えられた場合、true を返すこと', () => {
       const sut = new SuitTile(Suit.Character, Rank[5], TileModifier.Normal);
       const target = new SuitTile(Suit.Character, Rank[6], TileModifier.Normal);
 
-      const actual = sut.types(target);
-
-      expect(actual).toBe(true);
+      expect(sut.types(target)).toBe(true);
     });
 
-    it('別の Suit の値を持つ SuitTile を渡した場合、true を返すこと', () => {
+    it('異なる Suit の値を持つ SuitTile を与えられた場合、true を返すこと', () => {
       const sut = new SuitTile(Suit.Character, Rank[5], TileModifier.Normal);
       const target = new SuitTile(Suit.Circle, Rank[5], TileModifier.Normal);
 
-      const actual = sut.types(target);
-
-      expect(actual).toBe(false);
+      expect(sut.types(target)).toBe(false);
     });
   });
 });

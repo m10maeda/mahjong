@@ -8,30 +8,30 @@ import { SuitTile } from './suit-tile';
 import { TileModifier } from './tile-modifier';
 
 describe('HonorTile', () => {
-  describe('equals メソッド', () => {
-    it('すべての属性が同じ HonorTile を渡した場合、true を返すこと', () => {
+  describe('equals', () => {
+    it('同じ値を与えられた場合、true を返すこと', () => {
       const sut = new HonorTile(Honor.East, TileModifier.Normal);
       const target = new HonorTile(Honor.East, TileModifier.Normal);
 
       expect(sut.equals(target)).toBe(true);
     });
 
-    it('SuitTile を渡した場合、false を返すこと', () => {
-      const sut = new SuitTile(Suit.Character, Rank[5], TileModifier.Normal);
-      const target = new HonorTile(Honor.South, TileModifier.Normal);
+    describe('異なる値を与えられた場合', () => {
+      it('SuitTile を与えられた場合、false を返すこと', () => {
+        const sut = new SuitTile(Suit.Character, Rank[5], TileModifier.Normal);
+        const target = new HonorTile(Honor.South, TileModifier.Normal);
 
-      expect(sut.equals(target)).toBe(false);
-    });
+        expect(sut.equals(target)).toBe(false);
+      });
 
-    describe('属性が異なる HonorTile を渡した場合、false を返すこと', () => {
-      it('Honor が異なる HonorTile を渡した場合、false を返すこと', () => {
+      it('honor が異なる HonorTile を与えられた場合、false を返すこと', () => {
         const sut = new HonorTile(Honor.East, TileModifier.Normal);
         const target = new HonorTile(Honor.South, TileModifier.Normal);
 
         expect(sut.equals(target)).toBe(false);
       });
 
-      it('TileModifier が異なる HonorTile を渡した場合、false を返すこと', () => {
+      it('modifier が異なる HonorTile を与えられた場合、false を返すこと', () => {
         const sut = new HonorTile(Honor.East, TileModifier.Normal);
         const target = new HonorTile(Honor.East, TileModifier.Red);
 

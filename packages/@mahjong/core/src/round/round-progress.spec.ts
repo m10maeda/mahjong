@@ -5,63 +5,46 @@ import { RoundProgress } from './round-progress';
 import { RoundWind } from './round-wind';
 
 describe('RoundProgress', () => {
-  describe('compareTo メソッド', () => {
-    it('同じ値を持つ Point を渡した場合、0 を返すこと', () => {
+  describe('compareTo', () => {
+    it('同じ値を持つ Point を与えられた場合、0 を返すこと', () => {
       const sut = new RoundProgress(RoundWind.East, new RoundIndex(1));
       const target = new RoundProgress(RoundWind.East, new RoundIndex(1));
 
-      const actual = sut.compareTo(target);
-
-      expect(actual).toBe(0);
+      expect(sut.compareTo(target)).toBe(0);
     });
 
-    it('自身より前の RoundProgress を渡した場合、1 以上を返すこと', () => {
+    it('自身より前の RoundProgress を与えられた場合、1 以上を返すこと', () => {
       const sut = new RoundProgress(RoundWind.East, new RoundIndex(2));
       const target = new RoundProgress(RoundWind.East, new RoundIndex(1));
 
-      const actual = sut.compareTo(target);
-
-      expect(actual).toBeGreaterThanOrEqual(1);
+      expect(sut.compareTo(target)).toBeGreaterThan(0);
     });
 
-    it('自身より後の RoundProgress を渡した場合、-1 以下を返すこと', () => {
+    it('自身より後の RoundProgress を与えられた場合、-1 以下を返すこと', () => {
       const sut = new RoundProgress(RoundWind.East, new RoundIndex(1));
       const target = new RoundProgress(RoundWind.East, new RoundIndex(2));
 
-      const actual = sut.compareTo(target);
-
-      expect(actual).toBeLessThanOrEqual(-1);
+      expect(sut.compareTo(target)).toBeLessThan(0);
     });
   });
 
-  describe('equals メソッド', () => {
-    it('同じ値を持つ RoundProgress を渡した場合、true を返すこと', () => {
+  describe('equals', () => {
+    it('同じ値を与えられた場合、true を返すこと', () => {
       const sut = new RoundProgress(RoundWind.East, new RoundIndex(1));
       const target = new RoundProgress(RoundWind.East, new RoundIndex(1));
 
-      const actual = sut.equals(target);
-
-      expect(actual).toBe(true);
+      expect(sut.equals(target)).toBe(true);
     });
 
-    describe('異なる値を持つ RoundProgress を渡した場合、false を返すこと', () => {
-      it('RoundWind が異なる場合、false を返すこと', () => {
-        const sut = new RoundProgress(RoundWind.East, new RoundIndex(1));
-        const target = new RoundProgress(RoundWind.West, new RoundIndex(1));
+    it('異なる値を与えられた場合、false を返すこと', () => {
+      const sut = new RoundProgress(RoundWind.East, new RoundIndex(1));
 
-        const actual = sut.equals(target);
-
-        expect(actual).toBe(false);
-      });
-
-      it('RoundIndex が異なる場合、false を返すこと', () => {
-        const sut = new RoundProgress(RoundWind.East, new RoundIndex(1));
-        const target = new RoundProgress(RoundWind.East, new RoundIndex(2));
-
-        const actual = sut.equals(target);
-
-        expect(actual).toBe(false);
-      });
+      expect(
+        sut.equals(new RoundProgress(RoundWind.West, new RoundIndex(1))),
+      ).toBe(false);
+      expect(
+        sut.equals(new RoundProgress(RoundWind.East, new RoundIndex(2))),
+      ).toBe(false);
     });
   });
 });
