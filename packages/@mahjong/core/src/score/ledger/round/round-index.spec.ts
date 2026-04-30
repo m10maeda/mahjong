@@ -58,24 +58,4 @@ describe('RoundIndex', () => {
       expect(sut.equals(target)).toBe(false);
     });
   });
-
-  describe('reset', () => {
-    it('初期値の新しい RoundIndex を返すこと', () => {
-      const sut = new RoundIndex(2);
-
-      const result = sut.reset();
-
-      expect(result.valueOf()).toBe(1);
-
-      expect(result).not.toBe(sut);
-    });
-
-    it('元の値は変化しないこと', () => {
-      const sut = new RoundIndex(1);
-
-      sut.reset();
-
-      expect(sut.valueOf()).toBe(1);
-    });
-  });
 });

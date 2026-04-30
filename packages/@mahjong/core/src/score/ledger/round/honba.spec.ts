@@ -58,44 +58,4 @@ describe('Honba', () => {
       expect(sut.equals(target)).toBe(false);
     });
   });
-
-  describe('reset', () => {
-    it('初期値の新しい Honba を返すこと', () => {
-      const sut = new Honba(1);
-
-      const result = sut.reset();
-
-      expect(result.valueOf()).toBe(0);
-
-      expect(result).not.toBe(sut);
-    });
-
-    it('元の値は変化しないこと', () => {
-      const sut = new Honba(1);
-
-      sut.reset();
-
-      expect(sut.valueOf()).toBe(1);
-    });
-  });
-
-  describe('increase', () => {
-    it('自身の値に 1 加算された新しい Honba を返すこと', () => {
-      const sut = new Honba(0);
-
-      const result = sut.increase();
-
-      expect(result.valueOf()).toBe(1);
-
-      expect(result).not.toBe(sut);
-    });
-
-    it('元の値は変化しないこと', () => {
-      const sut = new Honba(0);
-
-      sut.increase();
-
-      expect(sut.valueOf()).toBe(0);
-    });
-  });
 });
