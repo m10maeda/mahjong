@@ -20,3 +20,5 @@ export {
   AddedQuadrupletEstablished,
   AddedQuadruplet,
 } from './event';
+
+export { Wall, TilePosition, OrderedTiles } from './wall';
