@@ -2,7 +2,7 @@ import { AccountingEntry } from './accounting-entry';
 import { Point } from '../point';
 
 import type { AccountOwner } from './account-owner';
-import type { Round } from '../../round';
+import type { Round } from './round';
 
 export class AccountingTransaction implements Iterable<AccountingEntry> {
   public readonly round: Round;

@@ -1,3 +1,5 @@
+export { Round, RoundWind, RoundIndex, RoundProgress, Honba } from './round';
+
 export { ScoreLedger } from './score-ledger';
 export { AccountingTransaction } from './accounting-transaction';
 export { AccountingEntry } from './accounting-entry';
