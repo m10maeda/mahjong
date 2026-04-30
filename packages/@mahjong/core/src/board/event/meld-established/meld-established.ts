@@ -1,7 +1,6 @@
 import { TurnBasedEvent } from '../turn-based-event';
 
 import type { Meld } from './meld';
-import type { Round } from '../../../round';
 import type { SeatPosition } from '../../../seat-position';
 import type { Turn } from '../../turn';
 
@@ -10,8 +9,8 @@ export abstract class MeldEstablished extends TurnBasedEvent {
 
   public readonly seat: SeatPosition;
 
-  public constructor(seat: SeatPosition, turn: Turn, round: Round) {
-    super(turn, round);
+  public constructor(seat: SeatPosition, turn: Turn) {
+    super(turn);
 
     this.seat = seat;
   }

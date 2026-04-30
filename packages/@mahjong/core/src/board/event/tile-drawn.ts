@@ -1,6 +1,5 @@
 import { TurnBasedEvent } from './turn-based-event';
 
-import type { Round } from '../../round';
 import type { SeatPosition } from '../../seat-position';
 import type { Tile } from '../../tile';
 import type { Turn } from '../turn';
@@ -26,10 +25,9 @@ export class TileDrawn extends TurnBasedEvent {
     seat: SeatPosition,
     source: TileDrawnSource,
     turn: Turn,
-    round: Round,
     deadWallStartPosition: WallIndex,
   ) {
-    super(turn, round);
+    super(turn);
 
     this.tile = tile;
     this.seat = seat;

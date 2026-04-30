@@ -1,6 +1,5 @@
 import { BoardEvent } from './board-event';
 
-import type { Round } from '../../round';
 import type { SeatPosition } from '../../seat-position';
 import type { Tile } from '../../tile';
 
@@ -29,12 +28,8 @@ export class BoardInitialized extends BoardEvent {
 
   public readonly wall: Wall;
 
-  public constructor(
-    round: Round,
-    wall: Wall,
-    initialHands: readonly InitialHand[],
-  ) {
-    super(round);
+  public constructor(wall: Wall, initialHands: readonly InitialHand[]) {
+    super();
 
     this.wall = wall;
     this.initialHands = initialHands;

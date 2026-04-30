@@ -1,7 +1,6 @@
 import { MeldEstablished } from '../meld-established';
 
 import type { Triplet } from './triplet';
-import type { Round } from '../../../../round';
 import type { SeatPosition } from '../../../../seat-position';
 import type { Turn } from '../../../turn';
 
@@ -15,9 +14,8 @@ export class TripletEstablished extends MeldEstablished {
     seat: SeatPosition,
     from: SeatPosition,
     turn: Turn,
-    round: Round,
   ) {
-    super(seat, turn, round);
+    super(seat, turn);
 
     this.created = created;
     this.from = from;
