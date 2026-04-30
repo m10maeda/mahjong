@@ -1,10 +1,16 @@
 import { describe, expect, it } from 'vitest';
 
-import { AccountingTransaction } from './accounting-transaction';
-import { Point } from '../point';
-import { Honba, Round, RoundIndex, RoundProgress, RoundWind } from '../round';
 import { AccountingEntry } from './accounting-entry';
+import { AccountingTransaction } from './accounting-transaction';
 import { SeatAccountOwner } from './seat-account-owner';
+import {
+  Honba,
+  Round,
+  RoundIndex,
+  RoundProgress,
+  RoundWind,
+} from '../../round';
+import { Point } from '../point';
 
 describe('AccountingTransaction', () => {
   describe('無効な値を与えられた場合', () => {

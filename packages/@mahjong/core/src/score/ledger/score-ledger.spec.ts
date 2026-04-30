@@ -4,8 +4,14 @@ import { AccountingEntry } from './accounting-entry';
 import { AccountingTransaction } from './accounting-transaction';
 import { ScoreLedger } from './score-ledger';
 import { SeatAccountOwner } from './seat-account-owner';
+import {
+  Honba,
+  Round,
+  RoundIndex,
+  RoundProgress,
+  RoundWind,
+} from '../../round';
 import { Point } from '../point';
-import { Honba, Round, RoundIndex, RoundProgress, RoundWind } from '../round';
 
 describe('ScoreLedger', () => {
   describe('record', () => {
