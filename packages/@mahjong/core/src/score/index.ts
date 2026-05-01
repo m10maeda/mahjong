@@ -1,8 +1,10 @@
 export { Point } from './point';
+
 export {
-  ScoreLedger,
-  AccountingTransaction,
-  AccountingEntry,
+  ScoreTransacted,
+  TransactionReason,
+  ScoreEntry,
+  EntryReason,
   AccountOwner,
   SeatAccountOwner,
   PotAccountOwner,
