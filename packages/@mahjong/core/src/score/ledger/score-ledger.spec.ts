@@ -2,10 +2,10 @@ import { describe, expect, it } from 'vitest';
 
 import { AccountingEntry } from './accounting-entry';
 import { AccountingTransaction } from './accounting-transaction';
+import { Honba, Round, RoundIndex, RoundProgress, RoundWind } from './round';
 import { ScoreLedger } from './score-ledger';
 import { SeatAccountOwner } from './seat-account-owner';
 import { Point } from '../point';
-import { Honba, Round, RoundIndex, RoundProgress, RoundWind } from '../round';
 
 describe('ScoreLedger', () => {
   describe('record', () => {

@@ -1,5 +1,5 @@
 import { AccountOwner, AccountType } from './account-owner';
-import { SeatPosition } from '../seat-position';
+import { SeatPosition } from '../../seat-position';
 
 export class SeatAccountOwner extends AccountOwner {
   public static readonly East = new SeatAccountOwner(SeatPosition.East);

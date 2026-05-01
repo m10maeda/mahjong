@@ -9,14 +9,6 @@ export class RoundIndex {
     return this.value === other.value;
   }
 
-  public next(): RoundIndex {
-    return new RoundIndex(this.value + 1);
-  }
-
-  public reset(): RoundIndex {
-    return new RoundIndex(1);
-  }
-
   public [Symbol.toPrimitive](
     hint: 'number' | 'string' | 'default' = 'default',
   ): number | string {
