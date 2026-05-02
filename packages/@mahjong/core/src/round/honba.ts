@@ -11,6 +11,14 @@ export class Honba {
     return this.value === other.value;
   }
 
+  public increase(): Honba {
+    return new Honba(this.value + 1);
+  }
+
+  public reset(): Honba {
+    return Honba.Zero;
+  }
+
   public [Symbol.toPrimitive](
     hint: 'number' | 'string' | 'default' = 'default',
   ): number | string {
