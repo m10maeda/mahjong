@@ -1,6 +1,6 @@
 import { ScoreEntry } from './score-entry';
 
-import type { Round } from '../round';
+import type { Round } from '../../../round';
 
 export enum TransactionReason {
   InitialDistribution,
