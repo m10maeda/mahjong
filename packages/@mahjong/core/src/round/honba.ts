@@ -3,16 +3,16 @@ export class Honba {
 
   private readonly value: number;
 
+  public advance(): Honba {
+    return new Honba(this.value + 1);
+  }
+
   public compareTo(other: Honba): number {
     return this.value - other.value;
   }
 
   public equals(other: Honba): boolean {
     return this.value === other.value;
-  }
-
-  public increase(): Honba {
-    return new Honba(this.value + 1);
   }
 
   public reset(): Honba {

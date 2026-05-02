@@ -13,6 +13,15 @@ export class RoundWind {
 
   private readonly value: Wind;
 
+  public advance(): RoundWind {
+    if (this.equals(RoundWind.East)) return RoundWind.South;
+    if (this.equals(RoundWind.South)) return RoundWind.West;
+    if (this.equals(RoundWind.West)) return RoundWind.North;
+    if (this.equals(RoundWind.North)) return RoundWind.East;
+
+    throw new Error();
+  }
+
   public compareTo(other: RoundWind): number {
     return this.value - other.value;
   }
