@@ -1,12 +1,20 @@
 export class RoundIndex {
   private readonly value: number;
 
+  public advance(): RoundIndex {
+    return new RoundIndex(this.value + 1);
+  }
+
   public compareTo(other: RoundIndex): number {
     return this.value - other.value;
   }
 
   public equals(other: RoundIndex): boolean {
     return this.value === other.value;
+  }
+
+  public reset(): RoundIndex {
+    return new RoundIndex(1);
   }
 
   public [Symbol.toPrimitive](

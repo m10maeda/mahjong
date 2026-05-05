@@ -20,6 +20,26 @@ describe('Honba', () => {
     );
   });
 
+  describe('advance', () => {
+    it('自身の値に 1 加算された新しい Honba を返すこと', () => {
+      const sut = new Honba(0);
+
+      const result = sut.advance();
+
+      expect(result.valueOf()).toBe(1);
+
+      expect(result).not.toBe(sut);
+    });
+
+    it('元の値は変化しないこと', () => {
+      const sut = new Honba(0);
+
+      sut.advance();
+
+      expect(sut.valueOf()).toBe(0);
+    });
+  });
+
   describe('compareTo', () => {
     it('自身と同じ値を与えられた場合、0 を返すこと', () => {
       const sut = new Honba(1);
@@ -56,6 +76,26 @@ describe('Honba', () => {
       const target = new Honba(1);
 
       expect(sut.equals(target)).toBe(false);
+    });
+  });
+
+  describe('reset', () => {
+    it('初期値の新しい Honba を返すこと', () => {
+      const sut = new Honba(1);
+
+      const result = sut.reset();
+
+      expect(result.valueOf()).toBe(0);
+
+      expect(result).not.toBe(sut);
+    });
+
+    it('元の値は変化しないこと', () => {
+      const sut = new Honba(1);
+
+      sut.reset();
+
+      expect(sut.valueOf()).toBe(1);
     });
   });
 });
