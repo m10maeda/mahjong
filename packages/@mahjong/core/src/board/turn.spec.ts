@@ -20,6 +20,26 @@ describe('Turn', () => {
     );
   });
 
+  describe('advance', () => {
+    it('自身の値に1を加えた新しい値を返すこと', () => {
+      const sut = new Turn(1);
+
+      const result = sut.advance();
+
+      expect(result.valueOf()).toBe(2);
+
+      expect(result).not.toBe(sut);
+    });
+
+    it('自身の値を変更しないこと', () => {
+      const sut = new Turn(1);
+
+      sut.advance();
+
+      expect(sut.valueOf()).toBe(1);
+    });
+  });
+
   describe('compareTo', () => {
     it('自身と同じ値を与えられた場合、0 を返すこと', () => {
       const sut = new Turn(1);
@@ -56,26 +76,6 @@ describe('Turn', () => {
       const target = new Turn(2);
 
       expect(sut.equals(target)).toBe(false);
-    });
-  });
-
-  describe('increase', () => {
-    it('自身の値に1を加えた新しい値を返すこと', () => {
-      const sut = new Turn(1);
-
-      const result = sut.increase();
-
-      expect(result.valueOf()).toBe(2);
-
-      expect(result).not.toBe(sut);
-    });
-
-    it('自身の値を変更しないこと', () => {
-      const sut = new Turn(1);
-
-      sut.increase();
-
-      expect(sut.valueOf()).toBe(1);
     });
   });
 });
