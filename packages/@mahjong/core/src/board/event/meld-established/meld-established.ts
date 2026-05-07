@@ -7,11 +7,11 @@ import type { Turn } from '../../turn';
 export abstract class MeldEstablished extends TurnBasedEvent {
   public abstract readonly created: Meld;
 
-  public readonly seat: SeatPosition;
+  public readonly actor: SeatPosition;
 
-  public constructor(seat: SeatPosition, turn: Turn) {
+  public constructor(actor: SeatPosition, turn: Turn) {
     super(turn);
 
-    this.seat = seat;
+    this.actor = actor;
   }
 }

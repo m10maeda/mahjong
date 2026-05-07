@@ -9,10 +9,10 @@ export class ClosedQuadrupletEstablished extends MeldEstablished {
 
   public constructor(
     created: ClosedQuadruplet,
-    seat: SeatPosition,
+    actor: SeatPosition,
     turn: Turn,
   ) {
-    super(seat, turn);
+    super(actor, turn);
 
     this.created = created;
   }

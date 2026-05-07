@@ -15,11 +15,11 @@ export class AddedQuadrupletEstablished extends MeldEstablished {
   public constructor(
     created: AddedQuadruplet,
     consumed: Triplet,
-    seat: SeatPosition,
+    actor: SeatPosition,
     from: SeatPosition,
     turn: Turn,
   ) {
-    super(seat, turn);
+    super(actor, turn);
 
     this.created = created;
     this.consumed = consumed;
