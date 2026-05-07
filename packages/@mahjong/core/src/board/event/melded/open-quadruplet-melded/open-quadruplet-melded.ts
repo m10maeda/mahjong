@@ -1,23 +1,23 @@
-import { MeldEstablished } from '../meld-established';
+import { Melded } from '../melded';
 
 import type { OpenQuadruplet } from './open-quadruplet';
 import type { SeatPosition } from '../../../../seat-position';
 import type { Turn } from '../../../turn';
 
-export class OpenQuadrupletEstablished extends MeldEstablished {
-  public readonly created: OpenQuadruplet;
-
+export class OpenQuadrupletMelded extends Melded {
   public readonly from: SeatPosition;
 
+  public readonly made: OpenQuadruplet;
+
   public constructor(
-    created: OpenQuadruplet,
-    actor: SeatPosition,
+    made: OpenQuadruplet,
+    melder: SeatPosition,
     from: SeatPosition,
     turn: Turn,
   ) {
-    super(actor, turn);
+    super(melder, turn);
 
-    this.created = created;
+    this.made = made;
     this.from = from;
   }
 }

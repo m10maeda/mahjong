@@ -3,35 +3,22 @@ import { BoardEvent } from './board-event';
 import type { SeatPosition } from '../../seat-position';
 import type { Tile } from '../../tile';
 
-type WallIndex = number;
-
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-type DealtTile = {
-  allocation: WallIndex;
-  tile: Tile;
-};
-
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-type Wall = {
-  deadWallStartIndex: WallIndex;
-  tiles: readonly Tile[];
-};
-
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-type InitialHand = {
-  seat: SeatPosition;
-  tiles: readonly DealtTile[];
-};
-
 export class BoardInitialized extends BoardEvent {
-  public readonly initialHands: readonly InitialHand[];
+  public readonly deadWall: readonly Tile[];
 
-  public readonly wall: Wall;
+  public readonly hands: Map<SeatPosition, Tile[]>;
 
-  public constructor(wall: Wall, initialHands: readonly InitialHand[]) {
+  public readonly wall: readonly Tile[];
+
+  public constructor(
+    wall: readonly Tile[],
+    deadWall: readonly Tile[],
+    hands: Map<SeatPosition, Tile[]>,
+  ) {
     super();
 
     this.wall = wall;
-    this.initialHands = initialHands;
+    this.deadWall = deadWall;
+    this.hands = hands;
   }
 }
