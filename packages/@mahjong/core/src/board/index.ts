@@ -23,6 +23,7 @@ export {
 
 export { Wall, InvalidNoTilesError } from './wall';
 export { DeadWall } from './dead-wall';
+export { Hand, MeldOperation, MeldTileGroup, TileNotHeldError } from './hand';
 export { DiscardPile } from './discard-pile';
 
 export { InvalidTileNotHeldError } from './invalid-tile-not-held-error';
