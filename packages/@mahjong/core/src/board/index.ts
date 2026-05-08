@@ -22,3 +22,6 @@ export {
 } from './event';
 
 export { Wall, TilePosition, OrderedTiles } from './wall';
+export { DiscardPile } from './discard-pile';
+
+export { InvalidTileNotHeldError } from './invalid-tile-not-held-error';
