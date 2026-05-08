@@ -2,11 +2,15 @@ import { InvalidNoTilesError } from '../invalid-no-tiles-error';
 
 import type { Tile } from '../../tile';
 
-export class Wall {
+export class Wall implements Iterable<Tile> {
   private readonly tiles: readonly Tile[];
 
   public isEmpty(): boolean {
     return this.tiles.length === 0;
+  }
+
+  public [Symbol.iterator](): Iterator<Tile> {
+    return this.tiles[Symbol.iterator]();
   }
 
   public takeLastTile(): readonly [Tile, Wall] {
