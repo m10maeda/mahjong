@@ -21,6 +21,7 @@ export {
   AddedQuadruplet,
 } from './event';
 
+export { type IBoard, Board, BoardCommand } from './board';
 export { Wall } from './wall';
 export { DeadWall } from './dead-wall';
 export {
@@ -31,4 +32,9 @@ export {
 } from './hand';
 export { DiscardPile } from './discard-pile';
 
+export { Hands } from './hands';
+
 export { InvalidNoTilesError } from './invalid-no-tiles-error';
+export { InvalidHolderNotFoundError } from './invalid-holder-not-found-error';
+export { InvalidMismatchClaimedTileError } from './invalid-mismatch-claimed-tile-error';
+export { InvalidDuplicatedSeatsError } from './invalid-duplicated-seats-error';
