@@ -6,7 +6,7 @@ import type { Tile } from '../../tile';
 export class BoardInitialized extends BoardEvent {
   public readonly deadWall: readonly Tile[];
 
-  public readonly hands: Map<SeatPosition, Tile[]>;
+  public readonly hands: Map<SeatPosition, readonly Tile[]>;
 
   public readonly wall: readonly Tile[];
 

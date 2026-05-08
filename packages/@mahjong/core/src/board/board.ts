@@ -11,11 +11,11 @@ import type { MeldOperation, MeldTileGroup } from './hand';
 import type { Wall } from './wall';
 
 export interface IBoard {
-  apply(command: BoardCommand<IBoard>): [IBoard, BoardEvent];
+  apply(command: BoardCommand<IBoard>): readonly [IBoard, BoardEvent];
 }
 
 export abstract class BoardCommand<TBoard> {
-  public abstract execute(prevBoard: TBoard): [TBoard, BoardEvent];
+  public abstract execute(prevBoard: TBoard): readonly [TBoard, BoardEvent];
 }
 
 export class Board implements IBoard {
@@ -27,7 +27,7 @@ export class Board implements IBoard {
 
   private readonly wall: Wall;
 
-  public apply(command: BoardCommand<Board>): [Board, BoardEvent] {
+  public apply(command: BoardCommand<Board>): readonly [Board, BoardEvent] {
     return command.execute(this);
   }
 
@@ -40,7 +40,7 @@ export class Board implements IBoard {
     return new Board(this.wall, this.deadWall, newHands, newDiscardPile);
   }
 
-  public draw(actor: SeatPosition): [Tile, Board] {
+  public draw(actor: SeatPosition): readonly [Tile, Board] {
     if (!this.hands.exists(actor)) throw new InvalidHolderNotFoundError();
 
     const [takenTile, newWall] = this.wall.takeTile();
@@ -53,7 +53,7 @@ export class Board implements IBoard {
     ];
   }
 
-  public drawFromDeadWall(actor: SeatPosition): [Tile, Board] {
+  public drawFromDeadWall(actor: SeatPosition): readonly [Tile, Board] {
     if (!this.hands.exists(actor)) throw new InvalidHolderNotFoundError();
 
     const [takenTile, tempDeadWall] = this.deadWall.take();

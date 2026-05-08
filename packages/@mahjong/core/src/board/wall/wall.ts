@@ -9,7 +9,7 @@ export class Wall {
     return this.tiles.length === 0;
   }
 
-  public takeLastTile(): [Tile, Wall] {
+  public takeLastTile(): readonly [Tile, Wall] {
     if (this.isEmpty()) throw new InvalidNoTilesError();
 
     const takenTile = this.tiles[this.tiles.length - 1];
@@ -19,7 +19,7 @@ export class Wall {
     return [takenTile, new Wall(...this.tiles.slice(0, -1))];
   }
 
-  public takeTile(): [Tile, Wall] {
+  public takeTile(): readonly [Tile, Wall] {
     if (this.isEmpty()) throw new InvalidNoTilesError();
 
     const takenTile = this.tiles[0];

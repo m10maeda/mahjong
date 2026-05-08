@@ -4,7 +4,7 @@ import { InvalidDuplicatedSeatsError } from './invalid-duplicated-seats-error';
 import type { Tile } from '../tile';
 import type { Hand } from './hand';
 
-export class Hands implements Iterable<[SeatPosition, Hand]> {
+export class Hands implements Iterable<readonly [SeatPosition, Hand]> {
   private readonly map: Map<SeatPosition, Hand>;
 
   public add(tile: Tile, holder: SeatPosition): Hands {
@@ -52,7 +52,7 @@ export class Hands implements Iterable<[SeatPosition, Hand]> {
     return new Hands(...newHands);
   }
 
-  public constructor(...hands: [SeatPosition, Hand][]) {
+  public constructor(...hands: readonly [SeatPosition, Hand][]) {
     const map = new Map(hands);
 
     const uniqueSeats = new Set([...hands].map(([holder]) => holder));
