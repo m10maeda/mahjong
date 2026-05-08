@@ -5,4 +5,6 @@ export {
   WonWithSelfDraw,
   AbortiveDrawn,
   ExhaustiveDrawn,
+  type IHandSessionEventSubscriber,
+  type IHandSessionEventPublisher,
 } from './event';

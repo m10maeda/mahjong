@@ -9,4 +9,6 @@ export {
   RoundStarted,
   RoundEnded,
   RoundEndedReason,
+  type IRoundEventSubscriber,
+  type IRoundEventPublisher,
 } from './event';
