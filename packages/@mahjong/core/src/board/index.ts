@@ -19,6 +19,8 @@ export {
   ClosedQuadruplet,
   AddedQuadrupletMelded,
   AddedQuadruplet,
+  type IBoardEventPublisher,
+  type IBoardEventSubscriber,
 } from './event';
 
 export { type IBoard, Board, BoardCommand } from './board';
