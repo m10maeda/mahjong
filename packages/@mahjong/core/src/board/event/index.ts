@@ -21,3 +21,6 @@ export {
   AddedQuadrupletMelded,
   AddedQuadruplet,
 } from './melded';
+
+export type { IBoardEventSubscriber } from './board-event-subscriber';
+export type { IBoardEventPublisher } from './board-event-publisher';
