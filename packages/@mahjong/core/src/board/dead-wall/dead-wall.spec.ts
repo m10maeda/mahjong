@@ -1,0 +1,93 @@
+import { describe, expect, it } from 'vitest';
+
+import { DeadWall } from './dead-wall';
+import { Rank, Suit, SuitTile, TileModifier } from '../../tile';
+import { InvalidTileNotHeldError } from '../invalid-tile-not-held-error';
+
+describe('DeadWall', () => {
+  describe('有効な値を与えられた場合', () => {
+    it('Wall として成立すること', () => {
+      expect(() => {
+        new DeadWall(
+          new SuitTile(Suit.Character, Rank[1], TileModifier.Normal),
+          new SuitTile(Suit.Character, Rank[2], TileModifier.Normal),
+          new SuitTile(Suit.Character, Rank[3], TileModifier.Normal),
+          new SuitTile(Suit.Character, Rank[4], TileModifier.Normal),
+        );
+      }).not.toThrow(Error);
+    });
+  });
+
+  describe('supply', () => {
+    it('与えられた牌を保持した新しい DeadWall を返すこと', () => {
+      const sut = new DeadWall();
+
+      expect([...sut]).not.toHaveLength(1);
+
+      const result = sut.supply(
+        new SuitTile(Suit.Character, Rank[1], TileModifier.Normal),
+      );
+
+      expect([...result]).toHaveLength(1);
+      expect(
+        result
+          .take()[0]
+          .equals(new SuitTile(Suit.Character, Rank[1], TileModifier.Normal)),
+      ).toBe(true);
+    });
+  });
+
+  describe('take', () => {
+    describe('牌を1枚以上保持している場合', () => {
+      it('保持している牌を払い出すまで InvalidTileNotHeldError を投げないこと', () => {
+        let sut = new DeadWall(
+          new SuitTile(Suit.Character, Rank[1], TileModifier.Normal),
+          new SuitTile(Suit.Character, Rank[2], TileModifier.Normal),
+        );
+
+        expect(() => {
+          [, sut] = sut.take();
+        }).not.toThrow(InvalidTileNotHeldError);
+
+        expect(() => {
+          [, sut] = sut.take();
+        }).not.toThrow(InvalidTileNotHeldError);
+
+        expect(() => {
+          [, sut] = sut.take();
+        }).toThrow(InvalidTileNotHeldError);
+      });
+
+      it('保持している牌を順番に払い出す新しい DeadWall を返すこと', () => {
+        const sut = new DeadWall(
+          new SuitTile(Suit.Character, Rank[1], TileModifier.Normal),
+          new SuitTile(Suit.Character, Rank[2], TileModifier.Normal),
+        );
+
+        const [result1, newDeadWall] = sut.take();
+        const [result2] = newDeadWall.take();
+
+        expect(
+          result1.equals(
+            new SuitTile(Suit.Character, Rank[2], TileModifier.Normal),
+          ),
+        ).toBe(true);
+        expect(
+          result2.equals(
+            new SuitTile(Suit.Character, Rank[1], TileModifier.Normal),
+          ),
+        ).toBe(true);
+      });
+    });
+
+    describe('牌を保持していない場合', () => {
+      const sut = new DeadWall();
+
+      it('InvalidTileNotHeldError を投げること', () => {
+        expect(() => {
+          sut.take();
+        }).toThrow(InvalidTileNotHeldError);
+      });
+    });
+  });
+});
