@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { InvalidNoTilesError } from './invalid-no-tiles-error';
+import { InvalidNoTilesError } from '../invalid-no-tiles-error';
 import { Wall } from './wall';
 import { Rank, Suit, SuitTile, TileModifier } from '../../tile';
 

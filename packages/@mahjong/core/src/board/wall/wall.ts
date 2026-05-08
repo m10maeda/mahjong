@@ -1,5 +1,4 @@
-import { InvalidNoTilesError } from './invalid-no-tiles-error';
-import { InvalidTileNotHeldError } from '../invalid-tile-not-held-error';
+import { InvalidNoTilesError } from '../invalid-no-tiles-error';
 
 import type { Tile } from '../../tile';
 
@@ -15,7 +14,7 @@ export class Wall {
 
     const takenTile = this.tiles[this.tiles.length - 1];
 
-    if (takenTile === undefined) throw new InvalidTileNotHeldError();
+    if (takenTile === undefined) throw new InvalidNoTilesError();
 
     return [takenTile, new Wall(...this.tiles.slice(0, -1))];
   }
@@ -25,7 +24,7 @@ export class Wall {
 
     const takenTile = this.tiles[0];
 
-    if (takenTile === undefined) throw new InvalidTileNotHeldError();
+    if (takenTile === undefined) throw new InvalidNoTilesError();
 
     return [takenTile, new Wall(...this.tiles.slice(1))];
   }

@@ -1,5 +1,5 @@
+import { InvalidTileNotHeldError } from './invalid-tile-not-held-error';
 import { MeldNotHeldError } from './meld-not-held-error';
-import { InvalidTileNotHeldError } from '../invalid-tile-not-held-error';
 
 import type { MeldOperation } from './meld-operation';
 import type { MeldTileGroup } from './meld-tile-group';

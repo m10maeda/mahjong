@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
 import { Hand } from './hand';
+import { InvalidTileNotHeldError } from './invalid-tile-not-held-error';
 import { MeldNotHeldError } from './meld-not-held-error';
 import { MeldOperation } from './meld-operation';
 import { MeldTileGroup } from './meld-tile-group';
 import { Rank, Suit, SuitTile, TileModifier } from '../../tile';
-import { InvalidTileNotHeldError } from '../invalid-tile-not-held-error';
 
 describe('Hand', () => {
   describe('add', () => {

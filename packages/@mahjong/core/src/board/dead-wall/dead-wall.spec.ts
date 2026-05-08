@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { DeadWall } from './dead-wall';
 import { Rank, Suit, SuitTile, TileModifier } from '../../tile';
-import { InvalidTileNotHeldError } from '../invalid-tile-not-held-error';
+import { InvalidNoTilesError } from '../invalid-no-tiles-error';
 
 describe('DeadWall', () => {
   describe('有効な値を与えられた場合', () => {
@@ -47,15 +47,15 @@ describe('DeadWall', () => {
 
         expect(() => {
           [, sut] = sut.take();
-        }).not.toThrow(InvalidTileNotHeldError);
+        }).not.toThrow(InvalidNoTilesError);
 
         expect(() => {
           [, sut] = sut.take();
-        }).not.toThrow(InvalidTileNotHeldError);
+        }).not.toThrow(InvalidNoTilesError);
 
         expect(() => {
           [, sut] = sut.take();
-        }).toThrow(InvalidTileNotHeldError);
+        }).toThrow(InvalidNoTilesError);
       });
 
       it('保持している牌を順番に払い出す新しい DeadWall を返すこと', () => {
@@ -86,7 +86,7 @@ describe('DeadWall', () => {
       it('InvalidTileNotHeldError を投げること', () => {
         expect(() => {
           sut.take();
-        }).toThrow(InvalidTileNotHeldError);
+        }).toThrow(InvalidNoTilesError);
       });
     });
   });

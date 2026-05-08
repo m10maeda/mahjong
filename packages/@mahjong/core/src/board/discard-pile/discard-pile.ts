@@ -1,4 +1,4 @@
-import { InvalidTileNotHeldError } from '../invalid-tile-not-held-error';
+import { InvalidNoTilesError } from '../invalid-no-tiles-error';
 
 import type { Tile } from '../../tile';
 
@@ -18,7 +18,7 @@ export class DiscardPile implements Iterable<Tile> {
   }
 
   public take(): readonly [Tile, DiscardPile] {
-    if (this.latest === undefined) throw new InvalidTileNotHeldError();
+    if (this.latest === undefined) throw new InvalidNoTilesError();
 
     return [this.latest, new DiscardPile(...[...this].slice(0, -1))];
   }
