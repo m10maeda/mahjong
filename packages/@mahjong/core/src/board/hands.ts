@@ -1,35 +1,10 @@
 import { SeatPosition } from '../seat-position';
 import { InvalidDuplicatedSeatsError } from './invalid-duplicated-seats-error';
 
-import type { Tile } from '../tile';
 import type { Hand } from './hand';
 
 export class Hands implements Iterable<readonly [SeatPosition, Hand]> {
   private readonly map: Map<SeatPosition, Hand>;
-
-  public add(tile: Tile, holder: SeatPosition): Hands {
-    const newHands = Array.from(this.map.entries()).map<[SeatPosition, Hand]>(
-      ([_holder, hand]) => {
-        if (_holder.equals(holder)) return [_holder, hand.add(tile)];
-
-        return [_holder, hand];
-      },
-    );
-
-    return new Hands(...newHands);
-  }
-
-  public discard(tile: Tile, holder: SeatPosition): Hands {
-    const newHands = Array.from(this.map.entries()).map<[SeatPosition, Hand]>(
-      ([_holder, hand]) => {
-        if (_holder.equals(holder)) return [_holder, hand.discard(tile)];
-
-        return [_holder, hand];
-      },
-    );
-
-    return new Hands(...newHands);
-  }
 
   public exists(holder: SeatPosition): boolean {
     return this.map.has(holder);
