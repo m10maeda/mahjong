@@ -10,7 +10,7 @@ export class Hands implements Iterable<readonly [SeatPosition, Hand]> {
     return this.map.has(holder);
   }
 
-  public [Symbol.iterator](): Iterator<[SeatPosition, Hand]> {
+  public [Symbol.iterator](): Iterator<readonly [SeatPosition, Hand]> {
     return this.map.entries();
   }
 

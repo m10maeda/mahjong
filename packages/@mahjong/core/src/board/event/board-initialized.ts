@@ -13,7 +13,7 @@ export class BoardInitialized extends BoardEvent {
   public constructor(
     wall: readonly Tile[],
     deadWall: readonly Tile[],
-    hands: Map<SeatPosition, Tile[]>,
+    hands: Map<SeatPosition, readonly Tile[]>,
   ) {
     super();
 
