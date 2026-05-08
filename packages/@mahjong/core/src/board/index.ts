@@ -21,4 +21,6 @@ export {
   AddedQuadruplet,
 } from './event';
 
-export { Wall, TilePosition, OrderedTiles } from './wall';
+export { Wall } from './wall';
+
+export { InvalidNoTilesError } from './invalid-no-tiles-error';

@@ -1,40 +1,35 @@
-import type { OrderedTiles } from './ordered-tiles';
-import type { TilePosition } from './tile-position';
+import { InvalidNoTilesError } from '../invalid-no-tiles-error';
+
 import type { Tile } from '../../tile';
 
 export class Wall {
-  public readonly deadWallStartPosition: TilePosition;
+  private readonly tiles: readonly Tile[];
 
-  private readonly _tiles: OrderedTiles;
-
-  public get count(): number {
-    return this._tiles.size;
+  public isEmpty(): boolean {
+    return this.tiles.length === 0;
   }
 
-  public get dead(): readonly Tile[] {
-    return this._tiles.slice(this.deadWallStartPosition);
+  public takeLastTile(): [Tile, Wall] {
+    if (this.isEmpty()) throw new InvalidNoTilesError();
+
+    const takenTile = this.tiles[this.tiles.length - 1];
+
+    if (takenTile === undefined) throw new InvalidNoTilesError();
+
+    return [takenTile, new Wall(...this.tiles.slice(0, -1))];
   }
 
-  public get tiles(): readonly Tile[] {
-    return [...this._tiles];
+  public takeTile(): [Tile, Wall] {
+    if (this.isEmpty()) throw new InvalidNoTilesError();
+
+    const takenTile = this.tiles[0];
+
+    if (takenTile === undefined) throw new InvalidNoTilesError();
+
+    return [takenTile, new Wall(...this.tiles.slice(1))];
   }
 
-  public at(position: TilePosition): Tile | undefined {
-    return this._tiles.at(position);
-  }
-
-  public slice(start: TilePosition, end?: TilePosition): readonly Tile[] {
-    return this._tiles.slice(start, end);
-  }
-
-  public withMovedDeadWallStartPosition(position: TilePosition): Wall {
-    return new Wall(this._tiles, position);
-  }
-
-  public constructor(tiles: OrderedTiles, deadWallStartPosition: TilePosition) {
-    if (tiles.at(deadWallStartPosition) === undefined) throw new Error();
-
-    this._tiles = tiles;
-    this.deadWallStartPosition = deadWallStartPosition;
+  public constructor(...tiles: readonly Tile[]) {
+    this.tiles = tiles;
   }
 }
