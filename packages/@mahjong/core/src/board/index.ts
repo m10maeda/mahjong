@@ -22,5 +22,6 @@ export {
 } from './event';
 
 export { Wall } from './wall';
+export { DeadWall } from './dead-wall';
 
 export { InvalidNoTilesError } from './invalid-no-tiles-error';
