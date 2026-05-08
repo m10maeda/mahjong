@@ -9,12 +9,8 @@ export enum TileDrawnSource {
   DeadWall,
 }
 
-type WallIndex = number;
-
 export class TileDrawn extends TurnBasedEvent {
-  public readonly deadWallStartPosition: WallIndex;
-
-  public readonly seat: SeatPosition;
+  public readonly actor: SeatPosition;
 
   public readonly source: TileDrawnSource;
 
@@ -25,13 +21,11 @@ export class TileDrawn extends TurnBasedEvent {
     seat: SeatPosition,
     source: TileDrawnSource,
     turn: Turn,
-    deadWallStartPosition: WallIndex,
   ) {
     super(turn);
 
     this.tile = tile;
-    this.seat = seat;
+    this.actor = seat;
     this.source = source;
-    this.deadWallStartPosition = deadWallStartPosition;
   }
 }

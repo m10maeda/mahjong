@@ -11,11 +11,11 @@ export class SequenceEstablished extends MeldEstablished {
 
   public constructor(
     created: Sequence,
-    seat: SeatPosition,
+    actor: SeatPosition,
     from: SeatPosition,
     turn: Turn,
   ) {
-    super(seat, turn);
+    super(actor, turn);
 
     this.created = created;
     this.from = from;

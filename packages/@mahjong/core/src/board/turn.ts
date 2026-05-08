@@ -1,16 +1,16 @@
 export class Turn {
   private readonly value: number;
 
+  public advance(): Turn {
+    return new Turn(this.value + 1);
+  }
+
   public compareTo(other: Turn): number {
     return this.value - other.value;
   }
 
   public equals(other: Turn): boolean {
     return this.value === other.value;
-  }
-
-  public increase(): Turn {
-    return new Turn(this.value + 1);
   }
 
   public [Symbol.toPrimitive](
