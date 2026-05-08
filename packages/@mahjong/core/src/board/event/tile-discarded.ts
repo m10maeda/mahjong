@@ -5,7 +5,7 @@ import type { Tile } from '../../tile';
 import type { Turn } from '../turn';
 
 export class TileDiscarded extends TurnBasedEvent {
-  public readonly actor: SeatPosition;
+  public readonly discarder: SeatPosition;
 
   public readonly fromConcealed: boolean;
 
@@ -14,13 +14,13 @@ export class TileDiscarded extends TurnBasedEvent {
   public constructor(
     tile: Tile,
     fromConcealed: boolean,
-    seat: SeatPosition,
+    discarder: SeatPosition,
     turn: Turn,
   ) {
     super(turn);
 
     this.tile = tile;
     this.fromConcealed = fromConcealed;
-    this.actor = seat;
+    this.discarder = discarder;
   }
 }

@@ -8,16 +8,16 @@ export { TileDrawn, TileDrawnSource } from './tile-drawn';
 export { TileDiscarded } from './tile-discarded';
 
 export {
-  MeldEstablished,
+  Melded,
   Meld,
-  SequenceEstablished,
-  Sequence,
-  TripletEstablished,
-  Triplet,
-  OpenQuadrupletEstablished,
+  SequenceMelded,
+  OpenSequence,
+  TripletMelded,
+  OpenTriplet,
+  OpenQuadrupletMelded,
   OpenQuadruplet,
-  ClosedQuadrupletEstablished,
+  ClosedQuadrupletMelded,
   ClosedQuadruplet,
-  AddedQuadrupletEstablished,
+  AddedQuadrupletMelded,
   AddedQuadruplet,
-} from './meld-established';
+} from './melded';

@@ -10,7 +10,7 @@ export enum TileDrawnSource {
 }
 
 export class TileDrawn extends TurnBasedEvent {
-  public readonly actor: SeatPosition;
+  public readonly drawer: SeatPosition;
 
   public readonly source: TileDrawnSource;
 
@@ -18,14 +18,14 @@ export class TileDrawn extends TurnBasedEvent {
 
   public constructor(
     tile: Tile,
-    seat: SeatPosition,
+    drawer: SeatPosition,
     source: TileDrawnSource,
     turn: Turn,
   ) {
     super(turn);
 
     this.tile = tile;
-    this.actor = seat;
+    this.drawer = drawer;
     this.source = source;
   }
 }
