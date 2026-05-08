@@ -23,5 +23,6 @@ export {
 
 export { Wall } from './wall';
 export { DeadWall } from './dead-wall';
+export { DiscardPile } from './discard-pile';
 
 export { InvalidNoTilesError } from './invalid-no-tiles-error';
