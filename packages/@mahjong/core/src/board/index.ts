@@ -28,6 +28,17 @@ export { Hand, MeldOperation, MeldTileGroup, TileNotHeldError } from './hand';
 export { DiscardPile } from './discard-pile';
 export { Hands } from './hands';
 
+export {
+  DrawTileFromWall,
+  DrawTileFromDeadWall,
+  DiscardTile,
+  MeldAddedQuadruplet,
+  MeldClosedQuadruplet,
+  MeldOpenQuadruplet,
+  MeldSequence,
+  MeldTriplet,
+} from './command';
+
 export { InvalidTileNotHeldError } from './invalid-tile-not-held-error';
 export { InvalidHolderNotFoundError } from './invalid-holder-not-found-error';
 export { InvalidMismatchClaimedTileError } from './invalid-mismatch-claimed-tile-error';
