@@ -1,12 +1,16 @@
 import { Won } from './won';
 
+import type { Round } from '../../../round';
 import type { SeatPosition } from '../../../seat-position';
 
 export class WonWithRon extends Won {
   public readonly winners: readonly [SeatPosition, ...SeatPosition[]];
 
-  public constructor(winners: readonly [SeatPosition, ...SeatPosition[]]) {
-    super();
+  public constructor(
+    round: Round,
+    winners: readonly [SeatPosition, ...SeatPosition[]],
+  ) {
+    super(round);
 
     this.winners = winners;
   }

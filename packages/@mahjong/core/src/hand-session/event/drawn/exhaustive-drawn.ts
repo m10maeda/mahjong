@@ -1,3 +1,3 @@
-import { HandSessionEvent } from '../hand-session-event';
+import { HandSessionEnded } from '../hand-session-ended';
 
-export class ExhaustiveDrawn extends HandSessionEvent {}
+export class ExhaustiveDrawn extends HandSessionEnded {}

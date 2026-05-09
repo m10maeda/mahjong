@@ -1,2 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
-export abstract class HandSessionEvent {}
+import type { Round } from '../../round';
+
+export abstract class HandSessionEvent {
+  public readonly round: Round;
+
+  public constructor(round: Round) {
+    this.round = round;
+  }
+}

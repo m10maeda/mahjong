@@ -1,12 +1,13 @@
 import { Won } from './won';
 
+import type { Round } from '../../../round';
 import type { SeatPosition } from '../../../seat-position';
 
 export class WonWithSelfDraw extends Won {
   public readonly winner: SeatPosition;
 
-  public constructor(winner: SeatPosition) {
-    super();
+  public constructor(round: Round, winner: SeatPosition) {
+    super(round);
 
     this.winner = winner;
   }
