@@ -1,11 +1,14 @@
 export { Point } from './point';
 
 export {
+  ScoreLedgerEvent,
   ScoreTransacted,
-  TransactionReason,
+  ScoreLedger,
+  ScoreTransaction,
   ScoreEntry,
-  EntryReason,
-  AccountOwner,
-  SeatAccountOwner,
-  PotAccountOwner,
+  ScoreHolder,
+  SeatScoreHolder,
+  PotScoreHolder,
+  InvalidDuplicatedHolderError,
+  InvalidNoZeroSumError,
 } from './ledger';
