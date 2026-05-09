@@ -1,4 +1,4 @@
-export { ScoreTransacted, TransactionReason, EntryReason } from './event';
+export { ScoreLedgerEvent, ScoreTransacted } from './event';
 
 export { ScoreEntry } from './score-entry';
 
