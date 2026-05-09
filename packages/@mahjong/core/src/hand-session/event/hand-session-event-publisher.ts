@@ -1,5 +1,4 @@
 import type { HandSessionEvent } from './hand-session-event';
+import type { IMahjongEventPublisher } from '../../event';
 
-export interface IHandSessionEventPublisher {
-  publish(event: HandSessionEvent): Promise<void>;
-}
+export interface IHandSessionEventPublisher extends IMahjongEventPublisher<HandSessionEvent> {}
