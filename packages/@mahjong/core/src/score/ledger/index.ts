@@ -1,9 +1,6 @@
-export {
-  ScoreTransacted,
-  TransactionReason,
-  ScoreEntry,
-  EntryReason,
-} from './event';
+export { ScoreTransacted, TransactionReason, EntryReason } from './event';
+
+export { ScoreEntry } from './score-entry';
 
 export { AccountOwner } from './account-owner';
 export { SeatAccountOwner } from './seat-account-owner';
