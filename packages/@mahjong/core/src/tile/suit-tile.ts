@@ -29,9 +29,9 @@ export class SuitTile extends Tile {
 
   public toString(): string {
     if (this.modifier === TileModifier.Red)
-      return `${this.rank.toString()}${this.suit}}r`;
+      return `${this.rank.toString()}${this.suit}r`;
 
-    return `${this.rank.toString()}${this.suit}}`;
+    return `${this.rank.toString()}${this.suit}`;
   }
 
   public types(other: SuitTile): boolean {
