@@ -1,6 +1,8 @@
-import { HandSessionEvent } from '../hand-session-event';
+import { HandSessionEnded } from '../hand-session-ended';
 
-enum AbortiveReason {
+import type { Round } from '../../../round';
+
+export enum AbortiveReason {
   /** 九種九牌 */
   NineTerminalsAndHonors,
 
@@ -17,34 +19,11 @@ enum AbortiveReason {
   TripleRon,
 }
 
-export class AbortiveDrawn extends HandSessionEvent {
-  /** 四開槓 */
-  public static readonly FourKans = new AbortiveDrawn(AbortiveReason.FourKans);
-
-  /** 四家立直 */
-  public static readonly FourRiichi = new AbortiveDrawn(
-    AbortiveReason.FourRiichi,
-  );
-
-  /** 四風子連打 */
-  public static readonly FourWindsOutInFirstTurn = new AbortiveDrawn(
-    AbortiveReason.FourWindsOutInFirstTurn,
-  );
-
-  /** 九種九牌 */
-  public static readonly NineTerminalsAndHonors = new AbortiveDrawn(
-    AbortiveReason.NineTerminalsAndHonors,
-  );
-
-  /** 三家和 */
-  public static readonly TripleRon = new AbortiveDrawn(
-    AbortiveReason.TripleRon,
-  );
-
+export class AbortiveDrawn extends HandSessionEnded {
   public readonly reason: AbortiveReason;
 
-  private constructor(reason: AbortiveReason) {
-    super();
+  public constructor(round: Round, reason: AbortiveReason) {
+    super(round);
 
     this.reason = reason;
   }
