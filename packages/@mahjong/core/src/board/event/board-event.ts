@@ -1,2 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
-export abstract class BoardEvent {}
+import { MahjongEvent } from '../../event';
+
+export abstract class BoardEvent extends MahjongEvent {}
