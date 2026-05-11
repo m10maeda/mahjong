@@ -1,15 +1,15 @@
 import { Tile } from '../../../tile';
-import { BoardCommand } from '../../board';
 import {
   AddedQuadruplet,
   AddedQuadrupletMelded,
   OpenTriplet,
   type BoardEvent,
 } from '../../event';
-import { MeldOperation, MeldTileGroup } from '../../hand';
+import { BoardCommand } from '../../models/board';
+import { MeldOperation, MeldTileGroup } from '../../models/hand';
 
 import type { SeatPosition } from '../../../seat-position';
-import type { Board } from '../../board';
+import type { Board } from '../../models/board';
 import type { Turn } from '../../turn';
 
 export class MeldAddedQuadruplet extends BoardCommand<Board> {

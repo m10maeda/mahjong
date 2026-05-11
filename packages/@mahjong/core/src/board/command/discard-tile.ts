@@ -1,9 +1,9 @@
-import { BoardCommand } from '../board';
 import { TileDiscarded, type BoardEvent } from '../event';
+import { BoardCommand } from '../models/board';
 
 import type { SeatPosition } from '../../seat-position';
 import type { Tile } from '../../tile';
-import type { Board } from '../board';
+import type { Board } from '../models/board';
 import type { Turn } from '../turn';
 
 export class DiscardTile extends BoardCommand<Board> {

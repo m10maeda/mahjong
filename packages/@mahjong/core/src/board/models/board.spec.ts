@@ -10,11 +10,11 @@ import {
   MeldTileGroup,
 } from './hand';
 import { MeldNotHeldError } from './hand/meld-not-held-error';
-import { Wall } from './wall';
-import { SeatPosition } from '../seat-position';
-import { Rank, Suit, SuitTile, TileModifier } from '../tile';
 import { Hands } from './hands';
 import { InvalidHolderNotFoundError } from './invalid-holder-not-found-error';
+import { Wall } from './wall';
+import { SeatPosition } from '../../seat-position';
+import { Rank, Suit, SuitTile, TileModifier } from '../../tile';
 
 describe('Board', () => {
   function createBoard() {

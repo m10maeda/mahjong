@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { DeadWall } from './dead-wall';
-import { Rank, Suit, SuitTile, TileModifier } from '../../tile';
+import { Rank, Suit, SuitTile, TileModifier } from '../../../tile';
 import { InvalidNoTilesError } from '../invalid-no-tiles-error';
 
 describe('DeadWall', () => {
