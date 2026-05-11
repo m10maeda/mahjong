@@ -1,6 +1,11 @@
 export type { IScoreLedgerWriter } from './score-ledger-writer';
 
-export { ScoreLedgerEvent, ScoreTransacted } from './event';
+export {
+  ScoreLedgerEvent,
+  type IScoreLedgerEventPublisher,
+  type IScoreLedgerEventSubscriber,
+  ScoreTransacted,
+} from './event';
 
 export { ScoreLedger } from './score-ledger';
 
