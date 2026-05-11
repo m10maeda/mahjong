@@ -3,22 +3,13 @@ import { InvalidMismatchClaimedTileError } from './invalid-mismatch-claimed-tile
 
 import type { DeadWall } from './dead-wall';
 import type { DiscardPile } from './discard-pile';
-import type { BoardEvent } from '../event';
 import type { MeldOperation, MeldTileGroup } from './hand';
 import type { Hands } from './hands';
 import type { Wall } from './wall';
 import type { SeatPosition } from '../../seat-position';
 import type { Tile } from '../../tile';
 
-export interface IBoard {
-  apply(command: BoardCommand<IBoard>): readonly [IBoard, BoardEvent];
-}
-
-export abstract class BoardCommand<TBoard> {
-  public abstract execute(prevBoard: TBoard): readonly [TBoard, BoardEvent];
-}
-
-export class Board implements IBoard {
+export class Board {
   private readonly deadWall: DeadWall;
 
   private readonly discardPile: DiscardPile;
@@ -26,10 +17,6 @@ export class Board implements IBoard {
   private readonly hands: Hands;
 
   private readonly wall: Wall;
-
-  public apply(command: BoardCommand<Board>): readonly [Board, BoardEvent] {
-    return command.execute(this);
-  }
 
   public discard(tile: Tile, actor: SeatPosition): Board {
     if (!this.hands.exists(actor)) throw new InvalidHolderNotFoundError();

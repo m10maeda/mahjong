@@ -1,58 +1,33 @@
-import {
-  OpenQuadruplet,
-  OpenQuadrupletMelded,
-  type BoardEvent,
-} from '../../event';
-import { BoardCommand } from '../../models/board';
-import { MeldOperation, MeldTileGroup } from '../../models/hand';
+import { BoardCommand } from '../board-command';
 
 import type { SeatPosition } from '../../../seat-position';
 import type { Tile } from '../../../tile';
-import type { Board } from '../../models/board';
 import type { Turn } from '../../turn';
 
-export class MeldOpenQuadruplet extends BoardCommand<Board> {
-  private readonly actor: SeatPosition;
+export class MeldOpenQuadruplet extends BoardCommand {
+  public readonly claimedOn: SeatPosition;
 
-  private readonly claimed: Tile;
+  public readonly claimedTile: Tile;
 
-  private readonly consumed: readonly [Tile, ...Tile[]];
+  public readonly consumedTiles: readonly [Tile, ...Tile[]];
 
-  private readonly currentTurn: Turn;
+  public readonly currentTurn: Turn;
 
-  private readonly from: SeatPosition;
-
-  public execute(prevBoard: Board): [Board, BoardEvent] {
-    const operation = new MeldOperation(
-      new MeldTileGroup(...this.consumed, this.claimed),
-      this.consumed,
-      this.claimed,
-    );
-    const newBoard = prevBoard.meld(this.actor, operation);
-
-    const event = new OpenQuadrupletMelded(
-      new OpenQuadruplet(this.consumed, this.claimed),
-      this.actor,
-      this.from,
-      this.currentTurn,
-    );
-
-    return [newBoard, event];
-  }
+  public readonly seat: SeatPosition;
 
   public constructor(
-    discarder: SeatPosition,
-    claimed: Tile,
-    consumed: readonly [Tile, ...Tile[]],
-    from: SeatPosition,
+    seat: SeatPosition,
+    claimedTile: Tile,
+    claimedOn: SeatPosition,
+    consumedTiles: readonly [Tile, ...Tile[]],
     currentTurn: Turn,
   ) {
     super();
 
-    this.actor = discarder;
-    this.claimed = claimed;
-    this.consumed = consumed;
-    this.from = from;
+    this.seat = seat;
+    this.claimedTile = claimedTile;
+    this.claimedOn = claimedOn;
+    this.consumedTiles = consumedTiles;
     this.currentTurn = currentTurn;
   }
 }

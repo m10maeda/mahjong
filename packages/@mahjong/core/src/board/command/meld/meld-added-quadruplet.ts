@@ -1,54 +1,32 @@
 import { Tile } from '../../../tile';
-import {
-  AddedQuadruplet,
-  AddedQuadrupletMelded,
-  OpenTriplet,
-  type BoardEvent,
-} from '../../event';
-import { BoardCommand } from '../../models/board';
-import { MeldOperation, MeldTileGroup } from '../../models/hand';
+import { OpenTriplet } from '../../event';
+import { BoardCommand } from '../board-command';
 
 import type { SeatPosition } from '../../../seat-position';
-import type { Board } from '../../models/board';
 import type { Turn } from '../../turn';
 
-export class MeldAddedQuadruplet extends BoardCommand<Board> {
-  private readonly actor: SeatPosition;
+export class MeldAddedQuadruplet extends BoardCommand {
+  // FIXME: コマンド用DOTへ変換する
+  // むしろ、Hand.melds をやめて、Board.melds で管理させた方が良さそう
+  public readonly base: OpenTriplet;
 
-  private readonly base: OpenTriplet;
+  public readonly consumedTile: Tile;
 
-  private readonly consumed: Tile;
+  public readonly currentTurn: Turn;
 
-  private readonly currentTurn: Turn;
-
-  public execute(prevBoard: Board): [Board, BoardEvent] {
-    const operation = new MeldOperation(
-      new MeldTileGroup(...this.base, this.consumed),
-      [this.consumed],
-    );
-    const newBoard = prevBoard.meld(this.actor, operation);
-
-    const event = new AddedQuadrupletMelded(
-      new AddedQuadruplet(this.base, this.consumed),
-      this.base,
-      this.actor,
-      this.currentTurn,
-    );
-
-    return [newBoard, event];
-  }
+  public readonly seat: SeatPosition;
 
   public constructor(
-    discarder: SeatPosition,
+    seat: SeatPosition,
+    consumedTile: Tile,
     base: OpenTriplet,
-    consumed: Tile,
     currentTurn: Turn,
   ) {
     super();
 
-    this.actor = discarder;
+    this.seat = seat;
+    this.consumedTile = consumedTile;
     this.base = base;
-    this.consumed = consumed;
     this.currentTurn = currentTurn;
   }
 }

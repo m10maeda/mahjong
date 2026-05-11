@@ -24,6 +24,8 @@ export {
 } from './event';
 
 export {
+  type IBoardCommandHandler,
+  BoardCommand,
   DrawTileFromWall,
   DrawTileFromDeadWall,
   DiscardTile,
