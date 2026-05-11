@@ -1,42 +1,27 @@
-import { BoardCommand } from '../board';
-import { TileDiscarded, type BoardEvent } from '../event';
+import { BoardCommand } from './board-command';
 
 import type { SeatPosition } from '../../seat-position';
 import type { Tile } from '../../tile';
-import type { Board } from '../board';
 import type { Turn } from '../turn';
 
-export class DiscardTile extends BoardCommand<Board> {
-  private readonly currentTurn: Turn;
+export class DiscardTile extends BoardCommand {
+  public readonly currentTurn: Turn;
 
-  private readonly discarder: SeatPosition;
+  public readonly fromConcealed: boolean;
 
-  private readonly fromConcealed: boolean;
+  public readonly seat: SeatPosition;
 
-  private readonly tile: Tile;
-
-  public execute(prevBoard: Board): [Board, BoardEvent] {
-    const newBoard = prevBoard.discard(this.tile, this.discarder);
-
-    const event = new TileDiscarded(
-      this.tile,
-      this.fromConcealed,
-      this.discarder,
-      this.currentTurn,
-    );
-
-    return [newBoard, event];
-  }
+  public readonly tile: Tile;
 
   public constructor(
-    discarder: SeatPosition,
+    seat: SeatPosition,
     tile: Tile,
     fromConcealed: boolean,
     currentTurn: Turn,
   ) {
     super();
 
-    this.discarder = discarder;
+    this.seat = seat;
     this.tile = tile;
     this.fromConcealed = fromConcealed;
     this.currentTurn = currentTurn;
