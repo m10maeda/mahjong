@@ -1,4 +1,4 @@
-export { type IBoard, Board, BoardCommand } from './board';
+export { Board } from './board';
 export { Wall } from './wall';
 export { DeadWall } from './dead-wall';
 export { Hands } from './hands';

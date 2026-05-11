@@ -21,9 +21,11 @@ export {
   AddedQuadruplet,
   type IBoardEventPublisher,
   type IBoardEventSubscriber,
-} from './event';
+} from './events';
 
 export {
+  type IBoardCommandHandler,
+  BoardCommand,
   DrawTileFromWall,
   DrawTileFromDeadWall,
   DiscardTile,
@@ -32,6 +34,6 @@ export {
   MeldOpenQuadruplet,
   MeldSequence,
   MeldTriplet,
-} from './command';
+} from './commands';
 
 export { TileSet, TileSetType } from './tile-set';
