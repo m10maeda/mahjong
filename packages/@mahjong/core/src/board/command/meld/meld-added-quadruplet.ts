@@ -1,5 +1,4 @@
 import { Tile } from '../../../tile';
-import { BoardCommand } from '../../board';
 import {
   AddedQuadruplet,
   AddedQuadrupletMelded,
@@ -7,12 +6,13 @@ import {
   type BoardEvent,
 } from '../../event';
 import { MeldOperation, MeldTileGroup } from '../../hand';
+import { BoardCommand } from '../board-command';
 
 import type { SeatPosition } from '../../../seat-position';
 import type { Board } from '../../board';
 import type { Turn } from '../../turn';
 
-export class MeldAddedQuadruplet extends BoardCommand<Board> {
+export class MeldAddedQuadruplet extends BoardCommand {
   private readonly actor: SeatPosition;
 
   private readonly base: OpenTriplet;

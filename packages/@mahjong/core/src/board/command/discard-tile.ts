@@ -1,4 +1,4 @@
-import { BoardCommand } from '../board';
+import { BoardCommand } from './board-command';
 import { TileDiscarded, type BoardEvent } from '../event';
 
 import type { SeatPosition } from '../../seat-position';
@@ -6,7 +6,7 @@ import type { Tile } from '../../tile';
 import type { Board } from '../board';
 import type { Turn } from '../turn';
 
-export class DiscardTile extends BoardCommand<Board> {
+export class DiscardTile extends BoardCommand {
   private readonly currentTurn: Turn;
 
   private readonly discarder: SeatPosition;

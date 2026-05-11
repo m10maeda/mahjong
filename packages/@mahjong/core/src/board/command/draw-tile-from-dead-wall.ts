@@ -1,11 +1,11 @@
-import { BoardCommand } from '../board';
 import { TileDrawn, TileDrawnSource, type BoardEvent } from '../event';
+import { BoardCommand } from './board-command';
 
 import type { SeatPosition } from '../../seat-position';
 import type { Board } from '../board';
 import type { Turn } from '../turn';
 
-export class DrawTileFromDeadWall extends BoardCommand<Board> {
+export class DrawTileFromDeadWall extends BoardCommand {
   private readonly currentTurn: Turn;
 
   private readonly drawer: SeatPosition;

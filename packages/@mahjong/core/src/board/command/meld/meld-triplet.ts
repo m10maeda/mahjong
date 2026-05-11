@@ -1,13 +1,13 @@
-import { BoardCommand } from '../../board';
 import { OpenTriplet, TripletMelded, type BoardEvent } from '../../event';
 import { MeldOperation, MeldTileGroup } from '../../hand';
+import { BoardCommand } from '../board-command';
 
 import type { SeatPosition } from '../../../seat-position';
 import type { Tile } from '../../../tile';
 import type { Board } from '../../board';
 import type { Turn } from '../../turn';
 
-export class MeldTriplet extends BoardCommand<Board> {
+export class MeldTriplet extends BoardCommand {
   private readonly actor: SeatPosition;
 
   private readonly claimed: Tile;

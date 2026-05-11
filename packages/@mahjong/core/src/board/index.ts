@@ -23,7 +23,14 @@ export {
   type IBoardEventSubscriber,
 } from './event';
 
-export { type IBoard, Board, BoardCommand } from './board';
+export type { IBoardCommandHandler } from './board-command-handler';
+
+export {
+  type IBoardCommandApplier,
+  BoardCommand,
+} from './board-command-applier';
+
+export { Board } from './board';
 export { Wall } from './wall';
 export { DeadWall } from './dead-wall';
 export {

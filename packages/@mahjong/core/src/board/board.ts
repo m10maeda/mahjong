@@ -5,20 +5,14 @@ import type { DiscardPile } from './discard-pile';
 import type { Hands } from './hands';
 import type { SeatPosition } from '../seat-position';
 import type { Tile } from '../tile';
+import type { IBoardCommandApplier } from './board-command-applier';
+import type { BoardCommand } from './command';
 import type { DeadWall } from './dead-wall';
 import type { BoardEvent } from './event';
 import type { MeldOperation, MeldTileGroup } from './hand';
 import type { Wall } from './wall';
 
-export interface IBoard {
-  apply(command: BoardCommand<IBoard>): readonly [IBoard, BoardEvent];
-}
-
-export abstract class BoardCommand<TBoard> {
-  public abstract execute(prevBoard: TBoard): readonly [TBoard, BoardEvent];
-}
-
-export class Board implements IBoard {
+export class Board implements IBoardCommandApplier {
   private readonly deadWall: DeadWall;
 
   private readonly discardPile: DiscardPile;
@@ -27,7 +21,7 @@ export class Board implements IBoard {
 
   private readonly wall: Wall;
 
-  public apply(command: BoardCommand<Board>): readonly [Board, BoardEvent] {
+  public apply(command: BoardCommand): readonly [Board, BoardEvent] {
     return command.execute(this);
   }
 
