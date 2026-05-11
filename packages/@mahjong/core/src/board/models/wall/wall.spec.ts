@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { InvalidNoTilesError } from '../invalid-no-tiles-error';
 import { Wall } from './wall';
-import { Rank, Suit, SuitTile, TileModifier } from '../../tile';
+import { Rank, Suit, SuitTile, TileModifier } from '../../../tile';
 
 describe('Wall', () => {
   describe('有効な値を与えられた場合', () => {

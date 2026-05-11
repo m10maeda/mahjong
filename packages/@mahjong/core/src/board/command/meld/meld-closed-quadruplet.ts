@@ -1,14 +1,14 @@
-import { BoardCommand } from '../../board';
 import {
   ClosedQuadruplet,
   ClosedQuadrupletMelded,
   type BoardEvent,
 } from '../../event';
-import { MeldOperation, MeldTileGroup } from '../../hand';
+import { BoardCommand } from '../../models/board';
+import { MeldOperation, MeldTileGroup } from '../../models/hand';
 
 import type { SeatPosition } from '../../../seat-position';
 import type { Tile } from '../../../tile';
-import type { Board } from '../../board';
+import type { Board } from '../../models/board';
 import type { Turn } from '../../turn';
 
 export class MeldClosedQuadruplet extends BoardCommand<Board> {

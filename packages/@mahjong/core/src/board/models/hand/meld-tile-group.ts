@@ -1,4 +1,4 @@
-import type { Tile } from '../../tile';
+import type { Tile } from '../../../tile';
 
 export class MeldTileGroup implements Iterable<Tile> {
   public readonly tiles: readonly Tile[];

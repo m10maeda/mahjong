@@ -5,7 +5,7 @@ import { InvalidTileNotHeldError } from './invalid-tile-not-held-error';
 import { MeldNotHeldError } from './meld-not-held-error';
 import { MeldOperation } from './meld-operation';
 import { MeldTileGroup } from './meld-tile-group';
-import { Rank, Suit, SuitTile, TileModifier } from '../../tile';
+import { Rank, Suit, SuitTile, TileModifier } from '../../../tile';
 
 describe('Hand', () => {
   describe('add', () => {

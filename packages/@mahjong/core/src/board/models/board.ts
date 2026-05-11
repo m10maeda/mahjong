@@ -1,14 +1,14 @@
 import { InvalidHolderNotFoundError } from './invalid-holder-not-found-error';
 import { InvalidMismatchClaimedTileError } from './invalid-mismatch-claimed-tile-error';
 
-import type { DiscardPile } from './discard-pile';
-import type { Hands } from './hands';
-import type { SeatPosition } from '../seat-position';
-import type { Tile } from '../tile';
 import type { DeadWall } from './dead-wall';
-import type { BoardEvent } from './event';
+import type { DiscardPile } from './discard-pile';
+import type { BoardEvent } from '../event';
 import type { MeldOperation, MeldTileGroup } from './hand';
+import type { Hands } from './hands';
 import type { Wall } from './wall';
+import type { SeatPosition } from '../../seat-position';
+import type { Tile } from '../../tile';
 
 export interface IBoard {
   apply(command: BoardCommand<IBoard>): readonly [IBoard, BoardEvent];
