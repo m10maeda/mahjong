@@ -1,5 +1,7 @@
 export type { IScoreLedgerWriter } from './score-ledger-writer';
 
+export { ScoreLedgerRuntime } from './score-ledger-runtime';
+
 export {
   ScoreLedgerEvent,
   type IScoreLedgerEventPublisher,
