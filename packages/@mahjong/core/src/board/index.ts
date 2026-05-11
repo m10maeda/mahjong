@@ -64,6 +64,8 @@ export {
   DiscardedRecord,
 } from './reader';
 
+export { BoardRuntime, BoardProjection } from './runtime';
+
 export { InvalidNoTilesError } from './invalid-no-tiles-error';
 export { InvalidHolderNotFoundError } from './invalid-holder-not-found-error';
 export { InvalidMismatchClaimedTileError } from './invalid-mismatch-claimed-tile-error';
