@@ -1,4 +1,13 @@
-export { ScoreLedgerEvent, ScoreTransacted } from './event';
+export type { IScoreLedgerWriter } from './score-ledger-writer';
+
+export { ScoreLedgerRuntime } from './score-ledger-runtime';
+
+export {
+  ScoreLedgerEvent,
+  type IScoreLedgerEventPublisher,
+  type IScoreLedgerEventSubscriber,
+  ScoreTransacted,
+} from './event';
 
 export { ScoreLedger } from './score-ledger';
 
