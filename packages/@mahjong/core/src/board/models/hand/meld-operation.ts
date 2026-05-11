@@ -1,5 +1,5 @@
 import type { MeldTileGroup } from './meld-tile-group';
-import type { Tile } from '../../tile';
+import type { Tile } from '../../../tile';
 
 export class MeldOperation {
   public readonly claimed?: Tile;

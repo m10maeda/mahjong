@@ -3,7 +3,7 @@ import { MeldNotHeldError } from './meld-not-held-error';
 
 import type { MeldOperation } from './meld-operation';
 import type { MeldTileGroup } from './meld-tile-group';
-import type { Tile } from '../../tile';
+import type { Tile } from '../../../tile';
 
 export class Hand {
   private readonly concealed: readonly Tile[];
