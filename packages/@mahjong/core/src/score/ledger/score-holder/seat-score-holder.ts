@@ -34,4 +34,8 @@ export class SeatScoreHolder extends ScoreHolder {
 
     this.seat = seat;
   }
+
+  public static of(seat: SeatPosition): SeatScoreHolder {
+    return new SeatScoreHolder(seat);
+  }
 }
