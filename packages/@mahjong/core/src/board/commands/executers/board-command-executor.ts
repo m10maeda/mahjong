@@ -1,4 +1,4 @@
-import type { BoardEvent } from '../../event';
+import type { BoardEvent } from '../../events';
 import type { BoardCommand } from '../board-command';
 
 export interface IBoardCommandExecutor<TCommand extends BoardCommand, TBoard> {

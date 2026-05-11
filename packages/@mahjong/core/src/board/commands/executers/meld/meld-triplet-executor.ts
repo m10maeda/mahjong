@@ -1,4 +1,4 @@
-import { OpenTriplet, TripletMelded, type BoardEvent } from '../../../event';
+import { OpenTriplet, TripletMelded, type BoardEvent } from '../../../events';
 import { MeldOperation, MeldTileGroup, type Board } from '../../../models';
 
 import type { MeldTriplet } from '../../meld';

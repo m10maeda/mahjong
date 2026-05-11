@@ -1,4 +1,4 @@
-import { OpenSequence, SequenceMelded, type BoardEvent } from '../../../event';
+import { OpenSequence, SequenceMelded, type BoardEvent } from '../../../events';
 import { MeldOperation, MeldTileGroup, type Board } from '../../../models';
 
 import type { MeldSequence } from '../../meld';

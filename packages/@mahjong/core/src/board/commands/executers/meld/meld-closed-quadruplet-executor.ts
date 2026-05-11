@@ -1,32 +1,30 @@
 import {
-  OpenQuadruplet,
-  OpenQuadrupletMelded,
+  ClosedQuadruplet,
+  ClosedQuadrupletMelded,
   type BoardEvent,
-} from '../../../event';
+} from '../../../events';
 import { MeldOperation, MeldTileGroup, type Board } from '../../../models';
 
-import type { MeldOpenQuadruplet } from '../../meld';
+import type { MeldClosedQuadruplet } from '../../meld';
 import type { IBoardCommandExecutor } from '../board-command-executor';
 
-export class MeldOpenQuadrupletExecutor implements IBoardCommandExecutor<
-  MeldOpenQuadruplet,
+export class MeldClosedQuadrupletExecutor implements IBoardCommandExecutor<
+  MeldClosedQuadruplet,
   Board
 > {
   public execute(
-    command: MeldOpenQuadruplet,
+    command: MeldClosedQuadruplet,
     board: Board,
   ): readonly [BoardEvent, Board] {
     const operation = new MeldOperation(
-      new MeldTileGroup(...command.consumedTiles, command.claimedTile),
+      new MeldTileGroup(...command.consumedTiles),
       command.consumedTiles,
-      command.claimedTile,
     );
     const newBoard = board.meld(command.seat, operation);
 
-    const event = new OpenQuadrupletMelded(
-      new OpenQuadruplet(command.consumedTiles, command.claimedTile),
+    const event = new ClosedQuadrupletMelded(
+      new ClosedQuadruplet(command.consumedTiles),
       command.seat,
-      command.claimedOn,
       command.currentTurn,
     );
 

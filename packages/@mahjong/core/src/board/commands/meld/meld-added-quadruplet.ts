@@ -1,5 +1,5 @@
 import { Tile } from '../../../tile';
-import { OpenTriplet } from '../../event';
+import { OpenTriplet } from '../../events';
 import { BoardCommand } from '../board-command';
 
 import type { SeatPosition } from '../../../seat-position';

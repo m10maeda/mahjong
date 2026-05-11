@@ -2,7 +2,7 @@ import {
   AddedQuadruplet,
   AddedQuadrupletMelded,
   type BoardEvent,
-} from '../../../event';
+} from '../../../events';
 import { MeldOperation, MeldTileGroup, type Board } from '../../../models';
 
 import type { MeldAddedQuadruplet } from '../../meld';

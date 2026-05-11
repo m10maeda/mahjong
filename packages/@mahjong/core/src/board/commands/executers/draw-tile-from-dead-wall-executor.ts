@@ -1,4 +1,4 @@
-import { TileDrawn, TileDrawnSource, type BoardEvent } from '../../event';
+import { TileDrawn, TileDrawnSource, type BoardEvent } from '../../events';
 
 import type { IBoardCommandExecutor } from './board-command-executor';
 import type { Board } from '../../models';
