@@ -54,6 +54,16 @@ export {
   MeldTriplet,
 } from './command';
 
+export {
+  type IWallReader,
+  WallProjection,
+  type IHandReader,
+  HandProjection,
+  type IDiscardPileReader,
+  DiscardPileProjection,
+  DiscardedRecord,
+} from './reader';
+
 export { InvalidNoTilesError } from './invalid-no-tiles-error';
 export { InvalidHolderNotFoundError } from './invalid-holder-not-found-error';
 export { InvalidMismatchClaimedTileError } from './invalid-mismatch-claimed-tile-error';
