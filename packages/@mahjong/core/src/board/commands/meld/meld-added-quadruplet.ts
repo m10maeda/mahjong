@@ -1,13 +1,13 @@
 import { Tile } from '../../../tile';
-import { OpenTriplet } from '../../events';
 import { BoardCommand } from '../board-command';
 
 import type { SeatPosition } from '../../../seat-position';
+import type { MeldReference } from '../../events/melded';
 
 export class MeldAddedQuadruplet extends BoardCommand {
   // FIXME: コマンド用DOTへ変換する
   // むしろ、Hand.melds をやめて、Board.melds で管理させた方が良さそう
-  public readonly base: OpenTriplet;
+  public readonly base: MeldReference;
 
   public readonly consumedTile: Tile;
 
@@ -16,7 +16,7 @@ export class MeldAddedQuadruplet extends BoardCommand {
   public constructor(
     seat: SeatPosition,
     consumedTile: Tile,
-    base: OpenTriplet,
+    base: MeldReference,
   ) {
     super();
 
