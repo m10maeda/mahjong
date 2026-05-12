@@ -7,9 +7,9 @@ import type { Tile } from '../../../tile';
 export class MeldedFromSelf extends Melded {
   public constructor(
     reference: MeldReference,
-    consumedTiles: readonly Tile[],
     seat: SeatPosition,
+    consumedTiles: readonly Tile[],
   ) {
-    super(reference, consumedTiles, seat);
+    super(reference, seat, consumedTiles);
   }
 }

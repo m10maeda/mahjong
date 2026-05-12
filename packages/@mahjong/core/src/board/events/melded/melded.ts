@@ -13,13 +13,13 @@ export abstract class Melded extends BoardEvent {
 
   public constructor(
     reference: MeldReference,
-    consumedTiles: readonly Tile[],
     seat: SeatPosition,
+    consumedTiles: readonly Tile[],
   ) {
     super();
 
     this.reference = reference;
-    this.consumedTiles = consumedTiles;
     this.seat = seat;
+    this.consumedTiles = consumedTiles;
   }
 }

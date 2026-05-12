@@ -11,12 +11,12 @@ export class MeldedWithClaimed extends Melded {
 
   public constructor(
     reference: MeldReference,
+    seat: SeatPosition,
     consumedTiles: readonly Tile[],
     claimedOn: SeatPosition,
     claimedTile: Tile,
-    seat: SeatPosition,
   ) {
-    super(reference, consumedTiles, seat);
+    super(reference, seat, consumedTiles);
 
     this.claimedOn = claimedOn;
     this.claimedTile = claimedTile;

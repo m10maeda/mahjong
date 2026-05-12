@@ -41,7 +41,7 @@ export class Board {
     const newHands = this.hands.update(seat, (hand) => hand.discard(tile));
     const newDiscardPile = this.discardPile.add(tile);
 
-    const event = new TileDiscarded(tile, fromDrawnTile, seat);
+    const event = new TileDiscarded(tile, seat, fromDrawnTile);
 
     return [
       event,
@@ -98,7 +98,7 @@ export class Board {
     );
 
     return [
-      new ExtendedMelded(reference, consumedTiles, seat),
+      new ExtendedMelded(reference, seat, consumedTiles),
       new Board(this.wall, this.deadWall, newHands, this.discardPile, newMelds),
     ];
   }
@@ -116,8 +116,8 @@ export class Board {
 
     const event = new MeldedFromSelf(
       new MeldReference(seat, [...this.melds].length),
-      consumedTile,
       seat,
+      consumedTile,
     );
 
     return [
@@ -146,10 +146,10 @@ export class Board {
 
     const event = new MeldedWithClaimed(
       new MeldReference(seat, [...this.melds].length),
+      seat,
       consumedTile,
       claimedOn,
       claimedTile,
-      seat,
     );
 
     return [
