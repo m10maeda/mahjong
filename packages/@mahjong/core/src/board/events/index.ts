@@ -7,17 +7,9 @@ export { TileDiscarded } from './tile-discarded';
 
 export {
   Melded,
-  Meld,
-  SequenceMelded,
-  OpenSequence,
-  TripletMelded,
-  OpenTriplet,
-  OpenQuadrupletMelded,
-  OpenQuadruplet,
-  ClosedQuadrupletMelded,
-  ClosedQuadruplet,
-  AddedQuadrupletMelded,
-  AddedQuadruplet,
+  ExtendedMelded,
+  MeldedWithClaimed,
+  MeldedFromSelf,
 } from './melded';
 
 export type { IBoardEventSubscriber } from './board-event-subscriber';
