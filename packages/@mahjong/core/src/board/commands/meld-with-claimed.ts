@@ -1,14 +1,14 @@
-import { BoardCommand } from '../board-command';
+import { BoardCommand } from './board-command';
 
-import type { SeatPosition } from '../../../seat-position';
-import type { Tile } from '../../../tile';
+import type { SeatPosition } from '../../seat-position';
+import type { Tile } from '../../tile';
 
-export class MeldSequence extends BoardCommand {
+export class MeldWithClaimed extends BoardCommand {
   public readonly claimedOn: SeatPosition;
 
   public readonly claimedTile: Tile;
 
-  public readonly consumedTiles: readonly [Tile, ...Tile[]];
+  public readonly consumedTiles: readonly Tile[];
 
   public readonly seat: SeatPosition;
 
@@ -16,7 +16,7 @@ export class MeldSequence extends BoardCommand {
     seat: SeatPosition,
     claimedTile: Tile,
     claimedOn: SeatPosition,
-    consumedTiles: readonly [Tile, ...Tile[]],
+    consumedTiles: readonly Tile[],
   ) {
     super();
 

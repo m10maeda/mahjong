@@ -1,13 +1,9 @@
 export { BoardCommand } from './board-command';
 export type { IBoardCommandHandler } from './board-command-handler';
 
-export { DrawTileFromWall } from './draw-tile-from-wall';
-export { DrawTileFromDeadWall } from './draw-tile-from-dead-wall';
+export { DrawTile, DrawTileSource } from './draw-tile';
 export { DiscardTile } from './discard-tile';
-export {
-  MeldAddedQuadruplet,
-  MeldClosedQuadruplet,
-  MeldOpenQuadruplet,
-  MeldSequence,
-  MeldTriplet,
-} from './meld';
+
+export { MeldWithClaimed } from './meld-with-claimed';
+export { MeldFromSelf } from './meld-from-self';
+export { ExtendMeld } from './extend-meld';
