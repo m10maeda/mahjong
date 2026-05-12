@@ -1,13 +1,16 @@
 import { InvalidHolderNotFoundError } from './invalid-holder-not-found-error';
+import { InvalidMeldNotFoundError } from './invalid-meld-not-found-error';
 import { InvalidMismatchClaimedTileError } from './invalid-mismatch-claimed-tile-error';
+import { ClosedMeld, ExtendedMeld, OpenMeld } from './meld';
 
 import type { DeadWall } from './dead-wall';
 import type { DiscardPile } from './discard-pile';
-import type { MeldOperation, MeldTileGroup } from './hand';
 import type { Hands } from './hands';
+import type { Melds } from './melds';
 import type { Wall } from './wall';
 import type { SeatPosition } from '../../seat-position';
 import type { Tile } from '../../tile';
+import type { MeldReference } from '../events/melded';
 
 export class Board {
   private readonly deadWall: DeadWall;
@@ -15,6 +18,8 @@ export class Board {
   private readonly discardPile: DiscardPile;
 
   private readonly hands: Hands;
+
+  private readonly melds: Melds;
 
   private readonly wall: Wall;
 
@@ -24,7 +29,13 @@ export class Board {
     const newHands = this.hands.update(actor, (hand) => hand.discard(tile));
     const newDiscardPile = this.discardPile.add(tile);
 
-    return new Board(this.wall, this.deadWall, newHands, newDiscardPile);
+    return new Board(
+      this.wall,
+      this.deadWall,
+      newHands,
+      newDiscardPile,
+      this.melds,
+    );
   }
 
   public draw(actor: SeatPosition): readonly [Tile, Board] {
@@ -36,7 +47,7 @@ export class Board {
 
     return [
       takenTile,
-      new Board(newWall, this.deadWall, newHands, this.discardPile),
+      new Board(newWall, this.deadWall, newHands, this.discardPile, this.melds),
     ];
   }
 
@@ -51,43 +62,79 @@ export class Board {
 
     return [
       takenTile,
-      new Board(newWall, newDeadWall, newHands, this.discardPile),
+      new Board(newWall, newDeadWall, newHands, this.discardPile, this.melds),
     ];
   }
 
-  public extend(
+  public extendMeld(
     actor: SeatPosition,
-    base: MeldTileGroup,
-    operation: MeldOperation,
+    reference: MeldReference,
+    consumedTiles: readonly Tile[],
   ): Board {
-    if (!this.hands.exists(actor)) throw new InvalidHolderNotFoundError();
+    const baseMeld = this.melds.get(reference);
+
+    if (baseMeld === undefined) throw new InvalidMeldNotFoundError();
+
+    const extendedMeld = new ExtendedMeld(actor, baseMeld, consumedTiles);
+    const newMelds = this.melds.replace(baseMeld, extendedMeld);
 
     const newHands = this.hands.update(actor, (hand) =>
-      hand.extend(base, operation),
+      hand.consume(...consumedTiles),
     );
 
-    return new Board(this.wall, this.deadWall, newHands, this.discardPile);
+    return new Board(
+      this.wall,
+      this.deadWall,
+      newHands,
+      this.discardPile,
+      newMelds,
+    );
   }
 
-  public meld(actor: SeatPosition, operation: MeldOperation): Board {
-    if (!this.hands.exists(actor)) throw new InvalidHolderNotFoundError();
+  public meldFromSelf(
+    actor: SeatPosition,
+    consumedTile: readonly Tile[],
+  ): Board {
+    const newHands = this.hands.update(actor, (hand) =>
+      hand.consume(...consumedTile),
+    );
 
-    const { claimed } = operation;
+    const meld = new ClosedMeld(actor, consumedTile);
+    const newMelds = this.melds.add(meld);
 
-    if (claimed === undefined) {
-      const newHands = this.hands.update(actor, (hand) => hand.meld(operation));
+    return new Board(
+      this.wall,
+      this.deadWall,
+      newHands,
+      this.discardPile,
+      newMelds,
+    );
+  }
 
-      return new Board(this.wall, this.deadWall, newHands, this.discardPile);
-    }
+  public meldWithClaimed(
+    actor: SeatPosition,
+    claimedTile: Tile,
+    claimedOn: SeatPosition,
+    consumedTile: readonly Tile[],
+  ): Board {
+    const [latestDiscardedTile, newDiscardPile] = this.discardPile.take();
 
-    const [latestTile, newDiscardPile] = this.discardPile.take();
-
-    if (!claimed.equals(latestTile))
+    if (!claimedTile.equals(latestDiscardedTile))
       throw new InvalidMismatchClaimedTileError();
 
-    const newHands = this.hands.update(actor, (hand) => hand.meld(operation));
+    const newHands = this.hands.update(actor, (hand) =>
+      hand.consume(...consumedTile),
+    );
+    const meld = new OpenMeld(actor, consumedTile, claimedTile, claimedOn);
+    const newMelds = this.melds.add(meld);
 
-    return new Board(this.wall, this.deadWall, newHands, newDiscardPile);
+    return new Board(
+      this.wall,
+      this.deadWall,
+      newHands,
+      newDiscardPile,
+      newMelds,
+    );
   }
 
   public constructor(
@@ -95,10 +142,12 @@ export class Board {
     deadWall: DeadWall,
     hands: Hands,
     discardedPile: DiscardPile,
+    melds: Melds,
   ) {
     this.wall = wall;
     this.deadWall = deadWall;
     this.hands = hands;
     this.discardPile = discardedPile;
+    this.melds = melds;
   }
 }

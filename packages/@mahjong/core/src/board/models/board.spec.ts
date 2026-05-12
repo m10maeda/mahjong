@@ -3,18 +3,15 @@ import { describe, expect, it } from 'vitest';
 import { Board } from './board';
 import { DeadWall } from './dead-wall';
 import { DiscardPile } from './discard-pile';
-import {
-  Hand,
-  InvalidTileNotHeldError,
-  MeldOperation,
-  MeldTileGroup,
-} from './hand';
-import { MeldNotHeldError } from './hand/meld-not-held-error';
+import { Hand, InvalidTileNotHeldError } from './hand';
 import { Hands } from './hands';
 import { InvalidHolderNotFoundError } from './invalid-holder-not-found-error';
+import { OpenMeld } from './meld';
+import { Melds } from './melds';
 import { Wall } from './wall';
 import { SeatPosition } from '../../seat-position';
 import { Rank, Suit, SuitTile, TileModifier } from '../../tile';
+import { MeldReference } from '../events/melded';
 
 describe('Board', () => {
   function createBoard() {
@@ -40,38 +37,40 @@ describe('Board', () => {
         [
           SeatPosition.East,
           new Hand(
-            [
-              new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
-              new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
-              new SuitTile(Suit.Bamboo, Rank[3], TileModifier.Normal),
-            ],
-            [
-              new MeldTileGroup(
-                new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
-                new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
-                new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
-              ),
-            ],
+            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
+            new SuitTile(Suit.Bamboo, Rank[3], TileModifier.Normal),
           ),
         ],
         [
           SeatPosition.South,
-          new Hand([
+          new Hand(
             new SuitTile(Suit.Bamboo, Rank[4], TileModifier.Normal),
             new SuitTile(Suit.Bamboo, Rank[5], TileModifier.Normal),
             new SuitTile(Suit.Bamboo, Rank[6], TileModifier.Normal),
-          ]),
+          ),
         ],
         [
           SeatPosition.West,
-          new Hand([
+          new Hand(
             new SuitTile(Suit.Bamboo, Rank[7], TileModifier.Normal),
             new SuitTile(Suit.Bamboo, Rank[8], TileModifier.Normal),
             new SuitTile(Suit.Bamboo, Rank[9], TileModifier.Normal),
-          ]),
+          ),
         ],
       ),
-      new DiscardPile(),
+      new DiscardPile(new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal)),
+      new Melds(
+        new OpenMeld(
+          SeatPosition.East,
+          [
+            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+          ],
+          new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+          SeatPosition.West,
+        ),
+      ),
     );
   }
 
@@ -188,107 +187,91 @@ describe('Board', () => {
     });
   });
 
-  describe('extend', () => {
-    describe('与えられた位置の手牌が存在しない場合', () => {
-      it('InvalidHolderNotFoundError を投げること', () => {
+  describe('extendMeld', () => {
+    describe('副露可能な条件を満たしている場合', () => {
+      it('与えられた与えられた消費牌を手牌から消費すること', () => {
         const sut = createBoard();
 
-        const base = new MeldTileGroup(
-          new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
-          new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
-          new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
-        );
+        expect(() => {
+          sut.discard(
+            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            SeatPosition.East,
+          );
+        }).not.toThrow(InvalidTileNotHeldError);
 
-        const operation = new MeldOperation(
-          new MeldTileGroup(
-            new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[3], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[4], TileModifier.Normal),
-          ),
-          [
-            new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[3], TileModifier.Normal),
-          ],
-          new SuitTile(Suit.Bamboo, Rank[4], TileModifier.Normal),
+        const result = sut.extendMeld(
+          SeatPosition.East,
+          new MeldReference(SeatPosition.East, 0),
+          [new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal)],
         );
 
         expect(() => {
-          sut.extend(SeatPosition.North, base, operation);
-        }).toThrow(InvalidHolderNotFoundError);
-      });
-    });
-
-    describe('与えられた元の副露面子が手牌に存在しない場合', () => {
-      it('InvalidHolderNotFoundError を投げること', () => {
-        const sut = createBoard();
-
-        const base = new MeldTileGroup(
-          new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
-          new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
-          new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
-        );
-
-        const operation = new MeldOperation(
-          new MeldTileGroup(
-            new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
-          ),
-          [new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal)],
-        );
-
-        expect(() => {
-          sut.extend(SeatPosition.East, base, operation);
-        }).toThrow(MeldNotHeldError);
+          result.discard(
+            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            SeatPosition.East,
+          );
+        }).toThrow(InvalidTileNotHeldError);
       });
     });
   });
 
-  describe('meld', () => {
-    describe('与えられた位置の手牌が存在する場合', () => {
-      it('InvalidHolderNotFoundError を投げないこと', () => {
+  describe('meldFromSelf', () => {
+    describe('副露可能な条件を満たしている場合', () => {
+      it('与えられた与えられた消費牌を手牌から消費すること', () => {
         const sut = createBoard();
 
-        const target = new MeldOperation(
-          new MeldTileGroup(
-            new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[3], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[4], TileModifier.Normal),
-          ),
-          [
-            new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[3], TileModifier.Normal),
-          ],
-          new SuitTile(Suit.Bamboo, Rank[4], TileModifier.Normal),
-        );
+        expect(() => {
+          sut.discard(
+            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            SeatPosition.East,
+          );
+        }).not.toThrow(InvalidTileNotHeldError);
+
+        const result = sut.meldFromSelf(SeatPosition.East, [
+          new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+          new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
+          new SuitTile(Suit.Bamboo, Rank[3], TileModifier.Normal),
+        ]);
 
         expect(() => {
-          sut.meld(SeatPosition.East, target);
-        }).not.toThrow(InvalidHolderNotFoundError);
+          result.discard(
+            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            SeatPosition.East,
+          );
+        }).toThrow(InvalidTileNotHeldError);
       });
     });
+  });
 
-    describe('与えられた位置の手牌が存在しない場合', () => {
-      it('InvalidHolderNotFoundError を投げること', () => {
+  describe('meldWithClaimed', () => {
+    describe('副露可能な条件を満たしている場合', () => {
+      it('与えられた与えられた消費牌を手牌から消費すること', () => {
         const sut = createBoard();
 
-        const target = new MeldOperation(
-          new MeldTileGroup(
-            new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[3], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[4], TileModifier.Normal),
-          ),
+        expect(() => {
+          sut.discard(
+            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            SeatPosition.East,
+          );
+        }).not.toThrow(InvalidTileNotHeldError);
+
+        const result = sut.meldWithClaimed(
+          SeatPosition.East,
+          new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+          SeatPosition.West,
           [
+            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
             new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
             new SuitTile(Suit.Bamboo, Rank[3], TileModifier.Normal),
           ],
-          new SuitTile(Suit.Bamboo, Rank[4], TileModifier.Normal),
         );
 
         expect(() => {
-          sut.meld(SeatPosition.North, target);
-        }).toThrow(InvalidHolderNotFoundError);
+          result.discard(
+            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            SeatPosition.East,
+          );
+        }).toThrow(InvalidTileNotHeldError);
       });
     });
   });
