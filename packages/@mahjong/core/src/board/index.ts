@@ -7,7 +7,7 @@ export {
   Melded,
   MeldedWithClaimed,
   MeldedFromSelf,
-  ExtendedMelded,
+  MeldExtended,
   type IBoardEventPublisher,
   type IBoardEventSubscriber,
 } from './events';

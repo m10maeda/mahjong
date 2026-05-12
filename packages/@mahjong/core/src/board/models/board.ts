@@ -3,7 +3,7 @@ import { InvalidMeldNotFoundError } from './invalid-meld-not-found-error';
 import { InvalidMismatchClaimedTileError } from './invalid-mismatch-claimed-tile-error';
 import { ClosedMeld, ExtendedMeld, OpenMeld } from './meld';
 import {
-  ExtendedMelded,
+  MeldExtended,
   MeldedWithClaimed,
   MeldedFromSelf,
   TileDiscarded,
@@ -85,7 +85,7 @@ export class Board {
     seat: SeatPosition,
     reference: MeldReference,
     consumedTiles: readonly Tile[],
-  ): readonly [ExtendedMelded, Board] {
+  ): readonly [MeldExtended, Board] {
     const baseMeld = this.melds.get(reference);
 
     if (baseMeld === undefined) throw new InvalidMeldNotFoundError();
@@ -98,7 +98,7 @@ export class Board {
     );
 
     return [
-      new ExtendedMelded(reference, seat, consumedTiles),
+      new MeldExtended(reference, seat, consumedTiles),
       new Board(this.wall, this.deadWall, newHands, this.discardPile, newMelds),
     ];
   }
