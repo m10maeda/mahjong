@@ -1,3 +1,7 @@
+import { DeadWall } from './dead-wall';
+import { DiscardPile } from './discard-pile';
+import { Hand } from './hand';
+import { Hands } from './hands';
 import { InvalidHolderNotFoundError } from './invalid-holder-not-found-error';
 import { InvalidMeldNotFoundError } from './invalid-meld-not-found-error';
 import { InvalidMismatchClaimedTileError } from './invalid-mismatch-claimed-tile-error';
@@ -9,14 +13,12 @@ import {
   TileDiscarded,
   TileDrawn,
   TileDrawnSource,
+  BoardInitialized,
 } from '../events';
+import { Melds } from './melds';
+import { Wall } from './wall';
 import { MeldReference } from '../events/melded';
 
-import type { DeadWall } from './dead-wall';
-import type { DiscardPile } from './discard-pile';
-import type { Hands } from './hands';
-import type { Melds } from './melds';
-import type { Wall } from './wall';
 import type { SeatPosition } from '../../seat-position';
 import type { Tile } from '../../tile';
 
@@ -170,5 +172,27 @@ export class Board {
     this.hands = hands;
     this.discardPile = discardedPile;
     this.melds = melds;
+  }
+
+  public static new(
+    wall: readonly Tile[],
+    deadWall: readonly Tile[],
+    hands: readonly [SeatPosition, readonly Tile[]][],
+  ): readonly [BoardInitialized, Board] {
+    const event = new BoardInitialized(wall, deadWall, new Map(hands));
+    const board = new Board(
+      new Wall(...wall),
+      new DeadWall(...deadWall),
+      new Hands(
+        ...hands.map<[SeatPosition, Hand]>(([seat, tiles]) => [
+          seat,
+          new Hand(...tiles),
+        ]),
+      ),
+      DiscardPile.new(),
+      Melds.new(),
+    );
+
+    return [event, board];
   }
 }
