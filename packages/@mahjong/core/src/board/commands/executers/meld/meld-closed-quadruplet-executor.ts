@@ -25,7 +25,6 @@ export class MeldClosedQuadrupletExecutor implements IBoardCommandExecutor<
     const event = new ClosedQuadrupletMelded(
       new ClosedQuadruplet(command.consumedTiles),
       command.seat,
-      command.currentTurn,
     );
 
     return [event, newBoard];

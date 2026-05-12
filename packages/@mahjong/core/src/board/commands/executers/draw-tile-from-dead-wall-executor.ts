@@ -18,7 +18,6 @@ export class DrawTileFromDeadWallExecutor implements IBoardCommandExecutor<
       drawTile,
       command.seat,
       TileDrawnSource.DeadWall,
-      command.currentTurn,
     );
 
     return [event, newBoard];

@@ -23,7 +23,6 @@ export class MeldSequenceExecutor implements IBoardCommandExecutor<
       new OpenSequence(command.consumedTiles, command.claimedTile),
       command.seat,
       command.claimedOn,
-      command.currentTurn,
     );
 
     return [event, newBoard];

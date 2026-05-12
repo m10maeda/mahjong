@@ -1,15 +1,14 @@
-import { TurnBasedEvent } from './turn-based-event';
+import { BoardEvent } from './board-event';
 
 import type { SeatPosition } from '../../seat-position';
 import type { Tile } from '../../tile';
-import type { Turn } from '../turn';
 
 export enum TileDrawnSource {
   Wall,
   DeadWall,
 }
 
-export class TileDrawn extends TurnBasedEvent {
+export class TileDrawn extends BoardEvent {
   public readonly drawer: SeatPosition;
 
   public readonly source: TileDrawnSource;
@@ -20,9 +19,8 @@ export class TileDrawn extends TurnBasedEvent {
     tile: Tile,
     drawer: SeatPosition,
     source: TileDrawnSource,
-    turn: Turn,
   ) {
-    super(turn);
+    super();
 
     this.tile = tile;
     this.drawer = drawer;
