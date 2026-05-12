@@ -14,9 +14,9 @@ export class MeldedWithClaimed extends Melded {
     consumedTiles: readonly Tile[],
     claimedOn: SeatPosition,
     claimedTile: Tile,
-    melder: SeatPosition,
+    seat: SeatPosition,
   ) {
-    super(reference, consumedTiles, melder);
+    super(reference, consumedTiles, seat);
 
     this.claimedOn = claimedOn;
     this.claimedTile = claimedTile;

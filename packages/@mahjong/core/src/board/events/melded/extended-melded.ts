@@ -8,8 +8,8 @@ export class ExtendedMelded extends Melded {
   public constructor(
     reference: MeldReference,
     consumedTiles: readonly Tile[],
-    melder: SeatPosition,
+    seat: SeatPosition,
   ) {
-    super(reference, consumedTiles, melder);
+    super(reference, consumedTiles, seat);
   }
 }

@@ -4,21 +4,17 @@ import type { SeatPosition } from '../../seat-position';
 import type { Tile } from '../../tile';
 
 export class TileDiscarded extends BoardEvent {
-  public readonly discarder: SeatPosition;
-
   public readonly fromDrawnTile: boolean;
+
+  public readonly seat: SeatPosition;
 
   public readonly tile: Tile;
 
-  public constructor(
-    tile: Tile,
-    fromDrawnTile: boolean,
-    discarder: SeatPosition,
-  ) {
+  public constructor(tile: Tile, seat: SeatPosition, fromDrawnTile: boolean) {
     super();
 
     this.tile = tile;
     this.fromDrawnTile = fromDrawnTile;
-    this.discarder = discarder;
+    this.seat = seat;
   }
 }
