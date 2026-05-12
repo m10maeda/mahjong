@@ -2,7 +2,6 @@ import { BoardCommand } from '../board-command';
 
 import type { SeatPosition } from '../../../seat-position';
 import type { Tile } from '../../../tile';
-import type { Turn } from '../../turn';
 
 export class MeldOpenQuadruplet extends BoardCommand {
   public readonly claimedOn: SeatPosition;
@@ -11,8 +10,6 @@ export class MeldOpenQuadruplet extends BoardCommand {
 
   public readonly consumedTiles: readonly [Tile, ...Tile[]];
 
-  public readonly currentTurn: Turn;
-
   public readonly seat: SeatPosition;
 
   public constructor(
@@ -20,7 +17,6 @@ export class MeldOpenQuadruplet extends BoardCommand {
     claimedTile: Tile,
     claimedOn: SeatPosition,
     consumedTiles: readonly [Tile, ...Tile[]],
-    currentTurn: Turn,
   ) {
     super();
 
@@ -28,6 +24,5 @@ export class MeldOpenQuadruplet extends BoardCommand {
     this.claimedTile = claimedTile;
     this.claimedOn = claimedOn;
     this.consumedTiles = consumedTiles;
-    this.currentTurn = currentTurn;
   }
 }

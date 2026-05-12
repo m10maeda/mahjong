@@ -26,7 +26,6 @@ export class MeldAddedQuadrupletExecutor implements IBoardCommandExecutor<
       new AddedQuadruplet(command.base, command.consumedTile),
       command.base,
       command.seat,
-      command.currentTurn,
     );
 
     return [event, newBoard];

@@ -1,10 +1,9 @@
-import { TurnBasedEvent } from './turn-based-event';
+import { BoardEvent } from './board-event';
 
 import type { SeatPosition } from '../../seat-position';
 import type { Tile } from '../../tile';
-import type { Turn } from '../turn';
 
-export class TileDiscarded extends TurnBasedEvent {
+export class TileDiscarded extends BoardEvent {
   public readonly discarder: SeatPosition;
 
   public readonly fromConcealed: boolean;
@@ -15,9 +14,8 @@ export class TileDiscarded extends TurnBasedEvent {
     tile: Tile,
     fromConcealed: boolean,
     discarder: SeatPosition,
-    turn: Turn,
   ) {
-    super(turn);
+    super();
 
     this.tile = tile;
     this.fromConcealed = fromConcealed;

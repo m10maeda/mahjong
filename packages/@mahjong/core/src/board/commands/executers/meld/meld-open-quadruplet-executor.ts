@@ -27,7 +27,6 @@ export class MeldOpenQuadrupletExecutor implements IBoardCommandExecutor<
       new OpenQuadruplet(command.consumedTiles, command.claimedTile),
       command.seat,
       command.claimedOn,
-      command.currentTurn,
     );
 
     return [event, newBoard];

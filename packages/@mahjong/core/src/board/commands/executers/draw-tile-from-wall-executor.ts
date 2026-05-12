@@ -14,12 +14,7 @@ export class DrawTileFromWallExecutor implements IBoardCommandExecutor<
   ): readonly [BoardEvent, Board] {
     const [drawTile, newBoard] = board.draw(command.seat);
 
-    const event = new TileDrawn(
-      drawTile,
-      command.seat,
-      TileDrawnSource.Wall,
-      command.currentTurn,
-    );
+    const event = new TileDrawn(drawTile, command.seat, TileDrawnSource.Wall);
 
     return [event, newBoard];
   }

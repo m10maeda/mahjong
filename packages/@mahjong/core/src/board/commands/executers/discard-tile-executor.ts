@@ -18,7 +18,6 @@ export class DiscardTileExecutor implements IBoardCommandExecutor<
       command.tile,
       command.fromConcealed,
       command.seat,
-      command.currentTurn,
     );
 
     return [event, newBoard];
