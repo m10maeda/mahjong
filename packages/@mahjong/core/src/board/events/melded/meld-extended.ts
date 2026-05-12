@@ -4,12 +4,12 @@ import type { MeldReference } from './meld-reference';
 import type { SeatPosition } from '../../../seat-position';
 import type { Tile } from '../../../tile';
 
-export class ExtendedMelded extends Melded {
+export class MeldExtended extends Melded {
   public constructor(
     reference: MeldReference,
+    seat: SeatPosition,
     consumedTiles: readonly Tile[],
-    melder: SeatPosition,
   ) {
-    super(reference, consumedTiles, melder);
+    super(reference, seat, consumedTiles);
   }
 }

@@ -7,19 +7,19 @@ import type { Tile } from '../../../tile';
 export abstract class Melded extends BoardEvent {
   public readonly consumedTiles: readonly Tile[];
 
-  public readonly melder: SeatPosition;
-
   public readonly reference: MeldReference;
+
+  public readonly seat: SeatPosition;
 
   public constructor(
     reference: MeldReference,
+    seat: SeatPosition,
     consumedTiles: readonly Tile[],
-    melder: SeatPosition,
   ) {
     super();
 
     this.reference = reference;
+    this.seat = seat;
     this.consumedTiles = consumedTiles;
-    this.melder = melder;
   }
 }

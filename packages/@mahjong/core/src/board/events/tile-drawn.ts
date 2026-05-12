@@ -9,21 +9,17 @@ export enum TileDrawnSource {
 }
 
 export class TileDrawn extends BoardEvent {
-  public readonly drawer: SeatPosition;
+  public readonly seat: SeatPosition;
 
   public readonly source: TileDrawnSource;
 
   public readonly tile: Tile;
 
-  public constructor(
-    tile: Tile,
-    drawer: SeatPosition,
-    source: TileDrawnSource,
-  ) {
+  public constructor(tile: Tile, seat: SeatPosition, source: TileDrawnSource) {
     super();
 
     this.tile = tile;
-    this.drawer = drawer;
+    this.seat = seat;
     this.source = source;
   }
 }

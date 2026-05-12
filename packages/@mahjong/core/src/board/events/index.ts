@@ -7,7 +7,7 @@ export { TileDiscarded } from './tile-discarded';
 
 export {
   Melded,
-  ExtendedMelded,
+  MeldExtended,
   MeldedWithClaimed,
   MeldedFromSelf,
 } from './melded';
