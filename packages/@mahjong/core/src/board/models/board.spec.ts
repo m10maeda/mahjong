@@ -83,6 +83,7 @@ describe('Board', () => {
           sut.discard(
             new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
             SeatPosition.East,
+            true,
           );
         }).not.toThrow(InvalidTileNotHeldError);
       });
@@ -90,15 +91,17 @@ describe('Board', () => {
       it('与えられた位置の手牌から与えられた捨て牌が捨てられ、2回目以降は TileNotHeldError を投げること', () => {
         const sut = createBoard();
 
-        const result = sut.discard(
+        const [, result] = sut.discard(
           new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
           SeatPosition.East,
+          true,
         );
 
         expect(() => {
           result.discard(
             new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
             SeatPosition.East,
+            true,
           );
         }).toThrow(InvalidTileNotHeldError);
       });
@@ -112,6 +115,7 @@ describe('Board', () => {
           sut.discard(
             new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
             SeatPosition.North,
+            true,
           );
         }).toThrow(InvalidHolderNotFoundError);
       });
@@ -125,6 +129,7 @@ describe('Board', () => {
           sut.discard(
             new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
             SeatPosition.South,
+            true,
           );
         }).toThrow(InvalidTileNotHeldError);
       });
@@ -136,14 +141,14 @@ describe('Board', () => {
       it('与えられた位置の手牌に追加して、牌を捨てることが可能となること', () => {
         const sut = createBoard();
 
-        const [drawnTile, result] = sut.draw(SeatPosition.East);
+        const [tileDrawn, result] = sut.draw(SeatPosition.East);
 
         expect(() => {
-          sut.discard(drawnTile, SeatPosition.East);
+          sut.discard(tileDrawn.tile, SeatPosition.East, true);
         }).toThrow(InvalidTileNotHeldError);
 
         expect(() => {
-          result.discard(drawnTile, SeatPosition.East);
+          result.discard(tileDrawn.tile, SeatPosition.East, true);
         }).not.toThrow(InvalidTileNotHeldError);
       });
     });
@@ -164,14 +169,14 @@ describe('Board', () => {
       it('与えられた位置の手牌に牌を手牌に追加して、牌を捨てることが可能となること', () => {
         const sut = createBoard();
 
-        const [drawnTile, result] = sut.drawFromDeadWall(SeatPosition.East);
+        const [tileDrawn, result] = sut.drawFromDeadWall(SeatPosition.East);
 
         expect(() => {
-          sut.discard(drawnTile, SeatPosition.East);
+          sut.discard(tileDrawn.tile, SeatPosition.East, true);
         }).toThrow(InvalidTileNotHeldError);
 
         expect(() => {
-          result.discard(drawnTile, SeatPosition.East);
+          result.discard(tileDrawn.tile, SeatPosition.East, true);
         }).not.toThrow(InvalidTileNotHeldError);
       });
     });
@@ -196,10 +201,11 @@ describe('Board', () => {
           sut.discard(
             new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
             SeatPosition.East,
+            false,
           );
         }).not.toThrow(InvalidTileNotHeldError);
 
-        const result = sut.extendMeld(
+        const [, result] = sut.extendMeld(
           SeatPosition.East,
           new MeldReference(SeatPosition.East, 0),
           [new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal)],
@@ -209,6 +215,7 @@ describe('Board', () => {
           result.discard(
             new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
             SeatPosition.East,
+            false,
           );
         }).toThrow(InvalidTileNotHeldError);
       });
@@ -224,10 +231,11 @@ describe('Board', () => {
           sut.discard(
             new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
             SeatPosition.East,
+            false,
           );
         }).not.toThrow(InvalidTileNotHeldError);
 
-        const result = sut.meldFromSelf(SeatPosition.East, [
+        const [, result] = sut.meldFromSelf(SeatPosition.East, [
           new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
           new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
           new SuitTile(Suit.Bamboo, Rank[3], TileModifier.Normal),
@@ -237,6 +245,7 @@ describe('Board', () => {
           result.discard(
             new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
             SeatPosition.East,
+            false,
           );
         }).toThrow(InvalidTileNotHeldError);
       });
@@ -252,10 +261,11 @@ describe('Board', () => {
           sut.discard(
             new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
             SeatPosition.East,
+            false,
           );
         }).not.toThrow(InvalidTileNotHeldError);
 
-        const result = sut.meldWithClaimed(
+        const [, result] = sut.meldWithClaimed(
           SeatPosition.East,
           new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
           SeatPosition.West,
@@ -270,6 +280,7 @@ describe('Board', () => {
           result.discard(
             new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
             SeatPosition.East,
+            false,
           );
         }).toThrow(InvalidTileNotHeldError);
       });
