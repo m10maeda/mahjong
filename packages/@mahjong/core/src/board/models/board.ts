@@ -34,14 +34,14 @@ export class Board {
   public discard(
     tile: Tile,
     actor: SeatPosition,
-    fromConcealed: boolean,
+    fromDrawnTile: boolean,
   ): readonly [TileDiscarded, Board] {
     if (!this.hands.exists(actor)) throw new InvalidHolderNotFoundError();
 
     const newHands = this.hands.update(actor, (hand) => hand.discard(tile));
     const newDiscardPile = this.discardPile.add(tile);
 
-    const event = new TileDiscarded(tile, fromConcealed, actor);
+    const event = new TileDiscarded(tile, fromDrawnTile, actor);
 
     return [
       event,
