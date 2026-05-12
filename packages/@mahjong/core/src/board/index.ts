@@ -15,14 +15,12 @@ export {
 export {
   type IBoardCommandHandler,
   BoardCommand,
-  DrawTileFromWall,
-  DrawTileFromDeadWall,
+  DrawTile,
+  DrawTileSource,
   DiscardTile,
-  MeldAddedQuadruplet,
-  MeldClosedQuadruplet,
-  MeldOpenQuadruplet,
-  MeldSequence,
-  MeldTriplet,
+  MeldFromSelf,
+  MeldWithClaimed,
+  ExtendMeld,
 } from './commands';
 
 export { TileSet, TileSetType } from './tile-set';
