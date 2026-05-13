@@ -3,7 +3,7 @@ import { BoardEvent } from './board-event';
 import type { SeatPosition } from '../../seat-position';
 import type { Tile } from '../../tile';
 
-export class BoardInitialized extends BoardEvent {
+export class TilesDistributed extends BoardEvent {
   public readonly deadWall: readonly Tile[];
 
   public readonly hands: Map<SeatPosition, readonly Tile[]>;

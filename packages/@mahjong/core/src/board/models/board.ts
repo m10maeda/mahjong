@@ -13,7 +13,7 @@ import {
   TileDiscarded,
   TileDrawn,
   TileDrawnSource,
-  BoardInitialized,
+  TilesDistributed,
 } from '../events';
 import { Melds } from './melds';
 import { Wall } from './wall';
@@ -178,8 +178,8 @@ export class Board {
     wall: readonly Tile[],
     deadWall: readonly Tile[],
     hands: readonly [SeatPosition, readonly Tile[]][],
-  ): readonly [BoardInitialized, Board] {
-    const event = new BoardInitialized(wall, deadWall, new Map(hands));
+  ): readonly [TilesDistributed, Board] {
+    const event = new TilesDistributed(wall, deadWall, new Map(hands));
     const board = new Board(
       new Wall(...wall),
       new DeadWall(...deadWall),
