@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
+import { Point } from '../score';
 import { ScoreEntry } from './score-entry';
-import { Point } from '../point';
 import { SeatScoreHolder } from './score-holder/seat-score-holder';
 
 describe('ScoreEntry', () => {

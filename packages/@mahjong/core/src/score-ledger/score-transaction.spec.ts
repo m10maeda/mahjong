@@ -2,17 +2,11 @@ import { describe, expect, it } from 'vitest';
 
 import { InvalidDuplicatedHolderError } from './invalid-duplicated-holder-error';
 import { InvalidNoZeroSumError } from './invalid-no-zero-sum-error';
+import { Point } from './point';
 import { ScoreEntry } from './score-entry';
 import { PotScoreHolder, SeatScoreHolder } from './score-holder';
 import { ScoreTransaction } from './score-transaction';
-import {
-  Honba,
-  Round,
-  RoundIndex,
-  RoundProgress,
-  RoundWind,
-} from '../../round';
-import { Point } from '../point';
+import { Honba, Round, RoundIndex, RoundProgress, RoundWind } from '../round';
 
 describe('ScoreTransaction', () => {
   describe('有効な値を与えられた場合', () => {

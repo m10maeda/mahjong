@@ -5,9 +5,9 @@ import {
   SeatScoreHolder,
   type ScoreLedgerEvent,
 } from '..';
-import { Point } from '../../point';
+import { Point } from '../../score';
 
-import type { SeatPosition } from '../../../table';
+import type { SeatPosition } from '../../table';
 
 export class ScoreBoardProjection implements Iterable<
   readonly [ScoreHolder, Point]

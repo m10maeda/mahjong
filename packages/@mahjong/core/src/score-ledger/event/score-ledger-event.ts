@@ -1,3 +1,3 @@
-import { MahjongEvent } from '../../../event';
+import { MahjongEvent } from '../../event';
 
 export abstract class ScoreLedgerEvent extends MahjongEvent {}

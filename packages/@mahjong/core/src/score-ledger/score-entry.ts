@@ -1,4 +1,4 @@
-import type { Point } from '../point';
+import type { Point } from '../score';
 import type { ScoreHolder } from './score-holder/score-holder';
 
 export class ScoreEntry {

@@ -1,20 +1,14 @@
 import { describe, expect, it, vi } from 'vitest';
 
 import { type IScoreLedgerEventPublisher, ScoreTransacted } from './event';
+import { Point } from '../score';
 import { ScoreBoardProjection } from './reader';
 import { ScoreEntry } from './score-entry';
 import { PotScoreHolder, ScoreHolder, SeatScoreHolder } from './score-holder';
 import { ScoreLedger } from './score-ledger';
 import { ScoreLedgerRuntime } from './score-ledger-runtime';
-import { Point } from '../point';
 import { ScoreTransaction } from './score-transaction';
-import {
-  Honba,
-  Round,
-  RoundIndex,
-  RoundProgress,
-  RoundWind,
-} from '../../round';
+import { Honba, Round, RoundIndex, RoundProgress, RoundWind } from '../round';
 
 describe('ScoreLedgerRuntime', () => {
   describe('getScoreBoard', () => {

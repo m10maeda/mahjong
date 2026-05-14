@@ -7,8 +7,8 @@ import {
   RoundIndex,
   RoundProgress,
   RoundWind,
-} from '../../../round';
-import { Point } from '../../point';
+} from '../../round';
+import { Point } from '../../score';
 import { ScoreTransacted } from '../event';
 import { ScoreEntry } from '../score-entry';
 import { PotScoreHolder, ScoreHolder, SeatScoreHolder } from '../score-holder';
