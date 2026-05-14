@@ -16,7 +16,7 @@ import { Point } from '../point';
 
 describe('ScoreTransaction', () => {
   describe('有効な値を与えられた場合', () => {
-    it('Point として成立すること', () => {
+    it('ScoreTransaction として成立すること', () => {
       const result = new ScoreTransaction(
         [
           new ScoreEntry(SeatScoreHolder.East, new Point(-4000)),

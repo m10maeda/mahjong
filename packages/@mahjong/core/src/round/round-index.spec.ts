@@ -4,7 +4,7 @@ import { RoundIndex } from './round-index';
 
 describe('RoundIndex', () => {
   describe('有効な値を与えられた場合', () => {
-    it('Point として成立すること', () => {
+    it('RoundIndex として成立すること', () => {
       const result = new RoundIndex(1);
 
       expect(result.valueOf()).toBe(1);
