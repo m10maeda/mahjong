@@ -11,9 +11,7 @@ import { Point } from '../../score';
 import { type IScoreLedgerEventPublisher, ScoreTransacted } from '../events';
 import {
   ScoreEntry,
-  PotScoreHolder,
   ScoreHolder,
-  SeatScoreHolder,
   ScoreLedger,
   ScoreTransaction,
 } from '../models';
@@ -28,11 +26,11 @@ describe('ScoreLedgerRuntime', () => {
       };
 
       const scores: readonly [ScoreHolder, Point][] = [
-        [SeatScoreHolder.East, new Point(24000)],
-        [SeatScoreHolder.South, new Point(17000)],
-        [SeatScoreHolder.West, new Point(33000)],
-        [SeatScoreHolder.North, new Point(25000)],
-        [PotScoreHolder.new(), new Point(1000)],
+        [ScoreHolder.EastSeat, new Point(24000)],
+        [ScoreHolder.SouthSeat, new Point(17000)],
+        [ScoreHolder.WestSeat, new Point(33000)],
+        [ScoreHolder.NorthSeat, new Point(25000)],
+        [ScoreHolder.Pot, new Point(1000)],
       ];
 
       const sut = new ScoreLedgerRuntime(
@@ -53,11 +51,11 @@ describe('ScoreLedgerRuntime', () => {
 
   describe('add', () => {
     const scores: readonly [ScoreHolder, Point][] = [
-      [SeatScoreHolder.East, new Point(24000)],
-      [SeatScoreHolder.South, new Point(17000)],
-      [SeatScoreHolder.West, new Point(33000)],
-      [SeatScoreHolder.North, new Point(25000)],
-      [PotScoreHolder.new(), new Point(1000)],
+      [ScoreHolder.EastSeat, new Point(24000)],
+      [ScoreHolder.SouthSeat, new Point(17000)],
+      [ScoreHolder.WestSeat, new Point(33000)],
+      [ScoreHolder.NorthSeat, new Point(25000)],
+      [ScoreHolder.Pot, new Point(1000)],
     ];
 
     it('与えられた取引に基づいて読み取りモデルを更新すること', async () => {
@@ -74,9 +72,9 @@ describe('ScoreLedgerRuntime', () => {
       await sut.add(
         new ScoreTransaction(
           [
-            new ScoreEntry(SeatScoreHolder.East, new Point(9000)),
-            new ScoreEntry(SeatScoreHolder.North, new Point(-8000)),
-            new ScoreEntry(PotScoreHolder.new(), new Point(-1000)),
+            new ScoreEntry(ScoreHolder.EastSeat, new Point(9000)),
+            new ScoreEntry(ScoreHolder.NorthSeat, new Point(-8000)),
+            new ScoreEntry(ScoreHolder.Pot, new Point(-1000)),
           ],
           new Round(
             new RoundProgress(RoundWind.East, new RoundIndex(2, 4)),
@@ -87,11 +85,11 @@ describe('ScoreLedgerRuntime', () => {
 
       const result = sut.getScoreBoard();
 
-      expect([...result][0]).toEqual([SeatScoreHolder.East, new Point(33000)]);
-      expect([...result][1]).toEqual([SeatScoreHolder.South, new Point(17000)]);
-      expect([...result][2]).toEqual([SeatScoreHolder.West, new Point(33000)]);
-      expect([...result][3]).toEqual([SeatScoreHolder.North, new Point(17000)]);
-      expect([...result][4]).toEqual([PotScoreHolder.new(), new Point(0)]);
+      expect([...result][0]).toEqual([ScoreHolder.EastSeat, new Point(33000)]);
+      expect([...result][1]).toEqual([ScoreHolder.SouthSeat, new Point(17000)]);
+      expect([...result][2]).toEqual([ScoreHolder.WestSeat, new Point(33000)]);
+      expect([...result][3]).toEqual([ScoreHolder.NorthSeat, new Point(17000)]);
+      expect([...result][4]).toEqual([ScoreHolder.Pot, new Point(0)]);
     });
 
     it('イベントパブリッシャーが呼び出されること', async () => {
@@ -111,8 +109,8 @@ describe('ScoreLedgerRuntime', () => {
       await sut.add(
         new ScoreTransaction(
           [
-            new ScoreEntry(SeatScoreHolder.East, new Point(1000)),
-            new ScoreEntry(PotScoreHolder.new(), new Point(-1000)),
+            new ScoreEntry(ScoreHolder.EastSeat, new Point(1000)),
+            new ScoreEntry(ScoreHolder.Pot, new Point(-1000)),
           ],
           new Round(
             new RoundProgress(RoundWind.East, new RoundIndex(2, 4)),
@@ -127,8 +125,8 @@ describe('ScoreLedgerRuntime', () => {
       expect(mockEventPublisher.publish).toHaveBeenCalledWith(
         new ScoreTransacted(
           [
-            new ScoreEntry(SeatScoreHolder.East, new Point(1000)),
-            new ScoreEntry(PotScoreHolder.new(), new Point(-1000)),
+            new ScoreEntry(ScoreHolder.EastSeat, new Point(1000)),
+            new ScoreEntry(ScoreHolder.Pot, new Point(-1000)),
           ],
           new Round(
             new RoundProgress(RoundWind.East, new RoundIndex(2, 4)),

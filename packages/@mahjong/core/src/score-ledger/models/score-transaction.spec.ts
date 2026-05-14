@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { InvalidDuplicatedHolderError } from './invalid-duplicated-holder-error';
 import { InvalidNoZeroSumError } from './invalid-no-zero-sum-error';
 import { ScoreEntry } from './score-entry';
-import { PotScoreHolder, SeatScoreHolder } from './score-holder';
+import { ScoreHolder } from './score-holder';
 import { ScoreTransaction } from './score-transaction';
 import {
   Honba,
@@ -19,11 +19,11 @@ describe('ScoreTransaction', () => {
     it('ScoreTransaction として成立すること', () => {
       const result = new ScoreTransaction(
         [
-          new ScoreEntry(SeatScoreHolder.East, new Point(-4000)),
-          new ScoreEntry(SeatScoreHolder.South, new Point(9000)),
-          new ScoreEntry(SeatScoreHolder.West, new Point(-2000)),
-          new ScoreEntry(SeatScoreHolder.North, new Point(-2000)),
-          new ScoreEntry(PotScoreHolder.new(), new Point(-1000)),
+          new ScoreEntry(ScoreHolder.EastSeat, new Point(-4000)),
+          new ScoreEntry(ScoreHolder.SouthSeat, new Point(9000)),
+          new ScoreEntry(ScoreHolder.WestSeat, new Point(-2000)),
+          new ScoreEntry(ScoreHolder.NorthSeat, new Point(-2000)),
+          new ScoreEntry(ScoreHolder.Pot, new Point(-1000)),
         ],
         new Round(
           new RoundProgress(RoundWind.East, new RoundIndex(1, 4)),
@@ -40,10 +40,10 @@ describe('ScoreTransaction', () => {
       expect(() => {
         new ScoreTransaction(
           [
-            new ScoreEntry(SeatScoreHolder.East, new Point(-2000)),
-            new ScoreEntry(SeatScoreHolder.South, new Point(8000)),
-            new ScoreEntry(SeatScoreHolder.West, new Point(-2000)),
-            new ScoreEntry(SeatScoreHolder.North, new Point(-2000)),
+            new ScoreEntry(ScoreHolder.EastSeat, new Point(-2000)),
+            new ScoreEntry(ScoreHolder.SouthSeat, new Point(8000)),
+            new ScoreEntry(ScoreHolder.WestSeat, new Point(-2000)),
+            new ScoreEntry(ScoreHolder.NorthSeat, new Point(-2000)),
           ],
           new Round(
             new RoundProgress(RoundWind.East, new RoundIndex(1, 4)),
@@ -57,10 +57,10 @@ describe('ScoreTransaction', () => {
       expect(() => {
         new ScoreTransaction(
           [
-            new ScoreEntry(SeatScoreHolder.East, new Point(-4000)),
-            new ScoreEntry(SeatScoreHolder.South, new Point(8000)),
-            new ScoreEntry(SeatScoreHolder.South, new Point(-2000)),
-            new ScoreEntry(SeatScoreHolder.East, new Point(-2000)),
+            new ScoreEntry(ScoreHolder.EastSeat, new Point(-4000)),
+            new ScoreEntry(ScoreHolder.SouthSeat, new Point(8000)),
+            new ScoreEntry(ScoreHolder.SouthSeat, new Point(-2000)),
+            new ScoreEntry(ScoreHolder.EastSeat, new Point(-2000)),
           ],
           new Round(
             new RoundProgress(RoundWind.East, new RoundIndex(1, 4)),

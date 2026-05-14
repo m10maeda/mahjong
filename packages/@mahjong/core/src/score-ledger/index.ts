@@ -14,8 +14,6 @@ export {
   ScoreTransaction,
   ScoreEntry,
   ScoreHolder,
-  SeatScoreHolder,
-  PotScoreHolder,
   InvalidDuplicatedHolderError,
   InvalidNoZeroSumError,
 } from './models';
