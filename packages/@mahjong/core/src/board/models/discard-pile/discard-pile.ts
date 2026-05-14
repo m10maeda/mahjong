@@ -26,4 +26,8 @@ export class DiscardPile implements Iterable<Tile> {
   public constructor(...tiles: Tile[]) {
     this.tiles = tiles;
   }
+
+  public static new(): DiscardPile {
+    return new DiscardPile();
+  }
 }

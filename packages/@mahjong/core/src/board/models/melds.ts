@@ -35,4 +35,8 @@ export class Melds implements Iterable<Meld> {
   public constructor(...melds: readonly Meld[]) {
     this.melds = melds;
   }
+
+  public static new(): Melds {
+    return new Melds();
+  }
 }
