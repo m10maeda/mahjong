@@ -1,13 +1,8 @@
-import {
-  PotScoreHolder,
-  ScoreHolder,
-  ScoreTransacted,
-  SeatScoreHolder,
-  type ScoreLedgerEvent,
-} from '..';
-import { Point } from '../../point';
+import { Point } from '../../score';
+import { ScoreTransacted, type ScoreLedgerEvent } from '../events';
+import { PotScoreHolder, ScoreHolder, SeatScoreHolder } from '../models';
 
-import type { SeatPosition } from '../../../table';
+import type { SeatPosition } from '../../table';
 
 export class ScoreBoardProjection implements Iterable<
   readonly [ScoreHolder, Point]

@@ -1,4 +1,4 @@
-import { ScoreTransacted } from './event';
+import { ScoreTransacted } from '../events';
 
 import type { ScoreTransaction } from './score-transaction';
 

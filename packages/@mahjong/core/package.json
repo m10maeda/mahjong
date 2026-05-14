@@ -11,7 +11,8 @@
     "./round": "./src/round/index.ts",
     "./board": "./src/board/index.ts",
     "./winning-hand-shape": "./src/winning-hand-shape/index.ts",
-    "./score": "./src/score/index.ts"
+    "./score": "./src/score/index.ts",
+    "./score-ledger": "./src/score-ledger/index.ts"
   },
   "main": "./src/index.ts",
   "scripts": {

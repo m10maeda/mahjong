@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
 import { ScoreEntry } from './score-entry';
-import { Point } from '../point';
-import { SeatScoreHolder } from './score-holder/seat-score-holder';
+import { SeatScoreHolder } from './score-holder';
+import { Point } from '../../score';
 
 describe('ScoreEntry', () => {
   describe('無効な値を与えられた場合', () => {
