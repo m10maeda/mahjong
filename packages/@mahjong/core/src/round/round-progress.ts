@@ -6,6 +6,13 @@ export class RoundProgress {
 
   public readonly wind: RoundWind;
 
+  public advance(): RoundProgress {
+    if (!this.index.canAdvance())
+      return new RoundProgress(this.wind.advance(), this.index.reset());
+
+    return new RoundProgress(this.wind, this.index.advance());
+  }
+
   public compareTo(other: RoundProgress): number {
     if (!this.wind.equals(other.wind)) return this.wind.compareTo(other.wind);
 

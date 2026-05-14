@@ -16,6 +16,14 @@ export class Round {
     return this.progress.wind;
   }
 
+  public advance(): Round {
+    return new Round(this.progress.advance(), this.honba.reset());
+  }
+
+  public carryover(): Round {
+    return new Round(this.progress.advance(), this.honba.advance());
+  }
+
   public compareTo(other: Round): number {
     if (!this.progress.equals(other.progress))
       return this.progress.compareTo(other.progress);
@@ -27,6 +35,10 @@ export class Round {
     return (
       this.progress.equals(other.progress) && this.honba.equals(other.honba)
     );
+  }
+
+  public repeat(): Round {
+    return new Round(this.progress, this.honba.advance());
   }
 
   public constructor(progress: RoundProgress, honba: Honba) {

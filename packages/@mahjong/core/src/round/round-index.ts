@@ -9,6 +9,10 @@ export class RoundIndex {
     return new RoundIndex(this.value + 1, this.max);
   }
 
+  public canAdvance(): boolean {
+    return this.value < this.max;
+  }
+
   public compareTo(other: RoundIndex): number {
     return this.value - other.value;
   }
