@@ -1,8 +1,7 @@
 import { Point } from '../../score';
+import { SeatPosition } from '../../table';
 import { ScoreTransacted, type ScoreLedgerEvent } from '../events';
-import { PotScoreHolder, ScoreHolder, SeatScoreHolder } from '../models';
-
-import type { SeatPosition } from '../../table';
+import { ScoreHolder } from '../models';
 
 export class ScoreBoardProjection implements Iterable<
   readonly [ScoreHolder, Point]
@@ -15,9 +14,7 @@ export class ScoreBoardProjection implements Iterable<
     const newScores = new Map(
       [...this.scores.entries()].map<readonly [ScoreHolder, Point]>(
         ([holder, balance]) => {
-          const delta = event.entries.find((entry) =>
-            entry.target.equals(holder),
-          );
+          const delta = event.entries.find((entry) => entry.target === holder);
 
           if (delta === undefined) return [holder, balance];
 
@@ -45,12 +42,21 @@ export class ScoreBoardProjection implements Iterable<
 
     if (seats.length !== uniqueSeats.size) throw new Error();
 
+    const holders = seats.map((seat) => {
+      if (seat.equals(SeatPosition.East)) return ScoreHolder.EastSeat;
+      if (seat.equals(SeatPosition.South)) return ScoreHolder.SouthSeat;
+      if (seat.equals(SeatPosition.West)) return ScoreHolder.WestSeat;
+      if (seat.equals(SeatPosition.North)) return ScoreHolder.NorthSeat;
+
+      throw new RangeError();
+    });
+
     const scores = new Map<ScoreHolder, Point>([
-      ...seats.map<readonly [SeatScoreHolder, Point]>((seat) => [
-        SeatScoreHolder.of(seat),
+      ...holders.map<readonly [ScoreHolder, Point]>((holder) => [
+        holder,
         startingPoint,
       ]),
-      [PotScoreHolder.new(), Point.Zero],
+      [ScoreHolder.Pot, Point.Zero],
     ]);
 
     return new ScoreBoardProjection(scores);
