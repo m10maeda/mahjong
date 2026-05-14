@@ -1,6 +1,6 @@
 export {
   BoardEvent,
-  BoardInitialized,
+  TilesDistributed,
   TileDrawn,
   TileDrawnSource,
   TileDiscarded,

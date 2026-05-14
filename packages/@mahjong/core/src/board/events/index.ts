@@ -1,6 +1,6 @@
 export { BoardEvent } from './board-event';
 
-export { BoardInitialized } from './board-initialized';
+export { TilesDistributed } from './tiles-distributed';
 
 export { TileDrawn, TileDrawnSource } from './tile-drawn';
 export { TileDiscarded } from './tile-discarded';
