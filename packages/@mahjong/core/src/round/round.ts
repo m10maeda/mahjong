@@ -1,7 +1,9 @@
-import type { Honba } from './honba';
-import type { RoundIndex } from './round-index';
-import type { RoundProgress } from './round-progress';
-import type { RoundWind } from './round-wind';
+import { Honba } from './honba';
+import { RoundIndex } from './round-index';
+import { RoundProgress } from './round-progress';
+import { RoundWind } from './round-wind';
+
+import type { ITable } from '../table';
 
 export class Round {
   public readonly honba: Honba;
@@ -44,5 +46,14 @@ export class Round {
   public constructor(progress: RoundProgress, honba: Honba) {
     this.progress = progress;
     this.honba = honba;
+  }
+
+  public static of(table: ITable): Round {
+    const size = [...table].length;
+
+    return new Round(
+      new RoundProgress(RoundWind.East, new RoundIndex(1, size)),
+      Honba.Zero,
+    );
   }
 }
