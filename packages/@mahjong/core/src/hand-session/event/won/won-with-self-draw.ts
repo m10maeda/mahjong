@@ -1,7 +1,7 @@
 import { Won } from './won';
 
 import type { Round } from '../../../round';
-import type { SeatPosition } from '../../../seat-position';
+import type { SeatPosition } from '../../../table';
 
 export class WonWithSelfDraw extends Won {
   public readonly winner: SeatPosition;

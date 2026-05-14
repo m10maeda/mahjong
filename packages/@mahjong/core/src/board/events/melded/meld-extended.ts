@@ -1,7 +1,7 @@
 import { Melded } from './melded';
 
 import type { MeldReference } from './meld-reference';
-import type { SeatPosition } from '../../../seat-position';
+import type { SeatPosition } from '../../../table';
 import type { Tile } from '../../../tile';
 
 export class MeldExtended extends Melded {

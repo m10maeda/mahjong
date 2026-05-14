@@ -1,5 +1,5 @@
 import { ScoreHolder } from './score-holder';
-import { SeatPosition } from '../../../seat-position';
+import { SeatPosition } from '../../../table';
 
 export class SeatScoreHolder extends ScoreHolder {
   public static readonly East = new SeatScoreHolder(SeatPosition.East);
