@@ -1,21 +1,23 @@
-export type { IScoreLedgerWriter } from './score-ledger-writer';
+export type { IScoreLedgerWriter, IScoreBoardReader } from './ports';
 
-export { ScoreLedgerRuntime } from './score-ledger-runtime';
+export { ScoreLedgerRuntime } from './runtime';
 
 export {
   ScoreLedgerEvent,
   type IScoreLedgerEventPublisher,
   type IScoreLedgerEventSubscriber,
   ScoreTransacted,
-} from './event';
+} from './events';
 
-export { ScoreLedger } from './score-ledger';
+export {
+  ScoreLedger,
+  ScoreTransaction,
+  ScoreEntry,
+  ScoreHolder,
+  SeatScoreHolder,
+  PotScoreHolder,
+  InvalidDuplicatedHolderError,
+  InvalidNoZeroSumError,
+} from './models';
 
-export { ScoreTransaction } from './score-transaction';
-
-export { ScoreEntry } from './score-entry';
-
-export { ScoreHolder, SeatScoreHolder, PotScoreHolder } from './score-holder';
-
-export { InvalidDuplicatedHolderError } from './invalid-duplicated-holder-error';
-export { InvalidNoZeroSumError } from './invalid-no-zero-sum-error';
+export { ScoreBoardProjection } from './projections';

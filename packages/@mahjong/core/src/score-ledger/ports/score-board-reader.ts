@@ -1,4 +1,4 @@
-import type { ScoreBoardProjection } from './score-board-projection';
+import type { ScoreBoardProjection } from '../projections';
 
 export interface IScoreBoardReader {
   getScoreBoard(): ScoreBoardProjection;

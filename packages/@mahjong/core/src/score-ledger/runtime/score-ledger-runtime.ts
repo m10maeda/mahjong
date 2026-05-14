@@ -1,8 +1,7 @@
-import type { IScoreLedgerEventPublisher } from './event';
-import type { IScoreBoardReader, ScoreBoardProjection } from './reader';
-import type { ScoreLedger } from './score-ledger';
-import type { IScoreLedgerWriter } from './score-ledger-writer';
-import type { ScoreTransaction } from './score-transaction';
+import type { IScoreLedgerEventPublisher } from '../events';
+import type { ScoreLedger, ScoreTransaction } from '../models';
+import type { IScoreBoardReader, IScoreLedgerWriter } from '../ports';
+import type { ScoreBoardProjection } from '../projections';
 
 export class ScoreLedgerRuntime
   implements IScoreLedgerWriter, IScoreBoardReader

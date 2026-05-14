@@ -1,9 +1,9 @@
 import { InvalidDuplicatedHolderError } from './invalid-duplicated-holder-error';
 import { InvalidNoZeroSumError } from './invalid-no-zero-sum-error';
-import { Point } from './point';
+import { Point } from '../../score';
 
 import type { ScoreEntry } from './score-entry';
-import type { Round } from '../round';
+import type { Round } from '../../round';
 
 export class ScoreTransaction implements Iterable<ScoreEntry> {
   public readonly round: Round;
