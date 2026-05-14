@@ -36,4 +36,6 @@ export {
   type ITilesDistributor,
 } from './runtime';
 
+export { BoardRuntimeFactory } from './runtime-factories';
+
 export { TileSet, TileSetType } from './tile-set';
