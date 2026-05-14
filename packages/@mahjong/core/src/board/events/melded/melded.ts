@@ -1,7 +1,7 @@
 import { BoardEvent } from '../board-event';
 
 import type { MeldReference } from './meld-reference';
-import type { SeatPosition } from '../../../seat-position';
+import type { SeatPosition } from '../../../table';
 import type { Tile } from '../../../tile';
 
 export abstract class Melded extends BoardEvent {
