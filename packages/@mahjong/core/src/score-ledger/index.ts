@@ -1,4 +1,5 @@
 export {
+  Point,
   ScoreTransaction,
   ScoreEntry,
   ScoreHolder,

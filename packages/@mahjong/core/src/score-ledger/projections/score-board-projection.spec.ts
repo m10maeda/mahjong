@@ -8,8 +8,7 @@ import {
   RoundProgress,
   RoundWind,
 } from '../../round';
-import { Point } from '../../score';
-import { ScoreEntry, ScoreHolder } from '../concepts';
+import { Point, ScoreEntry, ScoreHolder } from '../concepts';
 import { ScoreTransacted } from '../events';
 
 describe('ScoreBoardProjection', () => {

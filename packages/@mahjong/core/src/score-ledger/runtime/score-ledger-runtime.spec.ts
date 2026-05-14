@@ -7,8 +7,7 @@ import {
   RoundProgress,
   RoundWind,
 } from '../../round';
-import { Point } from '../../score';
-import { ScoreEntry, ScoreHolder, ScoreTransaction } from '../concepts';
+import { Point, ScoreEntry, ScoreHolder, ScoreTransaction } from '../concepts';
 import { type IScoreLedgerEventPublisher, ScoreTransacted } from '../events';
 import { ScoreBoardProjection } from '../projections';
 import { ScoreLedgerRuntime } from './score-ledger-runtime';

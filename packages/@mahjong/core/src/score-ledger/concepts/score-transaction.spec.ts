@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { InvalidDuplicatedHolderError } from './invalid-duplicated-holder-error';
 import { InvalidNoZeroSumError } from './invalid-no-zero-sum-error';
+import { Point } from './point';
 import { ScoreEntry } from './score-entry';
 import { ScoreHolder } from './score-holder';
 import { ScoreTransaction } from './score-transaction';
@@ -12,7 +13,6 @@ import {
   RoundProgress,
   RoundWind,
 } from '../../round';
-import { Point } from '../../score';
 
 describe('ScoreTransaction', () => {
   describe('有効な値を与えられた場合', () => {

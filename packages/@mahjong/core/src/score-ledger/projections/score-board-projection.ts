@@ -1,6 +1,5 @@
-import { Point } from '../../score';
 import { SeatPosition } from '../../table';
-import { ScoreHolder } from '../concepts';
+import { Point, ScoreHolder } from '../concepts';
 import { ScoreTransacted, type ScoreLedgerEvent } from '../events';
 
 export class ScoreBoardProjection implements Iterable<
