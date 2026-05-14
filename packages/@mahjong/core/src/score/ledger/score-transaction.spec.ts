@@ -26,7 +26,7 @@ describe('ScoreTransaction', () => {
           new ScoreEntry(PotScoreHolder.new(), new Point(-1000)),
         ],
         new Round(
-          new RoundProgress(RoundWind.East, new RoundIndex(1)),
+          new RoundProgress(RoundWind.East, new RoundIndex(1, 4)),
           Honba.Zero,
         ),
       );
@@ -46,7 +46,7 @@ describe('ScoreTransaction', () => {
             new ScoreEntry(SeatScoreHolder.North, new Point(-2000)),
           ],
           new Round(
-            new RoundProgress(RoundWind.East, new RoundIndex(1)),
+            new RoundProgress(RoundWind.East, new RoundIndex(1, 4)),
             Honba.Zero,
           ),
         );
@@ -63,7 +63,7 @@ describe('ScoreTransaction', () => {
             new ScoreEntry(SeatScoreHolder.East, new Point(-2000)),
           ],
           new Round(
-            new RoundProgress(RoundWind.East, new RoundIndex(1)),
+            new RoundProgress(RoundWind.East, new RoundIndex(1, 4)),
             Honba.Zero,
           ),
         );

@@ -10,11 +10,11 @@ describe('Round', () => {
   describe('compareTo', () => {
     it('自身と同じ値を与えられた場合、0 を返すこと', () => {
       const sut = new Round(
-        new RoundProgress(RoundWind.East, new RoundIndex(1)),
+        new RoundProgress(RoundWind.East, new RoundIndex(1, 4)),
         new Honba(0),
       );
       const target = new Round(
-        new RoundProgress(RoundWind.East, new RoundIndex(1)),
+        new RoundProgress(RoundWind.East, new RoundIndex(1, 4)),
         new Honba(0),
       );
 
@@ -23,14 +23,14 @@ describe('Round', () => {
 
     it('自身より小さい値を与えられた場合、正の数値を返すこと', () => {
       const sut = new Round(
-        new RoundProgress(RoundWind.East, new RoundIndex(2)),
+        new RoundProgress(RoundWind.East, new RoundIndex(2, 4)),
         new Honba(1),
       );
 
       expect(
         sut.compareTo(
           new Round(
-            new RoundProgress(RoundWind.East, new RoundIndex(1)),
+            new RoundProgress(RoundWind.East, new RoundIndex(1, 4)),
             new Honba(0),
           ),
         ),
@@ -38,7 +38,7 @@ describe('Round', () => {
       expect(
         sut.compareTo(
           new Round(
-            new RoundProgress(RoundWind.East, new RoundIndex(2)),
+            new RoundProgress(RoundWind.East, new RoundIndex(2, 4)),
             new Honba(0),
           ),
         ),
@@ -47,14 +47,14 @@ describe('Round', () => {
 
     it('自身より大きい値を与えられた場合、負の数値を返すこと', () => {
       const sut = new Round(
-        new RoundProgress(RoundWind.East, new RoundIndex(1)),
+        new RoundProgress(RoundWind.East, new RoundIndex(1, 4)),
         new Honba(0),
       );
 
       expect(
         sut.compareTo(
           new Round(
-            new RoundProgress(RoundWind.East, new RoundIndex(2)),
+            new RoundProgress(RoundWind.East, new RoundIndex(2, 4)),
             new Honba(0),
           ),
         ),
@@ -62,7 +62,7 @@ describe('Round', () => {
       expect(
         sut.compareTo(
           new Round(
-            new RoundProgress(RoundWind.East, new RoundIndex(1)),
+            new RoundProgress(RoundWind.East, new RoundIndex(1, 4)),
             new Honba(1),
           ),
         ),
@@ -73,11 +73,11 @@ describe('Round', () => {
   describe('equals', () => {
     it('同じ値を与えられた場合、true を返すこと', () => {
       const sut = new Round(
-        new RoundProgress(RoundWind.East, new RoundIndex(1)),
+        new RoundProgress(RoundWind.East, new RoundIndex(1, 4)),
         new Honba(0),
       );
       const target = new Round(
-        new RoundProgress(RoundWind.East, new RoundIndex(1)),
+        new RoundProgress(RoundWind.East, new RoundIndex(1, 4)),
         new Honba(0),
       );
 
@@ -86,14 +86,14 @@ describe('Round', () => {
 
     it('異なる値を与えられた場合、false を返すこと', () => {
       const sut = new Round(
-        new RoundProgress(RoundWind.East, new RoundIndex(1)),
+        new RoundProgress(RoundWind.East, new RoundIndex(1, 4)),
         new Honba(0),
       );
 
       expect(
         sut.equals(
           new Round(
-            new RoundProgress(RoundWind.West, new RoundIndex(1)),
+            new RoundProgress(RoundWind.West, new RoundIndex(1, 4)),
             new Honba(0),
           ),
         ),
@@ -101,7 +101,7 @@ describe('Round', () => {
       expect(
         sut.equals(
           new Round(
-            new RoundProgress(RoundWind.East, new RoundIndex(1)),
+            new RoundProgress(RoundWind.East, new RoundIndex(1, 4)),
             new Honba(1),
           ),
         ),

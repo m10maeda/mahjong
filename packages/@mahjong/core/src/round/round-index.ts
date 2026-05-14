@@ -1,8 +1,12 @@
 export class RoundIndex {
+  private readonly max: number;
+
   private readonly value: number;
 
   public advance(): RoundIndex {
-    return new RoundIndex(this.value + 1);
+    if (this.value === this.max) throw new RangeError();
+
+    return new RoundIndex(this.value + 1, this.max);
   }
 
   public compareTo(other: RoundIndex): number {
@@ -14,7 +18,7 @@ export class RoundIndex {
   }
 
   public reset(): RoundIndex {
-    return new RoundIndex(1);
+    return new RoundIndex(1, this.max);
   }
 
   public [Symbol.toPrimitive](
@@ -33,11 +37,14 @@ export class RoundIndex {
     return this.value;
   }
 
-  public constructor(value: number) {
-    if (!Number.isInteger(value)) throw new Error();
+  public constructor(value: number, max: number) {
+    if (!Number.isInteger(value)) throw new TypeError();
     if (value < 1) throw new Error();
-    if (value > 4) throw new Error();
+    if (!Number.isInteger(max)) throw new TypeError();
+    if (max < 1) throw new Error();
+    if (value > max) throw new RangeError();
 
     this.value = value;
+    this.max = max;
   }
 }

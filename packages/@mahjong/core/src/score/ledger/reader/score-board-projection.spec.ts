@@ -50,7 +50,7 @@ describe('ScoreBoardProjection', () => {
           new ScoreEntry(PotScoreHolder.new(), new Point(-1000)),
         ],
         new Round(
-          new RoundProgress(RoundWind.East, new RoundIndex(2)),
+          new RoundProgress(RoundWind.East, new RoundIndex(2, 4)),
           Honba.Zero,
         ),
       );
