@@ -9,24 +9,25 @@ import {
 } from '../../round';
 import { Point, ScoreEntry, ScoreHolder, ScoreTransaction } from '../concepts';
 import { type IScoreLedgerEventPublisher, ScoreTransacted } from '../events';
+import { ScoreLedger } from '../models';
+import { Score } from '../ports';
 import { ScoreBoardProjection } from '../projections';
 import { ScoreLedgerRuntime } from './score-ledger-runtime';
-import { ScoreLedger } from '../models';
 
 describe('ScoreLedgerRuntime', () => {
-  describe('getScoreBoard', () => {
+  describe('getAllScores', () => {
     it('保持している得点を取得できること', () => {
       const mockEventPublisher: IScoreLedgerEventPublisher = {
         publish: vi.fn(),
       };
 
-      const scores: readonly [ScoreHolder, Point][] = [
+      const scores = [
         [ScoreHolder.EastSeat, new Point(24000)],
         [ScoreHolder.SouthSeat, new Point(17000)],
         [ScoreHolder.WestSeat, new Point(33000)],
         [ScoreHolder.NorthSeat, new Point(25000)],
         [ScoreHolder.Pot, new Point(1000)],
-      ];
+      ] as const;
 
       const sut = new ScoreLedgerRuntime(
         new ScoreLedger(),
@@ -34,13 +35,13 @@ describe('ScoreLedgerRuntime', () => {
         mockEventPublisher,
       );
 
-      const result = sut.getScoreBoard();
+      const result = sut.getAllScores();
 
-      expect([...result][0]).toEqual(scores[0]);
-      expect([...result][1]).toEqual(scores[1]);
-      expect([...result][2]).toEqual(scores[2]);
-      expect([...result][3]).toEqual(scores[3]);
-      expect([...result][4]).toEqual(scores[4]);
+      expect([...result][0]).toEqual(new Score(scores[0][0], scores[0][1]));
+      expect([...result][1]).toEqual(new Score(scores[1][0], scores[1][1]));
+      expect([...result][2]).toEqual(new Score(scores[2][0], scores[2][1]));
+      expect([...result][3]).toEqual(new Score(scores[3][0], scores[3][1]));
+      expect([...result][4]).toEqual(new Score(scores[4][0], scores[4][1]));
     });
   });
 
@@ -78,13 +79,21 @@ describe('ScoreLedgerRuntime', () => {
         ),
       );
 
-      const result = sut.getScoreBoard();
+      const result = sut.getAllScores();
 
-      expect([...result][0]).toEqual([ScoreHolder.EastSeat, new Point(33000)]);
-      expect([...result][1]).toEqual([ScoreHolder.SouthSeat, new Point(17000)]);
-      expect([...result][2]).toEqual([ScoreHolder.WestSeat, new Point(33000)]);
-      expect([...result][3]).toEqual([ScoreHolder.NorthSeat, new Point(17000)]);
-      expect([...result][4]).toEqual([ScoreHolder.Pot, new Point(0)]);
+      expect([...result][0]).toEqual(
+        new Score(ScoreHolder.EastSeat, new Point(33000)),
+      );
+      expect([...result][1]).toEqual(
+        new Score(ScoreHolder.SouthSeat, new Point(17000)),
+      );
+      expect([...result][2]).toEqual(
+        new Score(ScoreHolder.WestSeat, new Point(33000)),
+      );
+      expect([...result][3]).toEqual(
+        new Score(ScoreHolder.NorthSeat, new Point(17000)),
+      );
+      expect([...result][4]).toEqual(new Score(ScoreHolder.Pot, new Point(0)));
     });
 
     it('イベントパブリッシャーが呼び出されること', async () => {

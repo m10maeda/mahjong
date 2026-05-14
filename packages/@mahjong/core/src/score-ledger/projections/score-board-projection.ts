@@ -25,6 +25,10 @@ export class ScoreBoardProjection implements Iterable<
     return new ScoreBoardProjection(newScores);
   }
 
+  public getBalanceBy(holder: ScoreHolder): Point | undefined {
+    return this.scores.get(holder);
+  }
+
   public [Symbol.iterator](): Iterator<readonly [ScoreHolder, Point]> {
     return this.scores.entries();
   }
