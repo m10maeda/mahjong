@@ -30,4 +30,10 @@ export {
   Seed,
 } from './ports';
 
+export {
+  BoardRuntime,
+  type IBoardEngine,
+  type ITilesDistributor,
+} from './runtime';
+
 export { TileSet, TileSetType } from './tile-set';
