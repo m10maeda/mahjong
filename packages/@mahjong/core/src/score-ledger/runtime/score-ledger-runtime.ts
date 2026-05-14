@@ -1,5 +1,6 @@
+import type { ScoreTransaction } from '../concepts';
 import type { IScoreLedgerEventPublisher } from '../events';
-import type { ScoreLedger, ScoreTransaction } from '../models';
+import type { ScoreLedger } from '../models';
 import type { IScoreBoardReader, IScoreLedgerWriter } from '../ports';
 import type { ScoreBoardProjection } from '../projections';
 

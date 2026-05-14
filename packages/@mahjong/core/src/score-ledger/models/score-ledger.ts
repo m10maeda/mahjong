@@ -1,6 +1,6 @@
 import { ScoreTransacted } from '../events';
 
-import type { ScoreTransaction } from './score-transaction';
+import type { ScoreTransaction } from '../concepts';
 
 export class ScoreLedger implements Iterable<ScoreTransaction> {
   private readonly transactions: readonly ScoreTransaction[];

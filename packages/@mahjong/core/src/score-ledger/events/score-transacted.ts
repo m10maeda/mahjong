@@ -1,4 +1,4 @@
-import { ScoreEntry } from '../models';
+import { ScoreEntry } from '../concepts';
 import { ScoreLedgerEvent } from './score-ledger-event';
 
 import type { Round } from '../../round';

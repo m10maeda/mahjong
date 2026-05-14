@@ -1,3 +1,12 @@
+export {
+  Point,
+  ScoreTransaction,
+  ScoreEntry,
+  ScoreHolder,
+  InvalidDuplicatedHolderError,
+  InvalidNoZeroSumError,
+} from './concepts';
+
 export type { IScoreLedgerWriter, IScoreBoardReader } from './ports';
 
 export { ScoreLedgerRuntime } from './runtime';
@@ -9,13 +18,6 @@ export {
   ScoreTransacted,
 } from './events';
 
-export {
-  ScoreLedger,
-  ScoreTransaction,
-  ScoreEntry,
-  ScoreHolder,
-  InvalidDuplicatedHolderError,
-  InvalidNoZeroSumError,
-} from './models';
+export { ScoreLedger } from './models';
 
 export { ScoreBoardProjection } from './projections';

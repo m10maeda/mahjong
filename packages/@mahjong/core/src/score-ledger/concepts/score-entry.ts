@@ -1,5 +1,5 @@
+import type { Point } from './point';
 import type { ScoreHolder } from './score-holder';
-import type { Point } from '../../score';
 
 export class ScoreEntry {
   public readonly amount: Point;
