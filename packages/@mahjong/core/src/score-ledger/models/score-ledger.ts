@@ -9,7 +9,7 @@ export class ScoreLedger implements Iterable<ScoreTransaction> {
     transaction: ScoreTransaction,
   ): readonly [ScoreLedger, ScoreTransacted] {
     return [
-      new ScoreLedger(...this.transactions),
+      new ScoreLedger(...this.transactions, transaction),
       new ScoreTransacted([...transaction], transaction.round),
     ];
   }
