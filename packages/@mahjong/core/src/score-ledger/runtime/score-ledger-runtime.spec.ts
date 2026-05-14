@@ -8,15 +8,11 @@ import {
   RoundWind,
 } from '../../round';
 import { Point } from '../../score';
+import { ScoreEntry, ScoreHolder, ScoreTransaction } from '../concepts';
 import { type IScoreLedgerEventPublisher, ScoreTransacted } from '../events';
-import {
-  ScoreEntry,
-  ScoreHolder,
-  ScoreLedger,
-  ScoreTransaction,
-} from '../models';
 import { ScoreBoardProjection } from '../projections';
 import { ScoreLedgerRuntime } from './score-ledger-runtime';
+import { ScoreLedger } from '../models';
 
 describe('ScoreLedgerRuntime', () => {
   describe('getScoreBoard', () => {

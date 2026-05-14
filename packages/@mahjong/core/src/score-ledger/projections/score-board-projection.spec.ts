@@ -9,9 +9,8 @@ import {
   RoundWind,
 } from '../../round';
 import { Point } from '../../score';
+import { ScoreEntry, ScoreHolder } from '../concepts';
 import { ScoreTransacted } from '../events';
-import { ScoreHolder } from '../models';
-import { ScoreEntry } from '../models/score-entry';
 
 describe('ScoreBoardProjection', () => {
   it('与えられた得点を保持すること', () => {
