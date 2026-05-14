@@ -1,5 +1,7 @@
-import type { ScoreBoardProjection } from '../projections';
+import type { ScoreHolder } from '../concepts';
+import type { Score } from './score';
 
 export interface IScoreBoardReader {
-  getScoreBoard(): ScoreBoardProjection;
+  getAllScores(): readonly Score[];
+  getScoreBy(holder: ScoreHolder): Score | undefined;
 }

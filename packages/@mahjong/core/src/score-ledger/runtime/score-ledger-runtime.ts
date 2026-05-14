@@ -1,4 +1,6 @@
-import type { ScoreTransaction } from '../concepts';
+import { Score } from '../ports';
+
+import type { ScoreHolder, ScoreTransaction } from '../concepts';
 import type { IScoreLedgerEventPublisher } from '../events';
 import type { ScoreLedger } from '../models';
 import type { IScoreBoardReader, IScoreLedgerWriter } from '../ports';
@@ -22,8 +24,18 @@ export class ScoreLedgerRuntime
     await this.eventPublisher.publish(event);
   }
 
-  public getScoreBoard(): ScoreBoardProjection {
-    return this.projection;
+  public getAllScores(): readonly Score[] {
+    return [...this.projection].map(
+      ([holder, balance]) => new Score(holder, balance),
+    );
+  }
+
+  public getScoreBy(holder: ScoreHolder): Score | undefined {
+    const balance = this.projection.getBalanceBy(holder);
+
+    if (balance === undefined) return undefined;
+
+    return new Score(holder, balance);
   }
 
   public constructor(
