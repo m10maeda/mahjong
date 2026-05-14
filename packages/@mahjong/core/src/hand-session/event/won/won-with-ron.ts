@@ -1,7 +1,7 @@
 import { Won } from './won';
 
 import type { Round } from '../../../round';
-import type { SeatPosition } from '../../../seat-position';
+import type { SeatPosition } from '../../../table';
 
 export class WonWithRon extends Won {
   public readonly winners: readonly [SeatPosition, ...SeatPosition[]];
