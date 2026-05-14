@@ -7,7 +7,7 @@ import {
 } from '..';
 import { Point } from '../../point';
 
-import type { SeatPosition } from '../../../seat-position';
+import type { SeatPosition } from '../../../table';
 
 export class ScoreBoardProjection implements Iterable<
   readonly [ScoreHolder, Point]
