@@ -37,7 +37,7 @@ export class ScoreBoardProjection implements Iterable<
     this.scores = scores;
   }
 
-  public static of(startingPoint: Point, table: ITable): ScoreBoardProjection {
+  public static new(startingPoint: Point, table: ITable): ScoreBoardProjection {
     const seats = [...table];
 
     const holders = seats.map((seat) => {
