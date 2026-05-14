@@ -23,4 +23,19 @@ export {
   ExtendMeld,
 } from './commands';
 
+export {
+  type IBoardRuntime,
+  type IBoardRuntimeFactory,
+  type IBoardSetupper,
+  Seed,
+} from './ports';
+
+export {
+  BoardRuntime,
+  type IBoardEngine,
+  type ITilesDistributor,
+} from './runtime';
+
+export { BoardRuntimeFactory } from './runtime-factories';
+
 export { TileSet, TileSetType } from './tile-set';
