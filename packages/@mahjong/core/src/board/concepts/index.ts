@@ -1,1 +1,1 @@
-export { MeldReference } from './meld-reference';
+export { MeldReference, MeldSequence } from './meld-reference';

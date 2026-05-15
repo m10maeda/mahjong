@@ -116,7 +116,7 @@ export class Board {
     const newMelds = this.melds.add(meld);
 
     const event = new MeldedFromSelf(
-      new MeldReference(seat, [...this.melds].length),
+      new MeldReference(seat, this.melds.getNextSequence()),
       seat,
       consumedTile,
     );
@@ -146,7 +146,7 @@ export class Board {
     const newMelds = this.melds.add(meld);
 
     const event = new MeldedWithClaimed(
-      new MeldReference(seat, [...this.melds].length),
+      new MeldReference(seat, this.melds.getNextSequence()),
       seat,
       consumedTile,
       claimedOn,

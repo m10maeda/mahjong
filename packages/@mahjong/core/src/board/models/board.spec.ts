@@ -16,7 +16,7 @@ import {
   TileModifier,
   SeatPosition,
 } from '../../concepts';
-import { MeldReference } from '../concepts';
+import { MeldReference, MeldSequence } from '../concepts';
 
 describe('Board', () => {
   function createBoard() {
@@ -212,7 +212,7 @@ describe('Board', () => {
 
         const [, result] = sut.extendMeld(
           SeatPosition.East,
-          new MeldReference(SeatPosition.East, 0),
+          new MeldReference(SeatPosition.East, MeldSequence.new()),
           [new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal)],
         );
 

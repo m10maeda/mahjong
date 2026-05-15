@@ -1,7 +1,7 @@
 import { InvalidMeldNotFoundError } from './invalid-meld-not-found-error';
+import { MeldSequence, type MeldReference } from '../concepts';
 
 import type { Meld } from './meld';
-import type { MeldReference } from '../concepts';
 
 export class Melds implements Iterable<Meld> {
   private readonly melds: readonly Meld[];
@@ -15,7 +15,11 @@ export class Melds implements Iterable<Meld> {
       meld.owner.equals(reference.seat),
     );
 
-    return candidates[reference.sequence];
+    return candidates[reference.sequence.valueOf()];
+  }
+
+  public getNextSequence(): MeldSequence {
+    return new MeldSequence(this.melds.length);
   }
 
   public replace(from: Meld, to: Meld): Melds {
