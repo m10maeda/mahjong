@@ -92,7 +92,7 @@ export class Board {
     if (baseMeld === undefined) throw new InvalidMeldNotFoundError();
 
     const extendedMeld = new ExtendedMeld(seat, baseMeld, consumedTiles);
-    const newMelds = this.melds.replace(baseMeld, extendedMeld);
+    const newMelds = this.melds.update(reference, extendedMeld);
 
     const newHands = this.hands.update(seat, (hand) =>
       hand.consume(...consumedTiles),

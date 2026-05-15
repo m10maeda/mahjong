@@ -6,6 +6,10 @@ export class MeldReference {
 
   public readonly sequence: MeldSequence;
 
+  public equals(other: MeldReference): boolean {
+    return this.seat.equals(other.seat) && this.sequence.equals(other.sequence);
+  }
+
   public constructor(seat: SeatPosition, sequence: MeldSequence) {
     this.seat = seat;
     this.sequence = sequence;

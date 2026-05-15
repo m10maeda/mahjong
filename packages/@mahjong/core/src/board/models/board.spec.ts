@@ -65,7 +65,8 @@ describe('Board', () => {
         ],
       ),
       new DiscardPile(new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal)),
-      new Melds(
+      new Melds([
+        new MeldReference(SeatPosition.East, new MeldSequence(0)),
         new OpenMeld(
           SeatPosition.East,
           [
@@ -75,7 +76,7 @@ describe('Board', () => {
           new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
           SeatPosition.West,
         ),
-      ),
+      ]),
     );
   }
 
