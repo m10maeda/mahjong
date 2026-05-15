@@ -1,13 +1,15 @@
 import { InvalidMeldNotFoundError } from './invalid-meld-not-found-error';
-import { MeldSequence, type MeldReference } from '../concepts';
+import { MeldReference, MeldSequence } from '../concepts';
 
 import type { Meld } from './meld';
 
 export class Melds implements Iterable<Meld> {
   private readonly melds: readonly Meld[];
 
-  public add(meld: Meld): Melds {
-    return new Melds(...this.melds, meld);
+  public add(meld: Meld): readonly [MeldReference, Melds] {
+    const reference = new MeldReference(meld.owner, this.getNextSequence());
+
+    return [reference, new Melds(...this.melds, meld)];
   }
 
   public get(reference: MeldReference): Meld | undefined {
@@ -16,10 +18,6 @@ export class Melds implements Iterable<Meld> {
     );
 
     return candidates[reference.sequence.valueOf()];
-  }
-
-  public getNextSequence(): MeldSequence {
-    return new MeldSequence(this.melds.length);
   }
 
   public replace(from: Meld, to: Meld): Melds {
@@ -34,6 +32,10 @@ export class Melds implements Iterable<Meld> {
 
   public [Symbol.iterator](): Iterator<Meld> {
     return this.melds[Symbol.iterator]();
+  }
+
+  private getNextSequence(): MeldSequence {
+    return new MeldSequence(this.melds.length);
   }
 
   public constructor(...melds: readonly Meld[]) {
