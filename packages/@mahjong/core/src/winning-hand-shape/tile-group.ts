@@ -1,4 +1,4 @@
-import type { Tile } from '../tile';
+import type { Tile } from '../concepts';
 
 export enum TileGroupType {
   Sequence,

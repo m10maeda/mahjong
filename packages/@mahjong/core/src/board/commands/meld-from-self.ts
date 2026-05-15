@@ -1,7 +1,6 @@
 import { BoardCommand } from './board-command';
 
-import type { SeatPosition } from '../../table';
-import type { Tile } from '../../tile';
+import type { SeatPosition, Tile } from '../../concepts';
 
 export class MeldFromSelf extends BoardCommand {
   public readonly consumedTiles: readonly Tile[];

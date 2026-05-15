@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { DiscardPile } from './discard-pile';
-import { Honor, HonorTile, TileModifier } from '../../../tile';
+import { Honor, HonorTile, TileModifier } from '../../../concepts';
 
 describe('DiscardedPile', () => {
   describe('latest', () => {

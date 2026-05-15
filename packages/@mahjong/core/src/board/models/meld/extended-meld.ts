@@ -1,7 +1,6 @@
 import { Meld } from './meld';
 
-import type { SeatPosition } from '../../../table';
-import type { Tile } from '../../../tile';
+import type { SeatPosition, Tile } from '../../../concepts';
 
 export class ExtendedMeld extends Meld {
   private readonly base: Meld;

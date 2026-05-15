@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { Hand } from './hand';
 import { InvalidTileNotHeldError } from './invalid-tile-not-held-error';
-import { Rank, Suit, SuitTile, TileModifier } from '../../../tile';
+import { Rank, Suit, SuitTile, TileModifier } from '../../../concepts';
 
 describe('Hand', () => {
   describe('add', () => {

@@ -1,7 +1,6 @@
 import { BoardEvent } from './board-event';
 
-import type { SeatPosition } from '../../table';
-import type { Tile } from '../../tile';
+import type { SeatPosition, Tile } from '../../concepts';
 
 export enum TileDrawnSource {
   Wall,

@@ -1,5 +1,4 @@
-import type { SeatPosition } from '../../../table';
-import type { Tile } from '../../../tile';
+import type { SeatPosition, Tile } from '../../../concepts';
 
 export abstract class Meld implements Iterable<Tile> {
   public readonly owner: SeatPosition;

@@ -1,6 +1,6 @@
 import { WinningHandShape } from './winning-hand-shape';
 
-import type { Tile } from '../tile';
+import type { Tile } from '../concepts';
 import type { Pair } from './pair';
 
 export class SevenPairsWinningHandShape extends WinningHandShape {

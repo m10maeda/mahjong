@@ -7,7 +7,7 @@ import {
   RoundIndex,
   RoundProgress,
   RoundWind,
-} from '../../round';
+} from '../../concepts';
 import { Point, ScoreEntry, ScoreHolder } from '../concepts';
 import { ScoreTransacted } from '../events';
 

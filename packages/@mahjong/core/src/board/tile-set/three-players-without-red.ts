@@ -6,7 +6,7 @@ import {
   Suit,
   SuitTile,
   TileModifier,
-} from '../../tile';
+} from '../../concepts';
 
 export class ThreePlayersWithoutRed extends AbstractTileSet {
   public constructor() {

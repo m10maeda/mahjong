@@ -1,4 +1,4 @@
-import type { TableType } from '../../table';
+import type { TableType } from '../../concepts';
 import type { IBoardEventPublisher } from '../events';
 import type { TileSet } from '../tile-set';
 import type { IBoardRuntime } from './board-runtime';

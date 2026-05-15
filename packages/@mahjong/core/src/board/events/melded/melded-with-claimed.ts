@@ -1,8 +1,7 @@
 import { Melded } from './melded';
 
 import type { MeldReference } from './meld-reference';
-import type { SeatPosition } from '../../../table';
-import type { Tile } from '../../../tile';
+import type { SeatPosition, Tile } from '../../../concepts';
 
 export class MeldedWithClaimed extends Melded {
   public readonly claimedOn: SeatPosition;

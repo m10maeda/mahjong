@@ -1,7 +1,7 @@
 import { WinningHandShape } from '../winning-hand-shape';
 
 import type { ThirteenOrphansWaitShape } from './thirteen-orphans-wait-shape';
-import type { Tile } from '../../tile';
+import type { Tile } from '../../concepts';
 
 export class ThirteenOrphansWinningHandShape extends WinningHandShape {
   public readonly wait: ThirteenOrphansWaitShape;

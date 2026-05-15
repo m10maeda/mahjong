@@ -9,8 +9,13 @@ import { InvalidHolderNotFoundError } from './invalid-holder-not-found-error';
 import { OpenMeld } from './meld';
 import { Melds } from './melds';
 import { Wall } from './wall';
-import { SeatPosition } from '../../table';
-import { Rank, Suit, SuitTile, TileModifier } from '../../tile';
+import {
+  Rank,
+  Suit,
+  SuitTile,
+  TileModifier,
+  SeatPosition,
+} from '../../concepts';
 import { MeldReference } from '../events/melded';
 
 describe('Board', () => {

@@ -22,7 +22,7 @@ import {
   TilesShuffler,
 } from '../tiles-distributor';
 
-import type { ITable } from '../../table';
+import type { ITable } from '../../concepts';
 import type { IBoardEventPublisher } from '../events';
 import type { Board } from '../models';
 import type { IBoardRuntimeFactory } from '../ports';

@@ -1,6 +1,6 @@
 import { InvalidTileNotHeldError } from './invalid-tile-not-held-error';
 
-import type { Tile } from '../../../tile';
+import type { Tile } from '../../../concepts';
 
 export class Hand implements Iterable<Tile> {
   private readonly tiles: readonly Tile[];

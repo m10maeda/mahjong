@@ -1,4 +1,4 @@
-import type { SeatPosition } from '../../../table';
+import type { SeatPosition } from '../../../concepts';
 
 export class MeldReference {
   public readonly seat: SeatPosition;
