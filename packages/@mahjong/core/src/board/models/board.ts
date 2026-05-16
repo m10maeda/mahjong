@@ -92,7 +92,7 @@ export class Board {
     if (baseMeld === undefined) throw new InvalidMeldNotFoundError();
 
     const extendedMeld = new ExtendedMeld(seat, baseMeld, consumedTiles);
-    const newMelds = this.melds.replace(baseMeld, extendedMeld);
+    const newMelds = this.melds.update(reference, extendedMeld);
 
     const newHands = this.hands.update(seat, (hand) =>
       hand.consume(...consumedTiles),
@@ -113,13 +113,9 @@ export class Board {
     );
 
     const meld = new ClosedMeld(seat, consumedTile);
-    const newMelds = this.melds.add(meld);
+    const [reference, newMelds] = this.melds.add(meld);
 
-    const event = new MeldedFromSelf(
-      new MeldReference(seat, [...this.melds].length),
-      seat,
-      consumedTile,
-    );
+    const event = new MeldedFromSelf(reference, seat, consumedTile);
 
     return [
       event,
@@ -143,10 +139,10 @@ export class Board {
     );
 
     const meld = new OpenMeld(seat, consumedTile, claimedTile, claimedOn);
-    const newMelds = this.melds.add(meld);
+    const [reference, newMelds] = this.melds.add(meld);
 
     const event = new MeldedWithClaimed(
-      new MeldReference(seat, [...this.melds].length),
+      reference,
       seat,
       consumedTile,
       claimedOn,
