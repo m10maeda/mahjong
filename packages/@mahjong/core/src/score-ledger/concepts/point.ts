@@ -44,8 +44,8 @@ export class Point {
   }
 
   public constructor(value: number) {
-    if (!Number.isInteger(value)) throw new Error();
-    if (value % 100 !== 0) throw new Error();
+    if (!Number.isInteger(value)) throw new RangeError();
+    if (value % 100 !== 0) throw new TypeError();
 
     this.value = value;
   }
