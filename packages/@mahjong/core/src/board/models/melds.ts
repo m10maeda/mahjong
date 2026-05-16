@@ -1,7 +1,7 @@
 import { InvalidMeldNotFoundError } from './invalid-meld-not-found-error';
 
 import type { Meld } from './meld';
-import type { MeldReference } from '../events/melded';
+import type { MeldReference } from '../concepts';
 
 export class Melds implements Iterable<Meld> {
   private readonly melds: readonly Meld[];

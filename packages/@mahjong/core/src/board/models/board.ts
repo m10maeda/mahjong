@@ -6,6 +6,9 @@ import { InvalidHolderNotFoundError } from './invalid-holder-not-found-error';
 import { InvalidMeldNotFoundError } from './invalid-meld-not-found-error';
 import { InvalidMismatchClaimedTileError } from './invalid-mismatch-claimed-tile-error';
 import { ClosedMeld, ExtendedMeld, OpenMeld } from './meld';
+import { Melds } from './melds';
+import { Wall } from './wall';
+import { MeldReference } from '../concepts';
 import {
   MeldExtended,
   MeldedWithClaimed,
@@ -15,9 +18,6 @@ import {
   TileDrawnSource,
   TilesDistributed,
 } from '../events';
-import { Melds } from './melds';
-import { Wall } from './wall';
-import { MeldReference } from '../events/melded';
 
 import type { SeatPosition, Tile } from '../../concepts';
 

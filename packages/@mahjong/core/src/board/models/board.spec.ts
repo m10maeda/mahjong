@@ -16,7 +16,7 @@ import {
   TileModifier,
   SeatPosition,
 } from '../../concepts';
-import { MeldReference } from '../events/melded';
+import { MeldReference } from '../concepts';
 
 describe('Board', () => {
   function createBoard() {
