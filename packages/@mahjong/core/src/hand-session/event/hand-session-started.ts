@@ -1,7 +1,6 @@
 import { HandSessionEvent } from './hand-session-event';
 
-import type { Round } from '../../round';
-import type { SeatPosition } from '../../table';
+import type { Round, SeatPosition } from '../../concepts';
 
 type PlayersSize = 2 | 3 | 4;
 

@@ -1,4 +1,4 @@
-import { type Tile } from '../tile';
+import { type Tile } from '../concepts';
 
 export class Pair implements Iterable<Tile> {
   private readonly tiles: readonly [Tile, Tile];

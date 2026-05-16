@@ -1,5 +1,5 @@
 import type { ITilesShuffler } from './tiles-distributor';
-import type { Tile } from '../../tile';
+import type { Tile } from '../../concepts';
 import type { Seed } from '../ports';
 
 export interface IRandomGenerator {

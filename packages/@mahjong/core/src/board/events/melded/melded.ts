@@ -1,8 +1,7 @@
 import { BoardEvent } from '../board-event';
 
 import type { MeldReference } from './meld-reference';
-import type { SeatPosition } from '../../../table';
-import type { Tile } from '../../../tile';
+import type { Tile, SeatPosition } from '../../../concepts';
 
 export abstract class Melded extends BoardEvent {
   public readonly consumedTiles: readonly Tile[];

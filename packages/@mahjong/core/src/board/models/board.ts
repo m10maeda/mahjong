@@ -19,8 +19,7 @@ import { Melds } from './melds';
 import { Wall } from './wall';
 import { MeldReference } from '../events/melded';
 
-import type { SeatPosition } from '../../table';
-import type { Tile } from '../../tile';
+import type { SeatPosition, Tile } from '../../concepts';
 
 export class Board {
   private readonly deadWall: DeadWall;

@@ -1,7 +1,6 @@
 import { Meld } from './meld';
 
-import type { SeatPosition } from '../../../table';
-import type { Tile } from '../../../tile';
+import type { SeatPosition, Tile } from '../../../concepts';
 
 export class OpenMeld extends Meld {
   private readonly claimedOn: SeatPosition;

@@ -1,6 +1,6 @@
 import { MahjongEvent } from '../../event';
 
-import type { Round } from '../../round';
+import type { Round } from '../../concepts';
 
 export abstract class HandSessionEvent extends MahjongEvent {
   public readonly round: Round;

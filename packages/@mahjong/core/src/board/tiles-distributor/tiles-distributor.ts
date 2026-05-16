@@ -1,7 +1,6 @@
-import { SeatPosition, type ITable } from '../../table';
+import { SeatPosition, type ITable, Tile } from '../../concepts';
 import { Board } from '../models';
 
-import type { Tile } from '../../tile';
 import type { TilesDistributed } from '../events';
 import type { Seed } from '../ports';
 import type { ITilesDistributor } from '../runtime';

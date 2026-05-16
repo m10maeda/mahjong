@@ -1,5 +1,5 @@
 import { InvalidDuplicatedSeatsError } from './invalid-duplicated-seats-error';
-import { SeatPosition } from '../../table';
+import { SeatPosition } from '../../concepts';
 
 import type { Hand } from './hand';
 

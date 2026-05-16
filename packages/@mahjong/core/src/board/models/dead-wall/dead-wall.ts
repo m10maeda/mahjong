@@ -1,6 +1,6 @@
 import { InvalidNoTilesError } from '../invalid-no-tiles-error';
 
-import type { Tile } from '../../../tile';
+import type { Tile } from '../../../concepts';
 
 export class DeadWall implements Iterable<Tile> {
   private readonly tiles: readonly Tile[];

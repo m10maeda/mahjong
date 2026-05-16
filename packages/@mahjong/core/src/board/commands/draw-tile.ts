@@ -1,6 +1,6 @@
 import { BoardCommand } from './board-command';
 
-import type { SeatPosition } from '../../table';
+import type { SeatPosition } from '../../concepts';
 
 export enum DrawTileSource {
   Wall,

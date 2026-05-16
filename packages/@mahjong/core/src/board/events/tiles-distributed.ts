@@ -1,7 +1,6 @@
 import { BoardEvent } from './board-event';
 
-import type { SeatPosition } from '../../table';
-import type { Tile } from '../../tile';
+import type { SeatPosition, Tile } from '../../concepts';
 
 export class TilesDistributed extends BoardEvent {
   public readonly deadWall: readonly Tile[];

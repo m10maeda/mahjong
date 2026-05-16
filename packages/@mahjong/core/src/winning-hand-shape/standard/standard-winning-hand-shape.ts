@@ -1,7 +1,7 @@
 import { WinningHandShape } from '../winning-hand-shape';
 
 import type { StandardWaitShape } from './standard-wait-shape';
-import type { Tile } from '../../tile';
+import type { Tile } from '../../concepts';
 import type { Pair } from '../pair';
 import type { TileGroup } from '../tile-group';
 

@@ -1,6 +1,6 @@
 import { HandSessionEnded } from '../hand-session-ended';
 
-import type { Round } from '../../../round';
+import type { Round } from '../../../concepts';
 
 export enum AbortiveReason {
   /** 九種九牌 */

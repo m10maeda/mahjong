@@ -1,7 +1,6 @@
 import { BoardCommand } from './board-command';
 
-import type { SeatPosition } from '../../table';
-import type { Tile } from '../../tile';
+import type { SeatPosition, Tile } from '../../concepts';
 import type { MeldReference } from '../events/melded';
 
 export class ExtendMeld extends BoardCommand {

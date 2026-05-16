@@ -1,4 +1,4 @@
-import { SeatPosition, type ITable } from '../../table';
+import { SeatPosition, type ITable } from '../../concepts';
 import { Point, ScoreHolder } from '../concepts';
 import { ScoreTransacted, type ScoreLedgerEvent } from '../events';
 
