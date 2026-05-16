@@ -1,1 +1,1 @@
-export class InvalidNoZeroSumError extends Error {}
+export class InvalidNoZeroSumError extends RangeError {}
