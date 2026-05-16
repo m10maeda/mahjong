@@ -1,1 +1,1 @@
-export class InvalidDuplicatedHolderError extends Error {}
+export class InvalidDuplicatedHolderError extends RangeError {}
