@@ -1,4 +1,4 @@
-import { SeatPosition } from '../../table';
+import { SeatPosition, type ITable } from '../../table';
 import { Point, ScoreHolder } from '../concepts';
 import { ScoreTransacted, type ScoreLedgerEvent } from '../events';
 
@@ -37,13 +37,8 @@ export class ScoreBoardProjection implements Iterable<
     this.scores = scores;
   }
 
-  public static of(
-    startingPoint: Point,
-    seats: readonly SeatPosition[],
-  ): ScoreBoardProjection {
-    const uniqueSeats = new Set([...seats]);
-
-    if (seats.length !== uniqueSeats.size) throw new Error();
+  public static new(startingPoint: Point, table: ITable): ScoreBoardProjection {
+    const seats = [...table];
 
     const holders = seats.map((seat) => {
       if (seat.equals(SeatPosition.East)) return ScoreHolder.EastSeat;
