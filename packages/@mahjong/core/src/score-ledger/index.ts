@@ -7,7 +7,11 @@ export {
   InvalidNoZeroSumError,
 } from './concepts';
 
-export type { IScoreLedgerWriter } from './ports';
+export type {
+  IScoreLedgerEngine,
+  IScoreLedgerWriter,
+  IScoreLedgerEngineFactory,
+} from './ports';
 
 export { ScoreLedgerRuntime } from './runtime';
 
