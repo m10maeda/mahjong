@@ -26,7 +26,7 @@ export {
 export {
   type IBoardEngine,
   type IBoardEngineFactory,
-  type IBoardSetupper,
+  type IBoardPreparer,
   Seed,
 } from './ports';
 

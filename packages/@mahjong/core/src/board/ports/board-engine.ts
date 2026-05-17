@@ -1,4 +1,4 @@
 import type { IBoardCommandHandler } from '../commands';
-import type { IBoardSetupper } from './board-setupper';
+import type { IBoardPreparer } from './board-preparer';
 
-export interface IBoardEngine extends IBoardCommandHandler, IBoardSetupper {}
+export interface IBoardEngine extends IBoardCommandHandler, IBoardPreparer {}

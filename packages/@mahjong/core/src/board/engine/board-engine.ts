@@ -14,7 +14,7 @@ export class BoardEngine<TBoard> implements IBoardEngine {
   private board?: TBoard;
 
   public async handle(command: BoardCommand) {
-    if (!this.board) throw new Error('Board not initialized');
+    if (!this.board) throw new Error('Board not prepared');
 
     const [event, nextBoard] = this.executor.execute(command, this.board);
 
@@ -23,12 +23,12 @@ export class BoardEngine<TBoard> implements IBoardEngine {
     this.board = nextBoard;
   }
 
-  public async setup(seed: Seed): Promise<void> {
-    const [event, nextBoard] = this.tilesDistributor.distribute(seed);
+  public async prepare(seed: Seed): Promise<void> {
+    const [event, newBoard] = this.tilesDistributor.distribute(seed);
 
     await this.eventPublisher.publish(event);
 
-    this.board = nextBoard;
+    this.board = newBoard;
   }
 
   public constructor(
