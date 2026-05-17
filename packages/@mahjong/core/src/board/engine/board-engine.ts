@@ -1,19 +1,43 @@
 import type { BoardCommand } from '../commands';
-import type { BoardEvent } from '../events';
-import type { IBoardEngine } from '../runtime';
+import type { IBoardEventPublisher } from '../events';
+import type { Seed, IBoardEngine } from '../ports';
 import type { IBoardCommandExecutor } from './board-command-executor';
+import type { ITilesDistributor } from './tiles-distributor';
 
-export class BoardEngine<TBoard> implements IBoardEngine<TBoard> {
+export class BoardEngine<TBoard> implements IBoardEngine {
+  private readonly eventPublisher: IBoardEventPublisher;
+
   private readonly executor: IBoardCommandExecutor<TBoard>;
 
-  public execute(
-    command: BoardCommand,
-    board: TBoard,
-  ): readonly [BoardEvent, TBoard] {
-    return this.executor.execute(command, board);
+  private readonly tilesDistributor: ITilesDistributor<TBoard>;
+
+  private board?: TBoard;
+
+  public async handle(command: BoardCommand) {
+    if (!this.board) throw new Error('Board not initialized');
+
+    const [event, nextBoard] = this.executor.execute(command, this.board);
+
+    await this.eventPublisher.publish(event);
+
+    this.board = nextBoard;
   }
 
-  public constructor(executor: IBoardCommandExecutor<TBoard>) {
+  public async setup(seed: Seed): Promise<void> {
+    const [event, nextBoard] = this.tilesDistributor.distribute(seed);
+
+    await this.eventPublisher.publish(event);
+
+    this.board = nextBoard;
+  }
+
+  public constructor(
+    executor: IBoardCommandExecutor<TBoard>,
+    tilesDistributor: ITilesDistributor<TBoard>,
+    eventPublisher: IBoardEventPublisher,
+  ) {
     this.executor = executor;
+    this.tilesDistributor = tilesDistributor;
+    this.eventPublisher = eventPublisher;
   }
 }

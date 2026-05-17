@@ -6,17 +6,6 @@ import {
   MeldWithClaimed,
 } from '../commands';
 import {
-  BoardEngine,
-  BoardCommandDispatcher,
-  BoardCommandExecutorBinding,
-  DiscardTileExecuter,
-  DrawTileExecuter,
-  ExtendMeldExecuter,
-  MeldFromSelfExecuter,
-  MeldWithClaimedExecuter,
-} from '../engine';
-import { BoardRuntime } from '../runtime';
-import {
   TilesDistributor,
   RandomGeneratorFactory,
   TilesShuffler,
@@ -25,23 +14,34 @@ import {
 import type { ITable } from '../../concepts';
 import type { IBoardEventPublisher } from '../events';
 import type { Board } from '../models';
-import type { IBoardRuntimeFactory } from '../ports';
+import type { IBoardEngineFactory } from '../ports';
 import type { TileSet } from '../tile-set';
 
-export class BoardRuntimeFactory implements IBoardRuntimeFactory {
+import {
+  BoardEngine,
+  BoardCommandDispatcher,
+  BoardCommandExecutorBinding,
+  DiscardTileExecuter,
+  DrawTileExecuter,
+  ExtendMeldExecuter,
+  MeldFromSelfExecuter,
+  MeldWithClaimedExecuter,
+} from '.';
+
+export class BoardEngineFactory implements IBoardEngineFactory {
   public create(
     table: ITable,
     tilesSet: TileSet,
     eventPublisher: IBoardEventPublisher,
-  ): BoardRuntime<Board> {
-    const engine = this.createEngine();
+  ): BoardEngine<Board> {
+    const dispatcher = this.createCommandDispatcher();
     const tilesDistributor = this.createTilesDistributor(table, tilesSet);
 
-    return new BoardRuntime(engine, eventPublisher, tilesDistributor);
+    return new BoardEngine(dispatcher, tilesDistributor, eventPublisher);
   }
 
-  private createEngine(): BoardEngine<Board> {
-    const commandDispatcher = new BoardCommandDispatcher(
+  private createCommandDispatcher(): BoardCommandDispatcher<Board> {
+    return new BoardCommandDispatcher(
       new BoardCommandExecutorBinding(DrawTile, new DrawTileExecuter()),
       new BoardCommandExecutorBinding(DiscardTile, new DiscardTileExecuter()),
       new BoardCommandExecutorBinding(MeldFromSelf, new MeldFromSelfExecuter()),
@@ -51,8 +51,6 @@ export class BoardRuntimeFactory implements IBoardRuntimeFactory {
       ),
       new BoardCommandExecutorBinding(ExtendMeld, new ExtendMeldExecuter()),
     );
-
-    return new BoardEngine(commandDispatcher);
   }
 
   private createTilesDistributor(
