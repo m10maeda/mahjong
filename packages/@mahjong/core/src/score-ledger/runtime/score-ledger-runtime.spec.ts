@@ -65,7 +65,7 @@ describe('ScoreLedgerRuntime', () => {
         mockEventPublisher,
       );
 
-      await sut.add(
+      await sut.append(
         new ScoreTransaction(
           [
             new ScoreEntry(ScoreHolder.EastSeat, new Point(9000)),
@@ -110,7 +110,7 @@ describe('ScoreLedgerRuntime', () => {
       // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(mockEventPublisher.publish).not.toHaveBeenCalled();
 
-      await sut.add(
+      await sut.append(
         new ScoreTransaction(
           [
             new ScoreEntry(ScoreHolder.EastSeat, new Point(1000)),

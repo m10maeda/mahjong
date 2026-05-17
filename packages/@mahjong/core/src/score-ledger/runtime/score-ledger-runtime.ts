@@ -15,8 +15,8 @@ export class ScoreLedgerRuntime
 
   private scoreLedger: ScoreLedger;
 
-  public async add(transaction: ScoreTransaction): Promise<void> {
-    const [newScoreLedger, event] = this.scoreLedger.add(transaction);
+  public async append(transaction: ScoreTransaction): Promise<void> {
+    const [newScoreLedger, event] = this.scoreLedger.append(transaction);
 
     this.scoreLedger = newScoreLedger;
     this.projection = this.projection.apply(event);

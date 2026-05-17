@@ -5,7 +5,7 @@ import type { ScoreTransaction } from '../concepts';
 export class ScoreLedger implements Iterable<ScoreTransaction> {
   private readonly transactions: readonly ScoreTransaction[];
 
-  public add(
+  public append(
     transaction: ScoreTransaction,
   ): readonly [ScoreLedger, ScoreTransacted] {
     return [
