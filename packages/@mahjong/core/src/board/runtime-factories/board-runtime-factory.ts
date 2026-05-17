@@ -14,7 +14,7 @@ import {
   ExtendMeldExecuter,
   MeldFromSelfExecuter,
   MeldWithClaimedExecuter,
-} from '../engines';
+} from '../engine';
 import { BoardRuntime } from '../runtime';
 import {
   TilesDistributor,
