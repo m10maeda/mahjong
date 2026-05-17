@@ -13,16 +13,16 @@ import {
   ScoreTransactionAppended,
 } from '../events';
 import { ScoreLedger } from '../models';
-import { ScoreLedgerRuntime } from './score-ledger-runtime';
+import { ScoreLedgerEngine } from './score-ledger-engine';
 
-describe('ScoreLedgerRuntime', () => {
+describe('ScoreLedgerEngine', () => {
   describe('add', () => {
     it('イベントパブリッシャーが呼び出されること', async () => {
       const mockEventPublisher: IScoreLedgerEventPublisher = {
         publish: vi.fn(),
       };
 
-      const sut = new ScoreLedgerRuntime(new ScoreLedger(), mockEventPublisher);
+      const sut = new ScoreLedgerEngine(new ScoreLedger(), mockEventPublisher);
 
       // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(mockEventPublisher.publish).not.toHaveBeenCalled();

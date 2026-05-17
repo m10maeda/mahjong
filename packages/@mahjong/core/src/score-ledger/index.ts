@@ -13,7 +13,7 @@ export type {
   IScoreLedgerEngineFactory,
 } from './ports';
 
-export { ScoreLedgerRuntime } from './runtime';
+export { ScoreLedgerEngine } from './engine';
 
 export {
   ScoreLedgerEvent,

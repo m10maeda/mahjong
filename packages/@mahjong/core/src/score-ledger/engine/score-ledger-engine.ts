@@ -3,7 +3,7 @@ import type { IScoreLedgerEventPublisher } from '../events';
 import type { ScoreLedger } from '../models';
 import type { IScoreLedgerWriter } from '../ports';
 
-export class ScoreLedgerRuntime implements IScoreLedgerWriter {
+export class ScoreLedgerEngine implements IScoreLedgerWriter {
   private readonly eventPublisher: IScoreLedgerEventPublisher;
 
   private scoreLedger: ScoreLedger;
