@@ -3,7 +3,7 @@ import { ScoreLedgerEvent } from './score-ledger-event';
 
 import type { Round } from '../../concepts';
 
-export class ScoreTransacted extends ScoreLedgerEvent {
+export class ScoreTransactionAppended extends ScoreLedgerEvent {
   public readonly entries: readonly ScoreEntry[];
 
   public readonly round: Round;
