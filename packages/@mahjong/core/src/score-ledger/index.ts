@@ -15,7 +15,7 @@ export {
   ScoreLedgerEvent,
   type IScoreLedgerEventPublisher,
   type IScoreLedgerEventSubscriber,
-  ScoreTransacted,
+  ScoreTransactionAppended,
 } from './events';
 
 export { ScoreLedger } from './models';

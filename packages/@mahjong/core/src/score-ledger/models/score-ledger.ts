@@ -1,4 +1,4 @@
-import { ScoreTransacted } from '../events';
+import { ScoreTransactionAppended } from '../events';
 
 import type { ScoreTransaction } from '../concepts';
 
@@ -7,10 +7,10 @@ export class ScoreLedger implements Iterable<ScoreTransaction> {
 
   public append(
     transaction: ScoreTransaction,
-  ): readonly [ScoreLedger, ScoreTransacted] {
+  ): readonly [ScoreLedger, ScoreTransactionAppended] {
     return [
       new ScoreLedger(...this.transactions, transaction),
-      new ScoreTransacted([...transaction], transaction.round),
+      new ScoreTransactionAppended([...transaction], transaction.round),
     ];
   }
 

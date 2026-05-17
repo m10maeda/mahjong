@@ -8,7 +8,10 @@ import {
   RoundWind,
 } from '../../concepts';
 import { Point, ScoreEntry, ScoreHolder, ScoreTransaction } from '../concepts';
-import { type IScoreLedgerEventPublisher, ScoreTransacted } from '../events';
+import {
+  type IScoreLedgerEventPublisher,
+  ScoreTransactionAppended,
+} from '../events';
 import { ScoreLedger } from '../models';
 import { ScoreLedgerRuntime } from './score-ledger-runtime';
 
@@ -41,7 +44,7 @@ describe('ScoreLedgerRuntime', () => {
       expect(mockEventPublisher.publish).toHaveBeenCalled();
       // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(mockEventPublisher.publish).toHaveBeenCalledWith(
-        new ScoreTransacted(
+        new ScoreTransactionAppended(
           [
             new ScoreEntry(ScoreHolder.EastSeat, new Point(1000)),
             new ScoreEntry(ScoreHolder.Pot, new Point(-1000)),
