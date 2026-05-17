@@ -7,7 +7,7 @@ export {
   InvalidNoZeroSumError,
 } from './concepts';
 
-export type { IScoreLedgerWriter, IScoreBoardReader, Score } from './ports';
+export type { IScoreLedgerWriter } from './ports';
 
 export { ScoreLedgerRuntime } from './runtime';
 
@@ -19,5 +19,3 @@ export {
 } from './events';
 
 export { ScoreLedger } from './models';
-
-export { ScoreBoardProjection } from './projections';
