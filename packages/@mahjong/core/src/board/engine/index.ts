@@ -1,4 +1,5 @@
 export { BoardEngine } from './board-engine';
+export { BoardEngineFactory } from './board-engine-factory';
 
 export {
   type BoardCommandClass,
@@ -13,3 +14,5 @@ export {
   MeldWithClaimedExecuter,
   ExtendMeldExecuter,
 } from './board-command-executors';
+
+export type { ITilesDistributor } from './tiles-distributor';

@@ -1,4 +1,4 @@
-export type { IBoardRuntime } from './board-runtime';
-export type { IBoardRuntimeFactory } from './board-runtime-factory';
-export type { IBoardSetupper } from './board-setupper';
+export type { IBoardEngine } from './board-engine';
+export type { IBoardEngineFactory } from './board-engine-factory';
+export type { IBoardPreparer } from './board-preparer';
 export { Seed } from './seed';

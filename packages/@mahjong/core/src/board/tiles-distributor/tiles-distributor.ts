@@ -1,9 +1,9 @@
 import { SeatPosition, type ITable, Tile } from '../../concepts';
 import { Board } from '../models';
 
+import type { ITilesDistributor } from '../engine';
 import type { TilesDistributed } from '../events';
 import type { Seed } from '../ports';
-import type { ITilesDistributor } from '../runtime';
 import type { TileSet } from '../tile-set';
 
 export interface ITilesShuffler {

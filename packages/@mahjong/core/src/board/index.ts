@@ -24,18 +24,16 @@ export {
 } from './commands';
 
 export {
-  type IBoardRuntime,
-  type IBoardRuntimeFactory,
-  type IBoardSetupper,
+  type IBoardEngine,
+  type IBoardEngineFactory,
+  type IBoardPreparer,
   Seed,
 } from './ports';
 
 export {
-  BoardRuntime,
-  type IBoardEngine,
+  BoardEngine,
+  BoardEngineFactory,
   type ITilesDistributor,
-} from './runtime';
-
-export { BoardRuntimeFactory } from './runtime-factories';
+} from './engine';
 
 export { TileSet, TileSetType } from './tile-set';
