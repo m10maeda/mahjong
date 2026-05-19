@@ -1,4 +1,4 @@
-import { HandSessionEnded } from '../hand-session-ended';
+import { RoundSessionEnded } from '../round-session-ended';
 
 import type { Round } from '../../../concepts';
 
@@ -19,7 +19,7 @@ export enum AbortiveReason {
   TripleRon,
 }
 
-export class AbortiveDrawn extends HandSessionEnded {
+export class AbortiveDrawn extends RoundSessionEnded {
   public readonly reason: AbortiveReason;
 
   public constructor(round: Round, reason: AbortiveReason) {

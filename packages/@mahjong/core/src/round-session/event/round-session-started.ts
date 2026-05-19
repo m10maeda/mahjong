@@ -1,10 +1,10 @@
-import { HandSessionEvent } from './hand-session-event';
+import { RoundSessionEvent } from './round-session-event';
 
 import type { Round, SeatPosition } from '../../concepts';
 
 type PlayersSize = 2 | 3 | 4;
 
-export class HandSessionStarted extends HandSessionEvent {
+export class RoundSessionStarted extends RoundSessionEvent {
   public readonly dealer: SeatPosition;
 
   public readonly playersSize: PlayersSize;
