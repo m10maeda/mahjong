@@ -10,4 +10,4 @@ export {
   ExhaustiveDrawn,
   type IRoundSessionEventSubscriber,
   type IRoundSessionEventPublisher,
-} from './event';
+} from './events';
