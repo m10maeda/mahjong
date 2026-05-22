@@ -1,4 +1,5 @@
 import type { BoardEvent } from './board-event';
-import type { IMahjongEventSubscriber } from '../../event';
 
-export interface IBoardEventSubscriber extends IMahjongEventSubscriber<BoardEvent> {}
+export interface IBoardEventSubscriber {
+  handle(event: BoardEvent): Promise<void>;
+}
