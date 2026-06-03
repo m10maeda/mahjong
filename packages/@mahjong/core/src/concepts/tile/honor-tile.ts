@@ -17,6 +17,12 @@ export class HonorTile extends Tile {
     return this.honor === other.honor && this.modifier === other.modifier;
   }
 
+  public isSameTileAs(other: Tile): boolean {
+    if (!(other instanceof HonorTile)) return false;
+
+    return this.honor === other.honor;
+  }
+
   public toString(): string {
     if (this.modifier === TileModifier.Red) return `${this.honor.toString()}zr`;
 
