@@ -27,6 +27,13 @@ export class SuitTile extends Tile {
     return this.rank.isEdge();
   }
 
+  public isSameTileAs(other: Tile): boolean {
+    if (!(other instanceof SuitTile)) return false;
+    if (this.suit !== other.suit) return false;
+
+    return this.rank.equals(other.rank);
+  }
+
   public toString(): string {
     if (this.modifier === TileModifier.Red)
       return `${this.rank.toString()}${this.suit}r`;
