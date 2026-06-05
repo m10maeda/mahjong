@@ -2,7 +2,7 @@ import { RoundSessionEnded } from '../round-session-ended';
 
 import type { Round } from '../../../concepts';
 
-export enum AbortiveReason {
+export enum AbortiveDrawReason {
   /** 九種九牌 */
   NineTerminalsAndHonors,
 
@@ -13,16 +13,16 @@ export enum AbortiveReason {
   FourRiichi,
 
   /** 四風子連打 */
-  FourWindsOutInFirstTurn,
+  FourWindsOutInFirstAround,
 
   /** 三家和 */
   TripleRon,
 }
 
 export class AbortiveDrawn extends RoundSessionEnded {
-  public readonly reason: AbortiveReason;
+  public readonly reason: AbortiveDrawReason;
 
-  public constructor(round: Round, reason: AbortiveReason) {
+  public constructor(reason: AbortiveDrawReason, round: Round) {
     super(round);
 
     this.reason = reason;
