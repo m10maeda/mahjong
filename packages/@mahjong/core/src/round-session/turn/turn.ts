@@ -1,6 +1,6 @@
 import { Around } from './around';
 
-import type { ITable, SeatPosition } from '../../concepts';
+import type { ITable, SeatPosition } from '../../table';
 
 export class Turn {
   public readonly activeSeat: SeatPosition;

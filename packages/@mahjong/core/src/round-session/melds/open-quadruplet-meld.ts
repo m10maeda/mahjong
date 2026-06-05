@@ -1,7 +1,7 @@
 import { ClaimedMeld } from './claimed-meld';
 import { MeldType } from './meld';
 
-import type { Tile } from '../../concepts';
+import type { Tile } from '../../tile';
 
 export class OpenQuadrupletMeld extends ClaimedMeld {
   private readonly claimedTile: Tile;

@@ -2,7 +2,7 @@ import { StandardWaitShape } from './standard-wait-shape';
 import { StandardWinningHandShape } from './standard-winning-hand-shape';
 import { SerialPairType } from '../tile-group/incomplete/serial-pair';
 
-import type { Tile, TileType } from '../../concepts';
+import type { Tile, TileType } from '../../tile';
 import type { CompleteTileGroup, Pair, SerialPair } from '../tile-group';
 
 export class SerialPairWaitStandardWinningHandShape extends StandardWinningHandShape {

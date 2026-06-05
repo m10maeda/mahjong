@@ -4,7 +4,7 @@ import {
   TileGroupType,
 } from './complete-tile-group';
 
-import type { Tile } from '../../../concepts';
+import type { Tile } from '../../../tile';
 import type { TileGroup } from '../tile-group';
 
 export class Sequence extends CompleteTileGroup {

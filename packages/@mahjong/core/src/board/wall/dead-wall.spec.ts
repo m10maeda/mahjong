@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { DeadWall } from './dead-wall';
-import { SuitType, Tile, TileModifier } from '../../concepts';
+import { SuitType, Tile, TileModifier } from '../../tile';
 
 describe('DeadWall', () => {
   describe('doraIndicators', () => {

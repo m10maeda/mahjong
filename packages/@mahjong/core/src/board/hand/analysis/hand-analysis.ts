@@ -1,4 +1,4 @@
-import type { Tile, TileType } from '../../../concepts';
+import type { Tile, TileType } from '../../../tile';
 import type { WinningHandShape } from '../../../winning-hand-shape';
 
 export interface IHandAnalysis {

@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 
 import { DiscardHistory } from './discard-history';
 import { DiscardRecord } from './discard-record';
-import { HonorType, SeatPosition, Tile, TileModifier } from '../../concepts';
+import { SeatPosition } from '../../table';
+import { HonorType, Tile, TileModifier } from '../../tile';
 
 describe('DiscardedHistory', () => {
   describe('append', () => {

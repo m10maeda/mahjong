@@ -1,6 +1,7 @@
 import { RoundSessionEvent } from '../round-session-event';
 
-import type { Round, SeatPosition } from '../../../concepts';
+import type { Round } from '../../../round';
+import type { SeatPosition } from '../../../table';
 import type { SerialPair } from '../../../winning-hand-shape';
 
 export class ChiiCallAccepted extends RoundSessionEvent {

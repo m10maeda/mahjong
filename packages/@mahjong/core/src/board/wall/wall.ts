@@ -1,6 +1,6 @@
 import type { DeadWall } from './dead-wall';
 import type { LiveWall } from './live-wall';
-import type { Tile } from '../../concepts';
+import type { Tile } from '../../tile';
 
 export class Wall {
   private readonly dead: DeadWall;

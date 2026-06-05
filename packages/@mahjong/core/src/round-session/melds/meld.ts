@@ -1,4 +1,4 @@
-import type { Tile } from '../../concepts';
+import type { Tile } from '../../tile';
 
 export enum MeldType {
   Sequence,

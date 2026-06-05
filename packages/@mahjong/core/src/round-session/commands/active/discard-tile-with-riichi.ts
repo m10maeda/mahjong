@@ -1,7 +1,8 @@
 import { RoundSessionCommand } from '../round-session-command';
 import { DiscardTile } from './discard-tile';
 
-import type { SeatPosition, Tile } from '../../../concepts';
+import type { SeatPosition } from '../../../table';
+import type { Tile } from '../../../tile';
 
 export class DiscardTileWithRiichi extends DiscardTile {
   public readonly fromDrawnTile: boolean;

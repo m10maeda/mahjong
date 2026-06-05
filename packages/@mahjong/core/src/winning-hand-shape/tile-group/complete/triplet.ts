@@ -3,7 +3,7 @@ import {
   TileGroupExposure,
   TileGroupType,
 } from './complete-tile-group';
-import { Tile, TileType } from '../../../concepts';
+import { Tile, TileType } from '../../../tile';
 
 import type { TileGroup } from '../tile-group';
 

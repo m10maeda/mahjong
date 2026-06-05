@@ -1,6 +1,7 @@
 import { RoundSessionCommand } from './round-session-command';
 
-import type { Round, SeatPosition } from '../../concepts';
+import type { Round } from '../../round';
+import type { SeatPosition } from '../../table';
 
 export class StartRoundSession extends RoundSessionCommand {
   public readonly dealer: SeatPosition;

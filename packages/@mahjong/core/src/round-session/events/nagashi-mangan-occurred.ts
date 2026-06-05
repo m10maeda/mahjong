@@ -1,6 +1,7 @@
 import { RoundSessionEnded } from './round-session-ended';
 
-import type { Round, SeatPosition } from '../../concepts';
+import type { Round } from '../../round';
+import type { SeatPosition } from '../../table';
 
 export class NagashiManganOccurred extends RoundSessionEnded {
   public readonly qualifiedSeats: readonly [SeatPosition, ...SeatPosition[]];

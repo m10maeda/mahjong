@@ -1,6 +1,6 @@
 import { RoundSessionCommand } from './round-session-command';
 
-import type { SeatPosition } from '../../concepts';
+import type { SeatPosition } from '../../table';
 
 export class DrawTile extends RoundSessionCommand {
   public readonly seat: SeatPosition;

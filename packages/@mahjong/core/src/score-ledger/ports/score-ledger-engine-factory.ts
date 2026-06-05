@@ -1,4 +1,4 @@
-import type { IScoreLedgerEventPublisher } from '../events';
+import type { IScoreLedgerEventPublisher } from '../engine';
 import type { IScoreLedgerEngine } from './score-ledger-engine';
 
 export interface IScoreLedgerEngineFactory {

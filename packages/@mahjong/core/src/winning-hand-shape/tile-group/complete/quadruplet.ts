@@ -4,7 +4,7 @@ import {
   TileGroupType,
 } from './complete-tile-group';
 
-import type { Tile, TileType } from '../../../concepts';
+import type { Tile, TileType } from '../../../tile';
 import type { TileGroup } from '../tile-group';
 
 export class Quadruplet extends CompleteTileGroup {

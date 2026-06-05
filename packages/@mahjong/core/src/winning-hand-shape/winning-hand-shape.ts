@@ -1,4 +1,4 @@
-import type { Tile, TileType } from '../concepts';
+import type { Tile, TileType } from '../tile';
 
 export abstract class WinningHandShape implements Iterable<Tile> {
   public abstract get waitTiles(): readonly TileType[];

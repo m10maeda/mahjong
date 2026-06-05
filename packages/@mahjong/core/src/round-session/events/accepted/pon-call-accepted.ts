@@ -1,6 +1,7 @@
 import { RoundSessionEvent } from '../round-session-event';
 
-import type { Round, SeatPosition } from '../../../concepts';
+import type { Round } from '../../../round';
+import type { SeatPosition } from '../../../table';
 import type { Pair } from '../../../winning-hand-shape';
 
 export class PonCallAccepted extends RoundSessionEvent {

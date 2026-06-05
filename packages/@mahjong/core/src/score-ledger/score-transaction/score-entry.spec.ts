@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { Point } from './point';
+import { Point } from '../point';
 import { ScoreEntry } from './score-entry';
 import { ScoreHolder } from './score-holder';
 

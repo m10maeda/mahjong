@@ -1,4 +1,4 @@
-import type { Tile } from '../../concepts';
+import type { Tile } from '../../tile';
 
 export abstract class TileGroup implements Iterable<Tile> {
   protected abstract get tiles(): readonly Tile[];

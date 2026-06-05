@@ -1,7 +1,8 @@
 import { RoundSessionCommand } from '../round-session-command';
 import { ActiveRoundSessionCommand } from './active-round-session-command';
 
-import type { SeatPosition, Tile } from '../../../concepts';
+import type { SeatPosition } from '../../../table';
+import type { Tile } from '../../../tile';
 
 export class MeldClosedQuadruplet extends ActiveRoundSessionCommand {
   public readonly consumedTiles: readonly [Tile, Tile, Tile, Tile];

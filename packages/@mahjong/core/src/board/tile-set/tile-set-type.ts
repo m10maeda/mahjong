@@ -4,7 +4,7 @@ import { ThreePlayersWithRed } from './three-players-with-red';
 import { ThreePlayersWithoutRed } from './three-players-without-red';
 
 import type { AbstractTileSet, ITileSet } from './abstract-tile-set';
-import type { Tile } from '../../concepts';
+import type { Tile } from '../../tile';
 
 export enum TileSetType {
   FourPlayersWithRed,

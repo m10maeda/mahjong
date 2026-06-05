@@ -1,5 +1,5 @@
 import { AbstractTileSet } from './abstract-tile-set';
-import { HonorType, SuitType, Tile, TileModifier } from '../../concepts';
+import { HonorType, SuitType, Tile, TileModifier } from '../../tile';
 
 export class FourPlayersWithRed extends AbstractTileSet {
   public constructor() {

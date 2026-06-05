@@ -1,4 +1,4 @@
-import type { SeatPosition } from '../../concepts';
+import type { SeatPosition } from '../../table';
 import type { ChiiCall, OpenKanCall, PonCall } from '../commands';
 import type { RonType } from '../events/won/won-with-ron';
 

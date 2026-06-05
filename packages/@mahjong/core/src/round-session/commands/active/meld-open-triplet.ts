@@ -1,6 +1,7 @@
 import { RoundSessionCommand } from '../round-session-command';
 
-import type { SeatPosition, Tile } from '../../../concepts';
+import type { SeatPosition } from '../../../table';
+import type { Tile } from '../../../tile';
 
 export class MeldOpenTriplet extends RoundSessionCommand {
   public readonly claimedOn: SeatPosition;
