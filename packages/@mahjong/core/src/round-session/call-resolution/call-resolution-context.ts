@@ -1,5 +1,5 @@
 import type { SeatPosition, Tile } from '../../concepts';
-import type { IHand } from '../board/hand';
+import type { IHand } from '../hand';
 
 export enum CallResolutionType {
   Discard,
