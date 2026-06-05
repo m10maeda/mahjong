@@ -1,16 +1,22 @@
-export class Turn {
+export class Around {
+  public static readonly First = new Around(1);
+
   private readonly value: number;
 
-  public advance(): Turn {
-    return new Turn(this.value + 1);
+  public advance(): Around {
+    return new Around(this.value + 1);
   }
 
-  public compareTo(other: Turn): number {
+  public compareTo(other: Around): number {
     return this.value - other.value;
   }
 
-  public equals(other: Turn): boolean {
+  public equals(other: Around): boolean {
     return this.value === other.value;
+  }
+
+  public isFirst(): boolean {
+    return this.equals(Around.First);
   }
 
   public [Symbol.toPrimitive](
