@@ -1,9 +1,9 @@
-import { BoardEvent } from '../board-event';
+import { RoundSessionEvent } from '../round-session-event';
 
-import type { Tile, SeatPosition } from '../../../concepts';
-import type { MeldReference } from '../../concepts';
+import type { Tile, SeatPosition, Round } from '../../../concepts';
+import type { MeldReference } from '../../meld-reference';
 
-export abstract class Melded extends BoardEvent {
+export abstract class Melded extends RoundSessionEvent {
   public readonly consumedTiles: readonly Tile[];
 
   public readonly reference: MeldReference;
@@ -12,10 +12,11 @@ export abstract class Melded extends BoardEvent {
 
   public constructor(
     reference: MeldReference,
-    seat: SeatPosition,
     consumedTiles: readonly Tile[],
+    seat: SeatPosition,
+    round: Round,
   ) {
-    super();
+    super(round);
 
     this.reference = reference;
     this.seat = seat;

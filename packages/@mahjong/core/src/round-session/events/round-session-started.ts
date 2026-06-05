@@ -1,25 +1,32 @@
 import { RoundSessionEvent } from './round-session-event';
 
-import type { Round, SeatPosition } from '../../concepts';
-
-type PlayersSize = 2 | 3 | 4;
+import type { Round, SeatPosition, Tile } from '../../concepts';
+import type { Seed } from '../seed';
 
 export class RoundSessionStarted extends RoundSessionEvent {
+  public readonly deadWall: readonly Tile[];
+
   public readonly dealer: SeatPosition;
 
-  public readonly playersSize: PlayersSize;
+  public readonly hands: Map<SeatPosition, readonly Tile[]>;
 
-  public readonly seed: number;
+  public readonly seed: Seed;
+
+  public readonly wall: readonly Tile[];
 
   public constructor(
+    wall: readonly Tile[],
+    deadWall: readonly Tile[],
+    hands: readonly (readonly [SeatPosition, readonly Tile[]])[],
     round: Round,
-    playersSize: PlayersSize,
     dealer: SeatPosition,
-    seed: number,
+    seed: Seed,
   ) {
     super(round);
 
-    this.playersSize = playersSize;
+    this.wall = wall;
+    this.deadWall = deadWall;
+    this.hands = new Map(hands);
     this.dealer = dealer;
     this.seed = seed;
   }

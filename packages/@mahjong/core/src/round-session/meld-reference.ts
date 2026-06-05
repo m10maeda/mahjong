@@ -1,16 +1,12 @@
-export class MeldSequence {
+export class MeldReference {
   private readonly value: number;
 
-  public compareTo(other: MeldSequence): number {
+  public compareTo(other: MeldReference): number {
     return this.value - other.value;
   }
 
-  public equals(other: MeldSequence): boolean {
+  public equals(other: MeldReference): boolean {
     return this.value === other.value;
-  }
-
-  public next(): MeldSequence {
-    return new MeldSequence(this.value + 1);
   }
 
   public [Symbol.toPrimitive](
@@ -34,9 +30,5 @@ export class MeldSequence {
     if (value < 0) throw new RangeError();
 
     this.value = value;
-  }
-
-  public static new(): MeldSequence {
-    return new MeldSequence(0);
   }
 }

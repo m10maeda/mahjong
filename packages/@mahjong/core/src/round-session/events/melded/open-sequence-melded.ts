@@ -1,21 +1,22 @@
 import { Melded } from './melded';
 
-import type { SeatPosition, Tile } from '../../../concepts';
-import type { MeldReference } from '../../concepts';
+import type { Round, SeatPosition, Tile } from '../../../concepts';
+import type { MeldReference } from '../../meld-reference';
 
-export class MeldedWithClaimed extends Melded {
+export class OpenSequenceMelded extends Melded {
   public readonly claimedOn: SeatPosition;
 
   public readonly claimedTile: Tile;
 
   public constructor(
     reference: MeldReference,
-    seat: SeatPosition,
     consumedTiles: readonly Tile[],
     claimedOn: SeatPosition,
     claimedTile: Tile,
+    seat: SeatPosition,
+    round: Round,
   ) {
-    super(reference, seat, consumedTiles);
+    super(reference, consumedTiles, seat, round);
 
     this.claimedOn = claimedOn;
     this.claimedTile = claimedTile;
