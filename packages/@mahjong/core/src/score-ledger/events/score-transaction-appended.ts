@@ -1,7 +1,7 @@
 import { ScoreEntry } from '../concepts';
 import { ScoreLedgerEvent } from './score-ledger-event';
 
-import type { Round } from '../../concepts';
+import type { Round } from '../../round';
 
 export class ScoreTransactionAppended extends ScoreLedgerEvent {
   public readonly entries: readonly ScoreEntry[];

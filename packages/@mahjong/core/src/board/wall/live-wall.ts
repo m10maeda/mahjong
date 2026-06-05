@@ -1,6 +1,6 @@
 import { InvalidNoTilesError } from '../invalid-no-tiles-error';
 
-import type { Tile } from '../../concepts';
+import type { Tile } from '../../tile';
 
 export class LiveWall implements Iterable<Tile> {
   private readonly tiles: readonly Tile[];

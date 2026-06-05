@@ -12,7 +12,7 @@ import {
   RoundIndex,
   RoundProgress,
   RoundWind,
-} from '../../concepts';
+} from '../../round';
 
 describe('ScoreTransaction', () => {
   describe('有効な値を与えられた場合', () => {

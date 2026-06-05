@@ -6,7 +6,7 @@ import {
   RoundIndex,
   RoundProgress,
   RoundWind,
-} from '../../concepts';
+} from '../../round';
 import { Point, ScoreEntry, ScoreHolder, ScoreTransaction } from '../concepts';
 import {
   type IScoreLedgerEventPublisher,

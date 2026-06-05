@@ -5,13 +5,14 @@ import { RiichiStatus } from './riichi-status';
 
 import type { IHandAnalysis, IHandAnalyzer } from './analysis';
 import type { IConcealedHand } from './concealed-hand';
-import type { SeatPosition, Tile, TileType } from '../../concepts';
 import type {
   IHand,
   Meld,
   MeldReference,
   RiichiContext,
 } from '../../round-session';
+import type { SeatPosition } from '../../table';
+import type { Tile, TileType } from '../../tile';
 import type {
   Pair,
   SerialPair,

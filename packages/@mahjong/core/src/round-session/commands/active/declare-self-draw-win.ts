@@ -1,7 +1,7 @@
 import { RoundSessionCommand } from '../round-session-command';
 import { ActiveRoundSessionCommand } from './active-round-session-command';
 
-import type { SeatPosition } from '../../../concepts';
+import type { SeatPosition } from '../../../table';
 import type { TileDrawnSource } from '../../events';
 
 export class DeclareSelfDrawWin extends ActiveRoundSessionCommand {

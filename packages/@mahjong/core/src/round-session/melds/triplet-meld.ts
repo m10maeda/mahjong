@@ -2,7 +2,7 @@ import { AddedQuadrupletMeld } from './added-quadruplet-meld';
 import { ClaimedMeld } from './claimed-meld';
 import { Meld, MeldType } from './meld';
 
-import type { Tile } from '../../concepts';
+import type { Tile } from '../../tile';
 
 export class TripletMeld extends ClaimedMeld {
   private readonly claimedTile: Tile;

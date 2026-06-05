@@ -1,6 +1,7 @@
 import { Won } from './won';
 
-import type { Round, SeatPosition } from '../../../concepts';
+import type { Round } from '../../../round';
+import type { SeatPosition } from '../../../table';
 
 export enum TileDrawnSource {
   LiveWall,

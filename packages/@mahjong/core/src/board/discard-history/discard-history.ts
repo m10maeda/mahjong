@@ -1,5 +1,6 @@
 import type { DiscardRecord } from './discard-record';
-import type { SeatPosition, Tile } from '../../concepts';
+import type { SeatPosition } from '../../table';
+import type { Tile } from '../../tile';
 
 export class DiscardHistory implements Iterable<DiscardRecord> {
   private readonly records: readonly DiscardRecord[];

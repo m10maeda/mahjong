@@ -1,4 +1,5 @@
-import type { SeatPosition, Tile } from '../../concepts';
+import type { SeatPosition } from '../../table';
+import type { Tile } from '../../tile';
 
 export class DiscardRecord {
   public readonly from: SeatPosition;

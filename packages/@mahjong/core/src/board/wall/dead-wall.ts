@@ -1,6 +1,6 @@
 import { InvalidNoTilesError } from '../invalid-no-tiles-error';
 
-import type { Tile } from '../../concepts';
+import type { Tile } from '../../tile';
 
 export class DeadWall implements Iterable<Tile> {
   private static readonly DORA_START_POSITION = 4;

@@ -1,4 +1,4 @@
-import type { Round } from '../../concepts';
+import type { Round } from '../../round';
 
 export abstract class RoundSessionEvent {
   public readonly round: Round;

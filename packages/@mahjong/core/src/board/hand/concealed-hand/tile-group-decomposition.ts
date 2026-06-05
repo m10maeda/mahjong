@@ -1,4 +1,4 @@
-import type { Tile } from '../../../concepts';
+import type { Tile } from '../../../tile';
 import type { CompleteTileGroup, Pair } from '../../../winning-hand-shape';
 
 export class TileGroupDecomposition {

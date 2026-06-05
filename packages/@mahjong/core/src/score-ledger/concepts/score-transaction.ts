@@ -3,7 +3,7 @@ import { InvalidNoZeroSumError } from './invalid-no-zero-sum-error';
 import { Point } from './point';
 
 import type { ScoreEntry } from './score-entry';
-import type { Round } from '../../concepts';
+import type { Round } from '../../round';
 
 export class ScoreTransaction implements Iterable<ScoreEntry> {
   public readonly round: Round;

@@ -1,6 +1,7 @@
 import { ReactiveRoundSessionCommand } from './reactive-round-session-command';
 
-import type { SeatPosition, Tile } from '../../../concepts';
+import type { SeatPosition } from '../../../table';
+import type { Tile } from '../../../tile';
 import type { RoundSessionCommand } from '../round-session-command';
 
 export class OpenKanCall extends ReactiveRoundSessionCommand {

@@ -8,8 +8,8 @@ import { InvalidMeldNotFoundError } from '../invalid-meld-not-found-error';
 
 import type { IConcealedHand } from './concealed-hand';
 import type { Melds } from './melds';
-import type { Tile } from '../../concepts';
 import type { Meld, MeldReference } from '../../round-session';
+import type { Tile } from '../../tile';
 import type { Pair, SerialPair } from '../../winning-hand-shape';
 
 export class RawHand {

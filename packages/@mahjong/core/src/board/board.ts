@@ -1,8 +1,9 @@
 import { DiscardRecord, type DiscardHistory } from './discard-history';
 import { Hands } from './hands';
-import { Tile, type SeatPosition } from '../concepts';
-import { type IBoard, type MeldReference } from '../round-session';
 
+import type { IBoard, MeldReference } from '../round-session';
+import type { SeatPosition } from '../table';
+import type { Tile } from '../tile';
 import type { Hand } from './hand';
 import type { Wall } from './wall';
 

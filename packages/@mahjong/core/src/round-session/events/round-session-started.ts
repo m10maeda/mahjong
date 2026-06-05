@@ -1,6 +1,8 @@
 import { RoundSessionEvent } from './round-session-event';
 
-import type { Round, SeatPosition, Tile } from '../../concepts';
+import type { Round } from '../../round/round';
+import type { SeatPosition } from '../../table';
+import type { Tile } from '../../tile';
 import type { Seed } from '../seed';
 
 export class RoundSessionStarted extends RoundSessionEvent {

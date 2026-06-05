@@ -1,4 +1,3 @@
-import { Tile, type Round, type SeatPosition } from '../concepts';
 import { CallResolutionContext, CallResolutionType } from './call-resolution';
 import { ReactiveRoundSessionCommand } from './commands';
 
@@ -7,6 +6,9 @@ import type { CallResolutionResult, ICallResolution } from './call-resolution';
 import type { IHand } from './hand';
 import type { MeldReference } from './meld-reference';
 import type { Around, Turn } from './turn';
+import type { Round } from '../round/round';
+import type { SeatPosition } from '../table';
+import type { Tile } from '../tile';
 
 export class RoundSession {
   public readonly round: Round;

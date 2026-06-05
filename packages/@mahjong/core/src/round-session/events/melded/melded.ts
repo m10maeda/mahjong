@@ -1,6 +1,8 @@
 import { RoundSessionEvent } from '../round-session-event';
 
-import type { Tile, SeatPosition, Round } from '../../../concepts';
+import type { Round } from '../../../round/round';
+import type { SeatPosition } from '../../../table';
+import type { Tile } from '../../../tile';
 import type { MeldReference } from '../../meld-reference';
 
 export abstract class Melded extends RoundSessionEvent {

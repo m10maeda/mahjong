@@ -1,6 +1,6 @@
 import { RoundSessionEnded } from '../round-session-ended';
 
-import type { Round } from '../../../concepts';
+import type { Round } from '../../../round';
 
 export enum AbortiveDrawReason {
   /** 九種九牌 */

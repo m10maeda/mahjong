@@ -1,6 +1,6 @@
 import { Meld, MeldType } from './meld';
 
-import type { Tile } from '../../concepts';
+import type { Tile } from '../../tile';
 
 export class ClosedQuadrupletMeld extends Meld {
   private readonly consumedTile: readonly [Tile, Tile, Tile, Tile];

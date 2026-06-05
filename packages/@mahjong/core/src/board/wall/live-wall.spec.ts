@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { InvalidNoTilesError } from '../invalid-no-tiles-error';
 import { LiveWall } from './live-wall';
-import { SuitType, Tile, TileModifier } from '../../concepts';
+import { SuitType, Tile, TileModifier } from '../../tile';
 
 describe('LiveWall', () => {
   describe('有効な値を与えられた場合', () => {

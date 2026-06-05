@@ -2,7 +2,7 @@ import { Pair, type CompleteTileGroup } from '../tile-group';
 import { StandardWaitShape } from './standard-wait-shape';
 import { StandardWinningHandShape } from './standard-winning-hand-shape';
 
-import type { Tile, TileType } from '../../concepts';
+import type { Tile, TileType } from '../../tile';
 
 export class SingleWaitStandardWinningHandShape extends StandardWinningHandShape {
   public readonly groups: readonly [

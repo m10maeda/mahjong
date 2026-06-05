@@ -1,6 +1,6 @@
 import { RoundSessionCommand } from '../round-session-command';
 
-import type { SeatPosition } from '../../../concepts';
+import type { SeatPosition } from '../../../table';
 
 export abstract class ReactiveRoundSessionCommand extends RoundSessionCommand {
   public readonly reactor: SeatPosition;

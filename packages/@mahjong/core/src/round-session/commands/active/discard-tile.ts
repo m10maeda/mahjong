@@ -1,6 +1,7 @@
 import { ActiveRoundSessionCommand } from './active-round-session-command';
 
-import type { SeatPosition, Tile } from '../../../concepts';
+import type { SeatPosition } from '../../../table';
+import type { Tile } from '../../../tile';
 import type { RoundSessionCommand } from '../round-session-command';
 
 export abstract class DiscardTile extends ActiveRoundSessionCommand {

@@ -1,6 +1,6 @@
 import { TileGroup } from '../tile-group';
 
-import type { Tile } from '../../../concepts';
+import type { Tile } from '../../../tile';
 import type { CompleteTileGroup } from '../complete';
 
 export abstract class IncompleteTileGroup extends TileGroup {

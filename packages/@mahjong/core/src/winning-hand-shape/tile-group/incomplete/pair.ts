@@ -1,5 +1,5 @@
 import { IncompleteTileGroup } from './incomplete-tile-group';
-import { TileType, type Tile } from '../../../concepts';
+import { TileType, type Tile } from '../../../tile';
 import { Triplet } from '../complete';
 
 import type { TileGroup } from '../tile-group';

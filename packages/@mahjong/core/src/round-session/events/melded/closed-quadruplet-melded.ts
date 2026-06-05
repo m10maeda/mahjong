@@ -1,6 +1,8 @@
 import { Melded } from './melded';
 
-import type { Round, SeatPosition, Tile } from '../../../concepts';
+import type { Round } from '../../../round';
+import type { SeatPosition } from '../../../table';
+import type { Tile } from '../../../tile';
 import type { MeldReference } from '../../meld-reference';
 
 export class ClosedQuadrupletMelded extends Melded {

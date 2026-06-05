@@ -1,4 +1,5 @@
-import type { SeatPosition, Tile } from '../../concepts';
+import type { SeatPosition } from '../../table';
+import type { Tile } from '../../tile';
 import type { IHand } from '../hand';
 import type { MeldReference } from '../meld-reference';
 

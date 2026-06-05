@@ -1,7 +1,7 @@
 import { WinningHandShape } from '../winning-hand-shape';
 
 import type { StandardWaitShape } from './standard-wait-shape';
-import type { Tile } from '../../concepts';
+import type { Tile } from '../../tile';
 import type { Pair, CompleteTileGroup } from '../tile-group';
 
 export abstract class StandardWinningHandShape extends WinningHandShape {

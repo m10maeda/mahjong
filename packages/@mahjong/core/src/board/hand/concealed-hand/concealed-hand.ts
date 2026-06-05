@@ -1,5 +1,5 @@
 import type { TileGroupDecomposition } from './tile-group-decomposition';
-import type { Tile } from '../../../concepts';
+import type { Tile } from '../../../tile';
 import type { Pair, SerialPair } from '../../../winning-hand-shape';
 
 export interface IConcealedHand extends Iterable<Tile> {

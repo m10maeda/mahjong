@@ -1,7 +1,7 @@
 import { Sequence } from '../complete';
 import { IncompleteTileGroup } from './incomplete-tile-group';
 
-import type { Tile, TileType } from '../../../concepts';
+import type { Tile, TileType } from '../../../tile';
 
 export enum SerialPairType {
   /** 両面 */

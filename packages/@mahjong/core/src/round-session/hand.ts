@@ -1,4 +1,5 @@
-import type { SeatPosition, Tile, TileType } from '../concepts';
+import type { SeatPosition } from '../table';
+import type { Tile, TileType } from '../tile';
 import type { Pair, SerialPair, WinningHandShape } from '../winning-hand-shape';
 import type { Meld } from './melds';
 

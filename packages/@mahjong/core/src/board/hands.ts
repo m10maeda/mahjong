@@ -1,7 +1,7 @@
 import { Hand } from './hand';
 import { InvalidDuplicatedSeatsError } from './invalid-duplicated-seats-error';
 import { InvalidHolderNotFoundError } from './invalid-holder-not-found-error';
-import { SeatPosition } from '../concepts';
+import { SeatPosition } from '../table';
 
 export class Hands implements Iterable<Hand> {
   private readonly hands: ReadonlyMap<SeatPosition, Hand>;

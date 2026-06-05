@@ -1,6 +1,6 @@
 import { WinningHandShape } from '../winning-hand-shape';
 import { ThirteenOrphansWaitShape } from './thirteen-orphans-wait-shape';
-import { HonorType, SuitType, TileType, type Tile } from '../../concepts';
+import { HonorType, SuitType, TileType, type Tile } from '../../tile';
 
 export class ThirteenOrphansWinningHandShape extends WinningHandShape {
   private static readonly REQUIRED_TILES = [
