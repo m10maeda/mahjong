@@ -2,17 +2,17 @@ import { describe, expect, it } from 'vitest';
 
 import { InvalidNoTilesError } from '../invalid-no-tiles-error';
 import { Wall } from './wall';
-import { Rank, Suit, SuitTile, TileModifier } from '../../../concepts';
+import { SuitType, Tile, TileModifier } from '../../../concepts';
 
 describe('Wall', () => {
   describe('有効な値を与えられた場合', () => {
     it('Wall として成立すること', () => {
       expect(() => {
         new Wall(
-          new SuitTile(Suit.Character, Rank[1], TileModifier.Normal),
-          new SuitTile(Suit.Character, Rank[2], TileModifier.Normal),
-          new SuitTile(Suit.Circle, Rank[1], TileModifier.Normal),
-          new SuitTile(Suit.Circle, Rank[2], TileModifier.Normal),
+          new Tile(SuitType.Character1, TileModifier.Normal),
+          new Tile(SuitType.Character2, TileModifier.Normal),
+          new Tile(SuitType.Circle1, TileModifier.Normal),
+          new Tile(SuitType.Circle2, TileModifier.Normal),
         );
       }).not.toThrow(Error);
     });
@@ -22,12 +22,12 @@ describe('Wall', () => {
     describe('牌を保持している場合', () => {
       it('末尾の牌と新しい Wall を返すこと', () => {
         const sut = new Wall(
-          new SuitTile(Suit.Character, Rank[1], TileModifier.Normal),
-          new SuitTile(Suit.Character, Rank[2], TileModifier.Normal),
-          new SuitTile(Suit.Character, Rank[3], TileModifier.Normal),
-          new SuitTile(Suit.Character, Rank[4], TileModifier.Normal),
-          new SuitTile(Suit.Circle, Rank[1], TileModifier.Normal),
-          new SuitTile(Suit.Circle, Rank[2], TileModifier.Normal),
+          new Tile(SuitType.Character1, TileModifier.Normal),
+          new Tile(SuitType.Character2, TileModifier.Normal),
+          new Tile(SuitType.Character3, TileModifier.Normal),
+          new Tile(SuitType.Character4, TileModifier.Normal),
+          new Tile(SuitType.Circle1, TileModifier.Normal),
+          new Tile(SuitType.Circle2, TileModifier.Normal),
         );
 
         const [firstDrawnTile, nextWall] = sut.takeLastTile();
@@ -35,12 +35,12 @@ describe('Wall', () => {
 
         expect(
           firstDrawnTile.equals(
-            new SuitTile(Suit.Circle, Rank[2], TileModifier.Normal),
+            new Tile(SuitType.Circle2, TileModifier.Normal),
           ),
         ).toBe(true);
         expect(
           secondDrawnTile.equals(
-            new SuitTile(Suit.Circle, Rank[1], TileModifier.Normal),
+            new Tile(SuitType.Circle1, TileModifier.Normal),
           ),
         ).toBe(true);
 
@@ -63,12 +63,12 @@ describe('Wall', () => {
     describe('牌を保持している場合', () => {
       it('先頭の牌と新しい Wall を返すこと', () => {
         const sut = new Wall(
-          new SuitTile(Suit.Character, Rank[1], TileModifier.Normal),
-          new SuitTile(Suit.Character, Rank[2], TileModifier.Normal),
-          new SuitTile(Suit.Character, Rank[3], TileModifier.Normal),
-          new SuitTile(Suit.Character, Rank[4], TileModifier.Normal),
-          new SuitTile(Suit.Circle, Rank[1], TileModifier.Normal),
-          new SuitTile(Suit.Circle, Rank[2], TileModifier.Normal),
+          new Tile(SuitType.Character1, TileModifier.Normal),
+          new Tile(SuitType.Character2, TileModifier.Normal),
+          new Tile(SuitType.Character3, TileModifier.Normal),
+          new Tile(SuitType.Character4, TileModifier.Normal),
+          new Tile(SuitType.Circle1, TileModifier.Normal),
+          new Tile(SuitType.Circle2, TileModifier.Normal),
         );
 
         const [firstDrawnTile, nextWall] = sut.takeTile();
@@ -76,12 +76,12 @@ describe('Wall', () => {
 
         expect(
           firstDrawnTile.equals(
-            new SuitTile(Suit.Character, Rank[1], TileModifier.Normal),
+            new Tile(SuitType.Character1, TileModifier.Normal),
           ),
         ).toBe(true);
         expect(
           secondDrawnTile.equals(
-            new SuitTile(Suit.Character, Rank[2], TileModifier.Normal),
+            new Tile(SuitType.Character2, TileModifier.Normal),
           ),
         ).toBe(true);
 

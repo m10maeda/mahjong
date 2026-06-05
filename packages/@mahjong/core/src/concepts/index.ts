@@ -1,9 +1,10 @@
 export {
   Tile,
-  SuitTile,
+  TileType,
+  SuitType,
   Suit,
   Rank,
-  HonorTile,
+  HonorType,
   Honor,
   TileModifier,
 } from './tile';

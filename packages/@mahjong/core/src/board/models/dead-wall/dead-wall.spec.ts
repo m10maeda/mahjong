@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { DeadWall } from './dead-wall';
-import { Rank, Suit, SuitTile, TileModifier } from '../../../concepts';
+import { SuitType, Tile, TileModifier } from '../../../concepts';
 import { InvalidNoTilesError } from '../invalid-no-tiles-error';
 
 describe('DeadWall', () => {
@@ -9,10 +9,10 @@ describe('DeadWall', () => {
     it('Wall として成立すること', () => {
       expect(() => {
         new DeadWall(
-          new SuitTile(Suit.Character, Rank[1], TileModifier.Normal),
-          new SuitTile(Suit.Character, Rank[2], TileModifier.Normal),
-          new SuitTile(Suit.Character, Rank[3], TileModifier.Normal),
-          new SuitTile(Suit.Character, Rank[4], TileModifier.Normal),
+          new Tile(SuitType.Character1, TileModifier.Normal),
+          new Tile(SuitType.Character2, TileModifier.Normal),
+          new Tile(SuitType.Character3, TileModifier.Normal),
+          new Tile(SuitType.Character4, TileModifier.Normal),
         );
       }).not.toThrow(Error);
     });
@@ -25,14 +25,14 @@ describe('DeadWall', () => {
       expect([...sut]).not.toHaveLength(1);
 
       const result = sut.supply(
-        new SuitTile(Suit.Character, Rank[1], TileModifier.Normal),
+        new Tile(SuitType.Character1, TileModifier.Normal),
       );
 
       expect([...result]).toHaveLength(1);
       expect(
         result
           .take()[0]
-          .equals(new SuitTile(Suit.Character, Rank[1], TileModifier.Normal)),
+          .equals(new Tile(SuitType.Character1, TileModifier.Normal)),
       ).toBe(true);
     });
   });
@@ -41,8 +41,8 @@ describe('DeadWall', () => {
     describe('牌を1枚以上保持している場合', () => {
       it('保持している牌を払い出すまで InvalidTileNotHeldError を投げないこと', () => {
         let sut = new DeadWall(
-          new SuitTile(Suit.Character, Rank[1], TileModifier.Normal),
-          new SuitTile(Suit.Character, Rank[2], TileModifier.Normal),
+          new Tile(SuitType.Character1, TileModifier.Normal),
+          new Tile(SuitType.Character2, TileModifier.Normal),
         );
 
         expect(() => {
@@ -60,22 +60,18 @@ describe('DeadWall', () => {
 
       it('保持している牌を順番に払い出す新しい DeadWall を返すこと', () => {
         const sut = new DeadWall(
-          new SuitTile(Suit.Character, Rank[1], TileModifier.Normal),
-          new SuitTile(Suit.Character, Rank[2], TileModifier.Normal),
+          new Tile(SuitType.Character1, TileModifier.Normal),
+          new Tile(SuitType.Character2, TileModifier.Normal),
         );
 
         const [result1, newDeadWall] = sut.take();
         const [result2] = newDeadWall.take();
 
         expect(
-          result1.equals(
-            new SuitTile(Suit.Character, Rank[2], TileModifier.Normal),
-          ),
+          result1.equals(new Tile(SuitType.Character2, TileModifier.Normal)),
         ).toBe(true);
         expect(
-          result2.equals(
-            new SuitTile(Suit.Character, Rank[1], TileModifier.Normal),
-          ),
+          result2.equals(new Tile(SuitType.Character1, TileModifier.Normal)),
         ).toBe(true);
       });
     });
