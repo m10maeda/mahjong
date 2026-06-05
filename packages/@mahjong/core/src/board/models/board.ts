@@ -1,193 +1,225 @@
-import { DeadWall } from './dead-wall';
-import { DiscardPile } from './discard-pile';
-import { Hand } from './hand';
+import { DiscardRecord, type DiscardHistory } from './discard-history';
 import { Hands } from './hands';
-import { InvalidHolderNotFoundError } from './invalid-holder-not-found-error';
-import { InvalidMeldNotFoundError } from './invalid-meld-not-found-error';
-import { InvalidMismatchClaimedTileError } from './invalid-mismatch-claimed-tile-error';
-import { ClosedMeld, ExtendedMeld, OpenMeld } from './meld';
-import { Melds } from './melds';
-import { Wall } from './wall';
-import { MeldReference } from '../concepts';
-import {
-  MeldExtended,
-  MeldedWithClaimed,
-  MeldedFromSelf,
-  TileDiscarded,
-  TileDrawn,
-  TileDrawnSource,
-  TilesDistributed,
-} from '../events';
+import { Tile, type SeatPosition } from '../../concepts';
+import { type IBoard, type MeldReference } from '../../round-session';
 
-import type { SeatPosition, Tile } from '../../concepts';
+import type { Hand } from './hand';
+import type { Wall } from './wall';
 
-export class Board {
-  private readonly deadWall: DeadWall;
-
-  private readonly discardPile: DiscardPile;
+export class Board implements IBoard {
+  private readonly discardHistory: DiscardHistory;
 
   private readonly hands: Hands;
 
-  private readonly melds: Melds;
-
   private readonly wall: Wall;
 
-  public discard(
-    tile: Tile,
-    seat: SeatPosition,
-    fromDrawnTile: boolean,
-  ): readonly [TileDiscarded, Board] {
-    if (!this.hands.exists(seat)) throw new InvalidHolderNotFoundError();
+  public get blindDoraIndicators(): readonly Tile[] {
+    return this.wall.blindDoraIndicators;
+  }
 
-    const newHands = this.hands.update(seat, (hand) => hand.discard(tile));
-    const newDiscardPile = this.discardPile.add(tile);
+  public get doraIndicators(): readonly Tile[] {
+    return this.wall.doraIndicators;
+  }
 
-    const event = new TileDiscarded(tile, seat, fromDrawnTile);
+  public get lastDiscardTile(): Tile | undefined {
+    return this.discardHistory.latest?.tile;
+  }
+
+  public addDoraIndicator(): Board {
+    return new Board(this.wall.addDora(), this.hands, this.discardHistory);
+  }
+
+  public canDrawAgainNextAround(): boolean {
+    return this.wall.reamingTileCount > this.hands.size;
+  }
+
+  public declareRiichi(seat: SeatPosition, isFirstAround: boolean): Board {
+    const hand = this.hands.get(seat);
+    const nextHand = hand.declareRiichi(isFirstAround);
+    const nextHands = this.hands.replace(nextHand);
+
+    return new Board(this.wall, nextHands, this.discardHistory);
+  }
+
+  public discardDrawnTile(seat: SeatPosition): readonly [Tile, Board] {
+    const hand = this.hands.get(seat);
+
+    const [discardedTile, nextHand] = hand.discardDrawnTile();
+
+    const nextHands = this.hands.replace(nextHand);
+
+    const nextDiscardHistory = this.discardHistory.append(
+      new DiscardRecord(discardedTile, seat),
+    );
+
+    return [discardedTile, new Board(this.wall, nextHands, nextDiscardHistory)];
+  }
+
+  public discardFromConcealed(tile: Tile, seat: SeatPosition): Board {
+    const hand = this.hands.get(seat);
+
+    const nextHand = hand.discardFromConcealed(tile);
+
+    const nextHands = this.hands.replace(nextHand);
+
+    const nextDiscardHistory = this.discardHistory.append(
+      new DiscardRecord(tile, seat),
+    );
+
+    return new Board(this.wall, nextHands, nextDiscardHistory);
+  }
+
+  public drawFromDeadWall(seat: SeatPosition): readonly [Tile, Board] {
+    const hand = this.hands.get(seat);
+
+    const [takenTile, nextWall] = this.wall.takeFromDeadWall();
+    const nextHand = hand.draw(takenTile);
+
+    const nextHands = this.hands.replace(nextHand);
+
+    return [takenTile, new Board(nextWall, nextHands, this.discardHistory)];
+  }
+
+  public drawFromLiveWall(seat: SeatPosition): readonly [Tile, Board] {
+    const hand = this.hands.get(seat);
+
+    const [takenTile, nextWall] = this.wall.takeFromLiveWall();
+    const nextHand = hand.draw(takenTile);
+
+    const nextHands = this.hands.replace(nextHand);
+
+    return [takenTile, new Board(nextWall, nextHands, this.discardHistory)];
+  }
+
+  public establishPendingRiichi(): readonly [SeatPosition | undefined, Board] {
+    const hand = this.hands.find((hand) => hand.isPendingRiichi());
+
+    if (hand === undefined) return [undefined, this];
+
+    const nextHand = hand.establishRiichi();
+    const nextHands = this.hands.replace(nextHand);
 
     return [
-      event,
-      new Board(this.wall, this.deadWall, newHands, newDiscardPile, this.melds),
+      nextHand.seat,
+      new Board(this.wall, nextHands, this.discardHistory),
     ];
   }
 
-  public draw(seat: SeatPosition): readonly [TileDrawn, Board] {
-    if (!this.hands.exists(seat)) throw new InvalidHolderNotFoundError();
-
-    const [takenTile, newWall] = this.wall.takeTile();
-
-    const newHands = this.hands.update(seat, (hand) => hand.add(takenTile));
-
-    const event = new TileDrawn(takenTile, seat, TileDrawnSource.Wall);
-
-    return [
-      event,
-      new Board(newWall, this.deadWall, newHands, this.discardPile, this.melds),
-    ];
+  public getAllDiscardedTilesOf(seat: SeatPosition): readonly Tile[] {
+    return this.discardHistory.allDiscardedTiles(seat);
   }
 
-  public drawFromDeadWall(seat: SeatPosition): readonly [TileDrawn, Board] {
-    if (!this.hands.exists(seat)) throw new InvalidHolderNotFoundError();
-
-    const [takenTile, tempDeadWall] = this.deadWall.take();
-    const [suppliedTile, newWall] = this.wall.takeLastTile();
-    const newDeadWall = tempDeadWall.supply(suppliedTile);
-
-    const newHands = this.hands.update(seat, (hand) => hand.add(takenTile));
-
-    const event = new TileDrawn(takenTile, seat, TileDrawnSource.DeadWall);
-
-    return [
-      event,
-      new Board(newWall, newDeadWall, newHands, this.discardPile, this.melds),
-    ];
+  public getAllHands(): readonly Hand[] {
+    return [...this.hands];
   }
 
-  public extendMeld(
-    seat: SeatPosition,
+  public getHandOf(seat: SeatPosition): Hand {
+    return this.hands.get(seat);
+  }
+
+  public hasLiveWallTile(): boolean {
+    throw new Error('Method not implemented.');
+  }
+
+  public hasPendingDoraIndicatorAddition(): boolean {
+    throw new Error('Method not implemented.');
+  }
+
+  public hasTakableDeadWallTile(): boolean {
+    throw new Error('Method not implemented.');
+  }
+
+  public isRiichiOf(seat: SeatPosition): boolean {
+    const hand = this.hands.get(seat);
+
+    return hand.isRiichi();
+  }
+
+  public meldAddedQuadruplet(
     reference: MeldReference,
-    consumedTiles: readonly Tile[],
-  ): readonly [MeldExtended, Board] {
-    const baseMeld = this.melds.get(reference);
+    addTile: Tile,
+    seat: SeatPosition,
+  ): Board {
+    const hand = this.hands.get(seat);
 
-    if (baseMeld === undefined) throw new InvalidMeldNotFoundError();
+    const nextHand = hand.meldAddedQuadruplet(reference, addTile);
+    const nextHands = this.hands.replace(nextHand);
 
-    const extendedMeld = new ExtendedMeld(seat, baseMeld, consumedTiles);
-    const newMelds = this.melds.update(reference, extendedMeld);
-
-    const newHands = this.hands.update(seat, (hand) =>
-      hand.consume(...consumedTiles),
-    );
-
-    return [
-      new MeldExtended(reference, seat, consumedTiles),
-      new Board(this.wall, this.deadWall, newHands, this.discardPile, newMelds),
-    ];
+    return new Board(this.wall, nextHands, this.discardHistory);
   }
 
-  public meldFromSelf(
+  public meldClosedQuadruplet(
+    consumedTiles: readonly [Tile, Tile, Tile, Tile],
     seat: SeatPosition,
-    consumedTile: readonly Tile[],
-  ): readonly [MeldedFromSelf, Board] {
-    const newHands = this.hands.update(seat, (hand) =>
-      hand.consume(...consumedTile),
-    );
+  ): readonly [MeldReference, Board] {
+    const hand = this.hands.get(seat);
 
-    const meld = new ClosedMeld(seat, consumedTile);
-    const [reference, newMelds] = this.melds.add(meld);
+    const [reference, nextHand] = hand.meldClosedQuadruplet(consumedTiles);
+    const nextHands = this.hands.replace(nextHand);
 
-    const event = new MeldedFromSelf(reference, seat, consumedTile);
-
-    return [
-      event,
-      new Board(this.wall, this.deadWall, newHands, this.discardPile, newMelds),
-    ];
+    return [reference, new Board(this.wall, nextHands, this.discardHistory)];
   }
 
-  public meldWithClaimed(
-    seat: SeatPosition,
+  public meldOpenQuadruplet(
     claimedTile: Tile,
     claimedOn: SeatPosition,
-    consumedTile: readonly Tile[],
-  ): readonly [MeldedWithClaimed, Board] {
-    const [latestDiscardedTile, newDiscardPile] = this.discardPile.take();
+    consumedTiles: readonly [Tile, Tile, Tile],
+    seat: SeatPosition,
+  ): readonly [MeldReference, Board] {
+    if (seat.equals(claimedOn)) throw new TypeError();
 
-    if (!claimedTile.equals(latestDiscardedTile))
-      throw new InvalidMismatchClaimedTileError();
+    const hand = this.hands.get(seat);
 
-    const newHands = this.hands.update(seat, (hand) =>
-      hand.consume(...consumedTile),
-    );
-
-    const meld = new OpenMeld(seat, consumedTile, claimedTile, claimedOn);
-    const [reference, newMelds] = this.melds.add(meld);
-
-    const event = new MeldedWithClaimed(
-      reference,
-      seat,
-      consumedTile,
-      claimedOn,
+    const [reference, nextHand] = hand.meldOpenQuadruplet(
       claimedTile,
+      consumedTiles,
     );
+    const nextHands = this.hands.replace(nextHand);
 
-    return [
-      event,
-      new Board(this.wall, this.deadWall, newHands, newDiscardPile, newMelds),
-    ];
+    return [reference, new Board(this.wall, nextHands, this.discardHistory)];
   }
 
-  public constructor(
-    wall: Wall,
-    deadWall: DeadWall,
-    hands: Hands,
-    discardedPile: DiscardPile,
-    melds: Melds,
-  ) {
+  public meldOpenSequence(
+    claimedTile: Tile,
+    claimedOn: SeatPosition,
+    consumedTiles: readonly [Tile, Tile],
+    seat: SeatPosition,
+  ): readonly [MeldReference, Board] {
+    if (seat.equals(claimedOn)) throw new TypeError();
+
+    const hand = this.hands.get(seat);
+
+    const [reference, nextHand] = hand.meldOpenSequence(
+      claimedTile,
+      consumedTiles,
+    );
+    const nextHands = this.hands.replace(nextHand);
+
+    return [reference, new Board(this.wall, nextHands, this.discardHistory)];
+  }
+
+  public meldOpenTriplet(
+    claimedTile: Tile,
+    claimedOn: SeatPosition,
+    consumedTiles: readonly [Tile, Tile],
+    seat: SeatPosition,
+  ): readonly [MeldReference, Board] {
+    if (seat.equals(claimedOn)) throw new TypeError();
+
+    const hand = this.hands.get(seat);
+
+    const [reference, nextHand] = hand.meldOpenTriplet(
+      claimedTile,
+      consumedTiles,
+    );
+    const nextHands = this.hands.replace(nextHand);
+
+    return [reference, new Board(this.wall, nextHands, this.discardHistory)];
+  }
+
+  public constructor(wall: Wall, hands: Hands, discardHistory: DiscardHistory) {
     this.wall = wall;
-    this.deadWall = deadWall;
     this.hands = hands;
-    this.discardPile = discardedPile;
-    this.melds = melds;
-  }
-
-  public static new(
-    wall: readonly Tile[],
-    deadWall: readonly Tile[],
-    hands: readonly [SeatPosition, readonly Tile[]][],
-  ): readonly [TilesDistributed, Board] {
-    const event = new TilesDistributed(wall, deadWall, new Map(hands));
-    const board = new Board(
-      new Wall(...wall),
-      new DeadWall(...deadWall),
-      new Hands(
-        ...hands.map<[SeatPosition, Hand]>(([seat, tiles]) => [
-          seat,
-          new Hand(...tiles),
-        ]),
-      ),
-      DiscardPile.new(),
-      Melds.new(),
-    );
-
-    return [event, board];
+    this.discardHistory = discardHistory;
   }
 }

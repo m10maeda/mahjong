@@ -1,39 +1,47 @@
+import { Hand } from './hand';
 import { InvalidDuplicatedSeatsError } from './invalid-duplicated-seats-error';
+import { InvalidHolderNotFoundError } from './invalid-holder-not-found-error';
 import { SeatPosition } from '../../concepts';
 
-import type { Hand } from './hand';
+export class Hands implements Iterable<Hand> {
+  private readonly hands: ReadonlyMap<SeatPosition, Hand>;
 
-export class Hands implements Iterable<readonly [SeatPosition, Hand]> {
-  private readonly map: Map<SeatPosition, Hand>;
-
-  public exists(holder: SeatPosition): boolean {
-    return this.map.has(holder);
+  public get size(): number {
+    return this.hands.size;
   }
 
-  public [Symbol.iterator](): Iterator<readonly [SeatPosition, Hand]> {
-    return this.map.entries();
+  public find(predicate: (hand: Hand) => boolean): Hand | undefined {
+    return [...this.hands.values()].find(predicate);
   }
 
-  public update(holder: SeatPosition, updater: (hand: Hand) => Hand): Hands {
-    const newHands = Array.from(this.map.entries()).map<[SeatPosition, Hand]>(
-      ([_holder, hand]) => {
-        if (!_holder.equals(holder)) return [_holder, hand];
+  public get(seat: SeatPosition): Hand {
+    const hand = [...this.hands.values()].find((hand) => hand.owns(seat));
 
-        const newHand = updater(hand);
-        return [_holder, newHand];
-      },
+    if (hand === undefined) throw new InvalidHolderNotFoundError();
+
+    return hand;
+  }
+
+  public replace(hand: Hand): Hands {
+    return new Hands(
+      ...[...this.hands.values()].map<Hand>((_hand) => {
+        if (_hand.equals(hand)) return hand;
+
+        return _hand;
+      }),
     );
-
-    return new Hands(...newHands);
   }
 
-  public constructor(...hands: readonly [SeatPosition, Hand][]) {
-    const map = new Map(hands);
+  public [Symbol.iterator](): Iterator<Hand> {
+    return this.hands.values();
+  }
 
-    const uniqueSeats = new Set([...hands].map(([holder]) => holder));
+  public constructor(...hands: readonly Hand[]) {
+    const map = new Map(hands.map((hand) => [hand.seat, hand]));
+    const uniqueSeats = new Set([...hands].map((hand) => hand.seat));
 
     if (map.size !== uniqueSeats.size) throw new InvalidDuplicatedSeatsError();
 
-    this.map = map;
+    this.hands = map;
   }
 }
