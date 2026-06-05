@@ -1,20 +1,20 @@
 import { describe, expect, it } from 'vitest';
 
 import { DiscardPile } from './discard-pile';
-import { Honor, HonorTile, TileModifier } from '../../../concepts';
+import { HonorType, Tile, TileModifier } from '../../../concepts';
 
 describe('DiscardedPile', () => {
   describe('latest', () => {
     it('履歴が存在する場合、最新の Tile を返すこと', () => {
       const sut = new DiscardPile(
-        new HonorTile(Honor.East, TileModifier.Normal),
-        new HonorTile(Honor.South, TileModifier.Normal),
-        new HonorTile(Honor.West, TileModifier.Normal),
-        new HonorTile(Honor.North, TileModifier.Normal),
+        new Tile(HonorType.East, TileModifier.Normal),
+        new Tile(HonorType.South, TileModifier.Normal),
+        new Tile(HonorType.West, TileModifier.Normal),
+        new Tile(HonorType.North, TileModifier.Normal),
       );
 
       expect(
-        sut.latest?.equals(new HonorTile(Honor.North, TileModifier.Normal)),
+        sut.latest?.equals(new Tile(HonorType.North, TileModifier.Normal)),
       ).toBe(true);
     });
 
@@ -28,11 +28,11 @@ describe('DiscardedPile', () => {
   describe('add', () => {
     it('与えられた捨て牌を最新に持つ新しい値を返すこと', () => {
       const sut = new DiscardPile(
-        new HonorTile(Honor.East, TileModifier.Normal),
-        new HonorTile(Honor.South, TileModifier.Normal),
-        new HonorTile(Honor.West, TileModifier.Normal),
+        new Tile(HonorType.East, TileModifier.Normal),
+        new Tile(HonorType.South, TileModifier.Normal),
+        new Tile(HonorType.West, TileModifier.Normal),
       );
-      const target = new HonorTile(Honor.North, TileModifier.Normal);
+      const target = new Tile(HonorType.North, TileModifier.Normal);
 
       const result = sut.add(target);
 

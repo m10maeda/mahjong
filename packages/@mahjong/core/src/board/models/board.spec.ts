@@ -9,71 +9,65 @@ import { InvalidHolderNotFoundError } from './invalid-holder-not-found-error';
 import { OpenMeld } from './meld';
 import { Melds } from './melds';
 import { Wall } from './wall';
-import {
-  Rank,
-  Suit,
-  SuitTile,
-  TileModifier,
-  SeatPosition,
-} from '../../concepts';
+import { Tile, SuitType, TileModifier, SeatPosition } from '../../concepts';
 import { MeldReference, MeldSequence } from '../concepts';
 
 describe('Board', () => {
   function createBoard() {
     return new Board(
       new Wall(
-        new SuitTile(Suit.Character, Rank[1], TileModifier.Normal),
-        new SuitTile(Suit.Character, Rank[2], TileModifier.Normal),
-        new SuitTile(Suit.Character, Rank[3], TileModifier.Normal),
-        new SuitTile(Suit.Character, Rank[4], TileModifier.Normal),
-        new SuitTile(Suit.Character, Rank[5], TileModifier.Normal),
-        new SuitTile(Suit.Character, Rank[6], TileModifier.Normal),
-        new SuitTile(Suit.Character, Rank[7], TileModifier.Normal),
-        new SuitTile(Suit.Character, Rank[8], TileModifier.Normal),
-        new SuitTile(Suit.Character, Rank[9], TileModifier.Normal),
+        new Tile(SuitType.Character1, TileModifier.Normal),
+        new Tile(SuitType.Character2, TileModifier.Normal),
+        new Tile(SuitType.Character3, TileModifier.Normal),
+        new Tile(SuitType.Character4, TileModifier.Normal),
+        new Tile(SuitType.Character5, TileModifier.Normal),
+        new Tile(SuitType.Character6, TileModifier.Normal),
+        new Tile(SuitType.Character7, TileModifier.Normal),
+        new Tile(SuitType.Character8, TileModifier.Normal),
+        new Tile(SuitType.Character9, TileModifier.Normal),
       ),
       new DeadWall(
-        new SuitTile(Suit.Circle, Rank[1], TileModifier.Normal),
-        new SuitTile(Suit.Circle, Rank[2], TileModifier.Normal),
-        new SuitTile(Suit.Circle, Rank[3], TileModifier.Normal),
-        new SuitTile(Suit.Circle, Rank[4], TileModifier.Normal),
+        new Tile(SuitType.Circle1, TileModifier.Normal),
+        new Tile(SuitType.Circle2, TileModifier.Normal),
+        new Tile(SuitType.Circle3, TileModifier.Normal),
+        new Tile(SuitType.Circle4, TileModifier.Normal),
       ),
       new Hands(
         [
           SeatPosition.East,
           new Hand(
-            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[3], TileModifier.Normal),
+            new Tile(SuitType.Bamboo1, TileModifier.Normal),
+            new Tile(SuitType.Bamboo2, TileModifier.Normal),
+            new Tile(SuitType.Bamboo3, TileModifier.Normal),
           ),
         ],
         [
           SeatPosition.South,
           new Hand(
-            new SuitTile(Suit.Bamboo, Rank[4], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[5], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[6], TileModifier.Normal),
+            new Tile(SuitType.Bamboo4, TileModifier.Normal),
+            new Tile(SuitType.Bamboo5, TileModifier.Normal),
+            new Tile(SuitType.Bamboo6, TileModifier.Normal),
           ),
         ],
         [
           SeatPosition.West,
           new Hand(
-            new SuitTile(Suit.Bamboo, Rank[7], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[8], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[9], TileModifier.Normal),
+            new Tile(SuitType.Bamboo7, TileModifier.Normal),
+            new Tile(SuitType.Bamboo8, TileModifier.Normal),
+            new Tile(SuitType.Bamboo9, TileModifier.Normal),
           ),
         ],
       ),
-      new DiscardPile(new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal)),
+      new DiscardPile(new Tile(SuitType.Bamboo1, TileModifier.Normal)),
       new Melds([
         new MeldReference(SeatPosition.East, new MeldSequence(0)),
         new OpenMeld(
           SeatPosition.East,
           [
-            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            new Tile(SuitType.Bamboo1, TileModifier.Normal),
+            new Tile(SuitType.Bamboo1, TileModifier.Normal),
           ],
-          new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+          new Tile(SuitType.Bamboo1, TileModifier.Normal),
           SeatPosition.West,
         ),
       ]),
@@ -87,7 +81,7 @@ describe('Board', () => {
 
         expect(() => {
           sut.discard(
-            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            new Tile(SuitType.Bamboo1, TileModifier.Normal),
             SeatPosition.East,
             true,
           );
@@ -98,14 +92,14 @@ describe('Board', () => {
         const sut = createBoard();
 
         const [, result] = sut.discard(
-          new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+          new Tile(SuitType.Bamboo1, TileModifier.Normal),
           SeatPosition.East,
           true,
         );
 
         expect(() => {
           result.discard(
-            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            new Tile(SuitType.Bamboo1, TileModifier.Normal),
             SeatPosition.East,
             true,
           );
@@ -119,7 +113,7 @@ describe('Board', () => {
 
         expect(() => {
           sut.discard(
-            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            new Tile(SuitType.Bamboo1, TileModifier.Normal),
             SeatPosition.North,
             true,
           );
@@ -133,7 +127,7 @@ describe('Board', () => {
       it('TileNotHeldError を投げること', () => {
         expect(() => {
           sut.discard(
-            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            new Tile(SuitType.Bamboo1, TileModifier.Normal),
             SeatPosition.South,
             true,
           );
@@ -205,7 +199,7 @@ describe('Board', () => {
 
         expect(() => {
           sut.discard(
-            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            new Tile(SuitType.Bamboo1, TileModifier.Normal),
             SeatPosition.East,
             false,
           );
@@ -214,12 +208,12 @@ describe('Board', () => {
         const [, result] = sut.extendMeld(
           SeatPosition.East,
           new MeldReference(SeatPosition.East, MeldSequence.new()),
-          [new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal)],
+          [new Tile(SuitType.Bamboo1, TileModifier.Normal)],
         );
 
         expect(() => {
           result.discard(
-            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            new Tile(SuitType.Bamboo1, TileModifier.Normal),
             SeatPosition.East,
             false,
           );
@@ -235,21 +229,21 @@ describe('Board', () => {
 
         expect(() => {
           sut.discard(
-            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            new Tile(SuitType.Bamboo1, TileModifier.Normal),
             SeatPosition.East,
             false,
           );
         }).not.toThrow(InvalidTileNotHeldError);
 
         const [, result] = sut.meldFromSelf(SeatPosition.East, [
-          new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
-          new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
-          new SuitTile(Suit.Bamboo, Rank[3], TileModifier.Normal),
+          new Tile(SuitType.Bamboo1, TileModifier.Normal),
+          new Tile(SuitType.Bamboo2, TileModifier.Normal),
+          new Tile(SuitType.Bamboo3, TileModifier.Normal),
         ]);
 
         expect(() => {
           result.discard(
-            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            new Tile(SuitType.Bamboo1, TileModifier.Normal),
             SeatPosition.East,
             false,
           );
@@ -265,7 +259,7 @@ describe('Board', () => {
 
         expect(() => {
           sut.discard(
-            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            new Tile(SuitType.Bamboo1, TileModifier.Normal),
             SeatPosition.East,
             false,
           );
@@ -273,18 +267,18 @@ describe('Board', () => {
 
         const [, result] = sut.meldWithClaimed(
           SeatPosition.East,
-          new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+          new Tile(SuitType.Bamboo1, TileModifier.Normal),
           SeatPosition.West,
           [
-            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[2], TileModifier.Normal),
-            new SuitTile(Suit.Bamboo, Rank[3], TileModifier.Normal),
+            new Tile(SuitType.Bamboo1, TileModifier.Normal),
+            new Tile(SuitType.Bamboo2, TileModifier.Normal),
+            new Tile(SuitType.Bamboo3, TileModifier.Normal),
           ],
         );
 
         expect(() => {
           result.discard(
-            new SuitTile(Suit.Bamboo, Rank[1], TileModifier.Normal),
+            new Tile(SuitType.Bamboo1, TileModifier.Normal),
             SeatPosition.East,
             false,
           );

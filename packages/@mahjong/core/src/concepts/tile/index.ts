@@ -1,10 +1,12 @@
 export { Tile } from './tile';
 
-export { SuitTile } from './suit-tile';
+export { TileType } from './tile-type';
+
+export { SuitType } from './suit-type';
 export { Suit } from './suit';
 export { Rank } from './rank';
 
-export { HonorTile } from './honor-tile';
+export { HonorType } from './honor-type';
 export { Honor } from './honor';
 
 export { TileModifier } from './tile-modifier';
