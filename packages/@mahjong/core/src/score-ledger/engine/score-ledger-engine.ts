@@ -1,7 +1,7 @@
-import type { ScoreTransaction } from '../concepts';
-import type { IScoreLedgerEventPublisher } from '../events';
-import type { ScoreLedger } from '../models';
 import type { IScoreLedgerWriter } from '../ports';
+import type { ScoreLedger } from '../score-ledger';
+import type { ScoreTransaction } from '../score-transaction';
+import type { IScoreLedgerEventPublisher } from './score-ledger-event-publisher';
 
 export class ScoreLedgerEngine implements IScoreLedgerWriter {
   private readonly eventPublisher: IScoreLedgerEventPublisher;

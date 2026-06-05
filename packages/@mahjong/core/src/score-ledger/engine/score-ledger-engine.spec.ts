@@ -7,13 +7,17 @@ import {
   RoundProgress,
   RoundWind,
 } from '../../round';
-import { Point, ScoreEntry, ScoreHolder, ScoreTransaction } from '../concepts';
+import { ScoreTransactionAppended } from '../events';
+import { Point } from '../point';
+import { ScoreLedger } from '../score-ledger';
 import {
-  type IScoreLedgerEventPublisher,
-  ScoreTransactionAppended,
-} from '../events';
-import { ScoreLedger } from '../models';
+  ScoreEntry,
+  ScoreHolder,
+  ScoreTransaction,
+} from '../score-transaction';
 import { ScoreLedgerEngine } from './score-ledger-engine';
+
+import type { IScoreLedgerEventPublisher } from './score-ledger-event-publisher';
 
 describe('ScoreLedgerEngine', () => {
   describe('add', () => {

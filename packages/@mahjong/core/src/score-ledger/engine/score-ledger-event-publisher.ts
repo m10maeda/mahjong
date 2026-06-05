@@ -1,4 +1,4 @@
-import type { ScoreLedgerEvent } from './score-ledger-event';
+import type { ScoreLedgerEvent } from '../events';
 
 export interface IScoreLedgerEventPublisher {
   publish(event: ScoreLedgerEvent): Promise<void>;

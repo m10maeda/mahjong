@@ -1,6 +1,6 @@
 import { InvalidDuplicatedHolderError } from './invalid-duplicated-holder-error';
 import { InvalidNoZeroSumError } from './invalid-no-zero-sum-error';
-import { Point } from './point';
+import { Point } from '../point';
 
 import type { ScoreEntry } from './score-entry';
 import type { Round } from '../../round';

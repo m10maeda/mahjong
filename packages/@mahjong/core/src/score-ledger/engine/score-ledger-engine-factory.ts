@@ -1,8 +1,8 @@
 import { ScoreLedgerEngine } from './score-ledger-engine';
-import { ScoreLedger } from '../models';
+import { ScoreLedger } from '../score-ledger';
 
-import type { IScoreLedgerEventPublisher } from '../events';
 import type { IScoreLedgerEngine, IScoreLedgerEngineFactory } from '../ports';
+import type { IScoreLedgerEventPublisher } from './score-ledger-event-publisher';
 
 export class ScoreLedgerEngineFactory implements IScoreLedgerEngineFactory {
   public create(
