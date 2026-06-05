@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest';
 
 import { InvalidNoTilesError } from '../invalid-no-tiles-error';
-import { Wall } from './wall';
+import { LiveWall } from './live-wall';
 import { SuitType, Tile, TileModifier } from '../../../concepts';
 
-describe('Wall', () => {
+describe('LiveWall', () => {
   describe('有効な値を与えられた場合', () => {
     it('Wall として成立すること', () => {
       expect(() => {
-        new Wall(
+        new LiveWall(
           new Tile(SuitType.Character1, TileModifier.Normal),
           new Tile(SuitType.Character2, TileModifier.Normal),
           new Tile(SuitType.Circle1, TileModifier.Normal),
@@ -21,7 +21,7 @@ describe('Wall', () => {
   describe('takeLastTile', () => {
     describe('牌を保持している場合', () => {
       it('末尾の牌と新しい Wall を返すこと', () => {
-        const sut = new Wall(
+        const sut = new LiveWall(
           new Tile(SuitType.Character1, TileModifier.Normal),
           new Tile(SuitType.Character2, TileModifier.Normal),
           new Tile(SuitType.Character3, TileModifier.Normal),
@@ -50,7 +50,7 @@ describe('Wall', () => {
 
     describe('牌を保持していない場合', () => {
       it('InvalidTileNotFoundError を投げること', () => {
-        const sut = new Wall();
+        const sut = new LiveWall();
 
         expect(() => {
           sut.takeLastTile();
@@ -62,7 +62,7 @@ describe('Wall', () => {
   describe('takeTile', () => {
     describe('牌を保持している場合', () => {
       it('先頭の牌と新しい Wall を返すこと', () => {
-        const sut = new Wall(
+        const sut = new LiveWall(
           new Tile(SuitType.Character1, TileModifier.Normal),
           new Tile(SuitType.Character2, TileModifier.Normal),
           new Tile(SuitType.Character3, TileModifier.Normal),
@@ -91,7 +91,7 @@ describe('Wall', () => {
 
     describe('牌を保持していない場合', () => {
       it('InvalidTileNotFoundError を投げること', () => {
-        const sut = new Wall();
+        const sut = new LiveWall();
 
         expect(() => {
           sut.takeTile();

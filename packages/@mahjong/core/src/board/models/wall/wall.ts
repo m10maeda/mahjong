@@ -1,39 +1,47 @@
-import { InvalidNoTilesError } from '../invalid-no-tiles-error';
-
+import type { DeadWall } from './dead-wall';
+import type { LiveWall } from './live-wall';
 import type { Tile } from '../../../concepts';
 
-export class Wall implements Iterable<Tile> {
-  private readonly tiles: readonly Tile[];
+export class Wall {
+  private readonly dead: DeadWall;
 
-  public isEmpty(): boolean {
-    return this.tiles.length === 0;
+  private readonly live: LiveWall;
+
+  public get blindDoraIndicators(): readonly Tile[] {
+    return this.dead.blindDoraIndicators;
   }
 
-  public [Symbol.iterator](): Iterator<Tile> {
-    return this.tiles[Symbol.iterator]();
+  public get doraIndicators(): readonly Tile[] {
+    return this.dead.doraIndicators;
   }
 
-  public takeLastTile(): readonly [Tile, Wall] {
-    if (this.isEmpty()) throw new InvalidNoTilesError();
-
-    const takenTile = this.tiles[this.tiles.length - 1];
-
-    if (takenTile === undefined) throw new InvalidNoTilesError();
-
-    return [takenTile, new Wall(...this.tiles.slice(0, -1))];
+  public get reamingTileCount(): number {
+    return this.live.reamingTileCount;
   }
 
-  public takeTile(): readonly [Tile, Wall] {
-    if (this.isEmpty()) throw new InvalidNoTilesError();
-
-    const takenTile = this.tiles[0];
-
-    if (takenTile === undefined) throw new InvalidNoTilesError();
-
-    return [takenTile, new Wall(...this.tiles.slice(1))];
+  public addDora(): Wall {
+    return new Wall(this.live, this.dead.addDora());
   }
 
-  public constructor(...tiles: readonly Tile[]) {
-    this.tiles = tiles;
+  public canTakeTileFromLiveWall(): boolean {
+    return this.live.isEmpty();
+  }
+
+  public takeFromDeadWall(): readonly [Tile, Wall] {
+    const [supplyTile, newLiveWall] = this.live.takeLastTile();
+    const [takenTile, newDeadWall] = this.dead.drawRinshanTile(supplyTile);
+
+    return [takenTile, new Wall(newLiveWall, newDeadWall)];
+  }
+
+  public takeFromLiveWall(): readonly [Tile, Wall] {
+    const [takenTile, newLiveWall] = this.live.takeTile();
+
+    return [takenTile, new Wall(newLiveWall, this.dead)];
+  }
+
+  public constructor(live: LiveWall, dead: DeadWall) {
+    this.live = live;
+    this.dead = dead;
   }
 }
