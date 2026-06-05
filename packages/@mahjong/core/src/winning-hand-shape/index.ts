@@ -6,5 +6,15 @@ export {
   ThirteenOrphansWaitShape,
 } from './thirteen-orphans';
 
-export { TileGroup } from './tile-group';
-export { Pair } from './pair';
+export {
+  TileGroup,
+  CompleteTileGroup,
+  TileGroupType,
+  TileGroupExposure,
+  Sequence,
+  Triplet,
+  Quadruplet,
+  IncompleteTileGroup,
+  Pair,
+  SerialPair,
+} from './tile-group';
