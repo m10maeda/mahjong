@@ -1,18 +1,43 @@
 import { WinningHandShape } from './winning-hand-shape';
 
-import type { Tile } from '../concepts';
-import type { Pair } from './pair';
+import type { Tile, TileType } from '../concepts';
+import type { Pair } from './tile-group';
 
 export class SevenPairsWinningHandShape extends WinningHandShape {
-  public readonly pairs: readonly Pair[];
+  public readonly winningTile: Tile;
 
-  public [Symbol.iterator](): Iterator<Tile> {
-    return [...this.pairs.flatMap((pair) => [...pair])][Symbol.iterator]();
+  private readonly _pairs: readonly [Pair, Pair, Pair, Pair, Pair, Pair];
+
+  private readonly isolatedTile: Tile;
+
+  public get waitTiles(): readonly [TileType] {
+    return [this.isolatedTile.type];
   }
 
-  public constructor(pairs: readonly Pair[], winningTile: Tile) {
-    super(winningTile);
+  public [Symbol.iterator](): Iterator<Tile> {
+    return [
+      ...this._pairs.flatMap((pair) => [...pair]),
+      this.isolatedTile,
+      this.winningTile,
+    ][Symbol.iterator]();
+  }
 
-    this.pairs = pairs;
+  public constructor(
+    pairs: readonly [Pair, Pair, Pair, Pair, Pair, Pair],
+    isolatedTile: Tile,
+    winningTile: Tile,
+  ) {
+    if (!isolatedTile.hasSameTypeAs(winningTile)) throw new TypeError();
+
+    const hasDuplicatePairType = pairs.some((pair, index) =>
+      pairs.slice(index + 1).some((other) => pair.isSameTileGroupAs(other)),
+    );
+    if (hasDuplicatePairType) throw new TypeError();
+
+    super();
+
+    this.winningTile = winningTile;
+    this._pairs = pairs;
+    this.isolatedTile = isolatedTile;
   }
 }
