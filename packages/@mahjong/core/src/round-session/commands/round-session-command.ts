@@ -1,2 +1,2 @@
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
-export abstract class BoardCommand {}
+export abstract class RoundSessionCommand {}
