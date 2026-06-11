@@ -1,4 +1,5 @@
 import type { Tile } from '../../tile';
+import type { CompleteTileGroup } from '../../winning-hand-shape';
 
 export enum MeldType {
   Sequence,
@@ -12,6 +13,8 @@ export abstract class Meld implements Iterable<Tile> {
   private readonly type: MeldType;
 
   protected abstract get tiles(): readonly Tile[];
+
+  public abstract toCompleteTileGroup(): CompleteTileGroup;
 
   public isQuadruplet(): boolean {
     if (this.type === MeldType.ClosedQuadruplet) return true;
