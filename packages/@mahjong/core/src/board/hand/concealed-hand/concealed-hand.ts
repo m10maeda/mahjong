@@ -1,4 +1,4 @@
-import type { TileGroupDecomposition } from './tile-group-decomposition';
+import type { TileGroupDecomposition } from '../../../hand-analysis';
 import type { Tile } from '../../../tile';
 import type { Pair, SerialPair } from '../../../winning-hand-shape';
 
