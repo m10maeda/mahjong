@@ -45,7 +45,7 @@ export class RawHand {
     if (meld === undefined) throw new InvalidMeldNotFoundError();
     if (!TripletMeld.isTripletMeld(meld)) throw new TypeError();
 
-    const nextConcealed = this.concealed.consume(addTile);
+    const nextConcealed = this.concealed.removeAll(addTile);
 
     const extendedMeld = TripletMeld.extend(meld, addTile);
     const nextMelds = this._melds.replace(reference, extendedMeld);
@@ -56,7 +56,7 @@ export class RawHand {
   public meldClosedQuadruplet(
     consumeTiles: readonly [Tile, Tile, Tile, Tile],
   ): readonly [MeldReference, RawHand] {
-    const nextConcealed = this.concealed.consume(...consumeTiles);
+    const nextConcealed = this.concealed.removeAll(...consumeTiles);
 
     const meld = new ClosedQuadrupletMeld(consumeTiles);
     const [reference, nextMelds] = this._melds.add(meld);
@@ -68,7 +68,7 @@ export class RawHand {
     claimTile: Tile,
     consumeTiles: readonly [Tile, Tile, Tile],
   ): readonly [MeldReference, RawHand] {
-    const nextConcealed = this.concealed.consume(...consumeTiles);
+    const nextConcealed = this.concealed.removeAll(...consumeTiles);
 
     const meld = new OpenQuadrupletMeld(consumeTiles, claimTile);
     const [reference, nextMelds] = this._melds.add(meld);
@@ -80,7 +80,7 @@ export class RawHand {
     claimTile: Tile,
     serialPair: SerialPair,
   ): readonly [MeldReference, RawHand] {
-    const nextConcealed = this.concealed.consume(...serialPair);
+    const nextConcealed = this.concealed.removeAll(...serialPair);
 
     const meld = new SequenceMeld(serialPair, claimTile);
     const [reference, nextMelds] = this._melds.add(meld);
@@ -92,7 +92,7 @@ export class RawHand {
     claimTile: Tile,
     pair: Pair,
   ): readonly [MeldReference, RawHand] {
-    const nextConcealed = this.concealed.consume(...pair);
+    const nextConcealed = this.concealed.removeAll(...pair);
 
     const meld = new TripletMeld(pair, claimTile);
     const [reference, nextMelds] = this._melds.add(meld);
