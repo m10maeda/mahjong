@@ -33,10 +33,13 @@ export class SerialPair extends IncompleteTileGroup {
   }
 
   public extend(tile: Tile): Sequence {
-    if (!this.receivableTiles.some((_tile) => _tile.equals(tile.type)))
-      throw new TypeError();
+    if (!this.receives(tile)) throw new TypeError();
 
     return Sequence.openOf(...this.tiles, tile);
+  }
+
+  public receives(tile: Tile): boolean {
+    return this.receivableTiles.some((_tile) => _tile.equals(tile.type));
   }
 
   public constructor(
