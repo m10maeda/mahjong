@@ -6,7 +6,6 @@ export {
   RawHand,
   Melds,
   type IConcealedHand,
-  TileGroupDecomposition,
   InvalidTileNotHeldError,
 } from './hand';
 export { DiscardHistory } from './discard-history';

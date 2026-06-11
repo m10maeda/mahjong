@@ -10,3 +10,10 @@ export {
   PairFinder,
   SerialPairFinder,
 } from './meld-source-finder';
+export {
+  type IConcealedHandDecomposer,
+  TileGroupDecomposition,
+  ComplexHandDecomposer,
+  SuitDecomposer,
+  HonorDecomposer,
+} from './concealed-hand-decomposer';
