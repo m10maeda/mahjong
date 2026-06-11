@@ -17,4 +17,5 @@ export {
   IncompleteTileGroup,
   Pair,
   SerialPair,
+  SerialPairType,
 } from './tile-group';

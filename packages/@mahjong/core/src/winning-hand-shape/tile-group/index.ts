@@ -8,4 +8,9 @@ export {
   Triplet,
   Quadruplet,
 } from './complete';
-export { IncompleteTileGroup, Pair, SerialPair } from './incomplete';
+export {
+  IncompleteTileGroup,
+  Pair,
+  SerialPair,
+  SerialPairType,
+} from './incomplete';
