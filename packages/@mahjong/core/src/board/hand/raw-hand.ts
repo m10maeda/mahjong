@@ -39,14 +39,6 @@ export class RawHand {
     return new RawHand(this.concealed.draw(tile), this._melds);
   }
 
-  public findAllPairCandidatesWith(tile: Tile): readonly Pair[] {
-    return this.concealed.findAllPairCandidatesWith(tile);
-  }
-
-  public findAllSerialPairCandidatesWith(tile: Tile): readonly SerialPair[] {
-    return this.concealed.findAllSerialPairCandidatesWith(tile);
-  }
-
   public meldAddedQuadruplet(reference: MeldReference, addTile: Tile): RawHand {
     const meld = this._melds.get(reference);
 
@@ -86,11 +78,10 @@ export class RawHand {
 
   public meldOpenSequence(
     claimTile: Tile,
-    consumeTiles: readonly [Tile, Tile],
+    serialPair: SerialPair,
   ): readonly [MeldReference, RawHand] {
-    const [serialPair, nextConcealed] = this.concealed.createSerialPair(
-      ...consumeTiles,
-    );
+    const nextConcealed = this.concealed.consume(...serialPair);
+
     const meld = new SequenceMeld(serialPair, claimTile);
     const [reference, nextMelds] = this._melds.add(meld);
 
@@ -99,9 +90,9 @@ export class RawHand {
 
   public meldOpenTriplet(
     claimTile: Tile,
-    consumeTiles: readonly [Tile, Tile],
+    pair: Pair,
   ): readonly [MeldReference, RawHand] {
-    const [pair, nextConcealed] = this.concealed.createPair(...consumeTiles);
+    const nextConcealed = this.concealed.consume(...pair);
 
     const meld = new TripletMeld(pair, claimTile);
     const [reference, nextMelds] = this._melds.add(meld);

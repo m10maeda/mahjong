@@ -46,14 +46,6 @@ export class Hand implements IHand {
     return this.seat.equals(other.seat);
   }
 
-  public findAllPairCandidatesWith(tile: Tile): readonly Pair[] {
-    return this.raw.findAllPairCandidatesWith(tile);
-  }
-
-  public findAllSerialPairCandidatesWith(tile: Tile): readonly SerialPair[] {
-    return this.raw.findAllSerialPairCandidatesWith(tile);
-  }
-
   public meldAddedQuadruplet(reference: MeldReference, addTile: Tile): Hand {
     const nextRawHand = this.raw.meldAddedQuadruplet(reference, addTile);
 
@@ -83,11 +75,11 @@ export class Hand implements IHand {
 
   public meldOpenSequence(
     claimTile: Tile,
-    consumeTiles: readonly [Tile, Tile],
+    serialPair: SerialPair,
   ): readonly [MeldReference, Hand] {
     const [reference, nextRawHand] = this.raw.meldOpenSequence(
       claimTile,
-      consumeTiles,
+      serialPair,
     );
 
     return [reference, new Hand(this.seat, nextRawHand)];
@@ -95,12 +87,9 @@ export class Hand implements IHand {
 
   public meldOpenTriplet(
     claimTile: Tile,
-    consumeTiles: readonly [Tile, Tile],
+    pair: Pair,
   ): readonly [MeldReference, Hand] {
-    const [reference, nextRawHand] = this.raw.meldOpenTriplet(
-      claimTile,
-      consumeTiles,
-    );
+    const [reference, nextRawHand] = this.raw.meldOpenTriplet(claimTile, pair);
 
     return [reference, new Hand(this.seat, nextRawHand)];
   }
