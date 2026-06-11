@@ -2,13 +2,14 @@ import { RoundSessionCommand } from '../round-session-command';
 
 import type { SeatPosition } from '../../../table';
 import type { Tile } from '../../../tile';
+import type { Pair } from '../../../winning-hand-shape';
 
 export class MeldOpenTriplet extends RoundSessionCommand {
   public readonly claimedOn: SeatPosition;
 
   public readonly claimedTile: Tile;
 
-  public readonly consumedTiles: readonly [Tile, Tile];
+  public readonly pair: Pair;
 
   public readonly seat: SeatPosition;
 
@@ -16,14 +17,14 @@ export class MeldOpenTriplet extends RoundSessionCommand {
     seat: SeatPosition,
     claimedTile: Tile,
     claimedOn: SeatPosition,
-    consumedTiles: readonly [Tile, Tile],
+    pair: Pair,
   ) {
     super();
 
     this.seat = seat;
     this.claimedTile = claimedTile;
     this.claimedOn = claimedOn;
-    this.consumedTiles = consumedTiles;
+    this.pair = pair;
   }
 
   public static isMeldOpenTriplet(
