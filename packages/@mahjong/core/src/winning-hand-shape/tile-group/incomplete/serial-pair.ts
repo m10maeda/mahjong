@@ -19,11 +19,27 @@ export class SerialPair extends IncompleteTileGroup {
 
   public readonly type: SerialPairType;
 
+  public get composeTiles(): readonly [TileType, TileType] {
+    return [this.tiles[0].type, this.tiles[1].type];
+  }
+
+  public composes(...tiles: readonly [TileType, TileType]): boolean {
+    return (
+      (this.composeTiles[0].equals(tiles[0]) &&
+        this.composeTiles[1].equals(tiles[1])) ||
+      (this.composeTiles[0].equals(tiles[1]) &&
+        this.composeTiles[1].equals(tiles[0]))
+    );
+  }
+
   public extend(tile: Tile): Sequence {
-    if (!this.receivableTiles.some((_tile) => _tile.equals(tile.type)))
-      throw new TypeError();
+    if (!this.receives(tile)) throw new TypeError();
 
     return Sequence.openOf(...this.tiles, tile);
+  }
+
+  public receives(tile: Tile): boolean {
+    return this.receivableTiles.some((_tile) => _tile.equals(tile.type));
   }
 
   public constructor(

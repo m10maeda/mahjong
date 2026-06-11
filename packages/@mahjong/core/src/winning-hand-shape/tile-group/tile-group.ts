@@ -8,4 +8,8 @@ export abstract class TileGroup implements Iterable<Tile> {
   public [Symbol.iterator](): Iterator<Tile> {
     return this.tiles[Symbol.iterator]();
   }
+
+  public toString(): string {
+    return this.tiles.map((tile) => tile.toString()).join('');
+  }
 }
