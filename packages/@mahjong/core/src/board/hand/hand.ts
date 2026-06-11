@@ -1,7 +1,7 @@
 import { Melds } from './melds';
 import { RawHand } from './raw-hand';
 
-import type { IConcealedHand } from './concealed-hand';
+import type { ConcealedHand } from './concealed-hand';
 import type { IHand, Meld, MeldReference } from '../../round-session';
 import type { SeatPosition } from '../../table';
 import type { Tile } from '../../tile';
@@ -114,7 +114,7 @@ export class Hand implements IHand {
     this.raw = raw;
   }
 
-  public static new(seat: SeatPosition, concealed: IConcealedHand): Hand {
+  public static new(seat: SeatPosition, concealed: ConcealedHand): Hand {
     const melds = new Melds();
 
     return new Hand(seat, new RawHand(concealed, melds));
