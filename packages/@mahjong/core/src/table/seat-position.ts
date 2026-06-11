@@ -44,7 +44,7 @@ export class SeatPosition {
         return 'North';
 
       default:
-        throw new Error();
+        throw new RangeError();
     }
   }
 
