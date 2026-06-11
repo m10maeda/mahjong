@@ -10,6 +10,7 @@ import type { Round } from '../round/round';
 import type { SeatPosition } from '../table';
 import type { Tile } from '../tile';
 import type { RiichiStatuses } from './riichi-statuses';
+import type { Pair, SerialPair } from '../winning-hand-shape';
 
 export class RoundSession {
   public readonly round: Round;
@@ -288,13 +289,13 @@ export class RoundSession {
   public meldOpenSequence(
     claimTile: Tile,
     claimOn: SeatPosition,
-    consumeTiles: readonly [Tile, Tile],
+    serialPair: SerialPair,
     seat: SeatPosition,
   ): readonly [MeldReference, RoundSession] {
     const [reference, nextBoard] = this.board.meldOpenSequence(
       claimTile,
       claimOn,
-      consumeTiles,
+      serialPair,
       seat,
     );
 
@@ -313,13 +314,13 @@ export class RoundSession {
   public meldOpenTriplet(
     claimTile: Tile,
     claimOn: SeatPosition,
-    consumeTiles: readonly [Tile, Tile],
+    pair: Pair,
     seat: SeatPosition,
   ): readonly [MeldReference, RoundSession] {
     const [reference, nextBoard] = this.board.meldOpenTriplet(
       claimTile,
       claimOn,
-      consumeTiles,
+      pair,
       seat,
     );
 

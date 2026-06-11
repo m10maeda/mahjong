@@ -1,5 +1,6 @@
 import type { SeatPosition } from '../../table';
 import type { Tile } from '../../tile';
+import type { Pair, SerialPair } from '../../winning-hand-shape';
 import type { IHand } from '../hand';
 import type { MeldReference } from '../meld-reference';
 
@@ -37,13 +38,13 @@ export interface IBoard {
   meldOpenSequence(
     claimTile: Tile,
     claimOn: SeatPosition,
-    consumeTiles: readonly [Tile, Tile],
+    serialPair: SerialPair,
     seat: SeatPosition,
   ): readonly [MeldReference, IBoard];
   meldOpenTriplet(
     claimTile: Tile,
     claimOn: SeatPosition,
-    consumeTiles: readonly [Tile, Tile],
+    pair: Pair,
     seat: SeatPosition,
   ): readonly [MeldReference, IBoard];
 }

@@ -1,65 +1,16 @@
-import { Pair, type SerialPair } from '../../winning-hand-shape';
 import { InvalidNoTilesError } from '../invalid-no-tiles-error';
 
-import type {
-  IConcealedHandDecomposer,
-  IMeldSourceFinder,
-  TileGroupDecomposition,
-} from '../../hand-analysis';
 import type { Tile } from '../../tile';
 
 export class ConcealedHand implements Iterable<Tile> {
   public readonly drawnTile?: Tile | undefined;
 
-  private readonly decomposer: IConcealedHandDecomposer;
-
-  private readonly meldSourceFinder: IMeldSourceFinder;
-
   private readonly tiles: readonly Tile[];
-
-  public get pairs(): readonly Pair[] {
-    return this.meldSourceFinder.findAllPairPatterns(...this);
-  }
-
-  public get serialPairs(): readonly SerialPair[] {
-    return this.meldSourceFinder.findAllSerialPairPatterns(...this);
-  }
 
   public consume(...tiles: readonly Tile[]): ConcealedHand {
     if (!this.has(...tiles)) throw new InvalidNoTilesError();
 
     return this.remove(...tiles);
-  }
-
-  public createPair(
-    ...tiles: readonly [Tile, Tile]
-  ): readonly [Pair, ConcealedHand] {
-    if (!this.has(...tiles)) throw new InvalidNoTilesError();
-
-    const pair = new Pair(...tiles);
-    const nextConcealedHand = this.remove(...pair);
-
-    return [pair, nextConcealedHand];
-  }
-
-  public createSerialPair(
-    ...tiles: readonly [Tile, Tile]
-  ): readonly [SerialPair, ConcealedHand] {
-    if (!this.has(...tiles)) throw new InvalidNoTilesError();
-
-    const serialPair = this.serialPairs.find((serialPair) =>
-      serialPair.composes(tiles[0].type, tiles[1].type),
-    );
-
-    if (serialPair === undefined) throw new TypeError();
-
-    const nextConcealedHand = this.remove(...serialPair);
-
-    return [serialPair, nextConcealedHand];
-  }
-
-  public decompose(): readonly TileGroupDecomposition[] {
-    return this.decomposer.decompose(...this);
   }
 
   public discard(tile: Tile): ConcealedHand {
@@ -71,27 +22,11 @@ export class ConcealedHand implements Iterable<Tile> {
   public discardDrawnTile(): readonly [Tile, ConcealedHand] {
     if (this.drawnTile === undefined) throw new InvalidNoTilesError();
 
-    return [
-      this.drawnTile,
-      new ConcealedHand(this.decomposer, this.meldSourceFinder, this.tiles),
-    ];
+    return [this.drawnTile, new ConcealedHand(this.tiles)];
   }
 
   public draw(tile: Tile): ConcealedHand {
-    return new ConcealedHand(
-      this.decomposer,
-      this.meldSourceFinder,
-      this.tiles,
-      tile,
-    );
-  }
-
-  public findAllPairCandidatesWith(tile: Tile): readonly Pair[] {
-    return this.pairs.filter((pair) => pair.composes(tile.type));
-  }
-
-  public findAllSerialPairCandidatesWith(tile: Tile): readonly SerialPair[] {
-    return this.serialPairs.filter((serialPair) => serialPair.receives(tile));
+    return new ConcealedHand(this.tiles, tile);
   }
 
   public [Symbol.iterator](): Iterator<Tile> {
@@ -127,17 +62,10 @@ export class ConcealedHand implements Iterable<Tile> {
       nextTiles = [...nextTiles.slice(0, index), ...nextTiles.slice(index + 1)];
     }
 
-    return new ConcealedHand(this.decomposer, this.meldSourceFinder, nextTiles);
+    return new ConcealedHand(nextTiles);
   }
 
-  public constructor(
-    decomposer: IConcealedHandDecomposer,
-    meldSourceFinder: IMeldSourceFinder,
-    tiles: readonly Tile[],
-    drawnTile?: Tile,
-  ) {
-    this.decomposer = decomposer;
-    this.meldSourceFinder = meldSourceFinder;
+  public constructor(tiles: readonly Tile[], drawnTile?: Tile) {
     this.tiles = tiles;
     this.drawnTile = drawnTile;
   }

@@ -6,6 +6,7 @@ import type { SeatPosition } from '../table';
 import type { Tile } from '../tile';
 import type { Hand } from './hand';
 import type { Wall } from './wall';
+import type { Pair, SerialPair } from '../winning-hand-shape';
 
 export class Board implements IBoard {
   private readonly discardHistory: DiscardHistory;
@@ -155,7 +156,7 @@ export class Board implements IBoard {
   public meldOpenSequence(
     claimedTile: Tile,
     claimedOn: SeatPosition,
-    consumedTiles: readonly [Tile, Tile],
+    serialPair: SerialPair,
     seat: SeatPosition,
   ): readonly [MeldReference, Board] {
     if (seat.equals(claimedOn)) throw new TypeError();
@@ -164,7 +165,7 @@ export class Board implements IBoard {
 
     const [reference, nextHand] = hand.meldOpenSequence(
       claimedTile,
-      consumedTiles,
+      serialPair,
     );
     const nextHands = this.hands.replace(nextHand);
 
@@ -174,17 +175,14 @@ export class Board implements IBoard {
   public meldOpenTriplet(
     claimedTile: Tile,
     claimedOn: SeatPosition,
-    consumedTiles: readonly [Tile, Tile],
+    pair: Pair,
     seat: SeatPosition,
   ): readonly [MeldReference, Board] {
     if (seat.equals(claimedOn)) throw new TypeError();
 
     const hand = this.hands.get(seat);
 
-    const [reference, nextHand] = hand.meldOpenTriplet(
-      claimedTile,
-      consumedTiles,
-    );
+    const [reference, nextHand] = hand.meldOpenTriplet(claimedTile, pair);
     const nextHands = this.hands.replace(nextHand);
 
     return [reference, new Board(this.wall, nextHands, this.discardHistory)];
