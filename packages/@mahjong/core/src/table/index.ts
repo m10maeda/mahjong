@@ -1,4 +1,2 @@
-export { type ITable } from './table';
+export { type ITable, Table } from './table';
 export { SeatPosition } from './seat-position';
-
-export { TableType } from './table-type';
