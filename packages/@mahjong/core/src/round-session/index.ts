@@ -85,3 +85,4 @@ export {
   AllPassCallResolutionResult,
   PendingCallResolutionResult,
 } from './call-resolution';
+export { RiichiStatuses, RiichiStatus } from './riichi-statuses';

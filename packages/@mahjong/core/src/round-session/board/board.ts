@@ -9,19 +9,16 @@ export interface IBoard {
   get doraIndicators(): readonly Tile[];
   addDoraIndicator(): IBoard;
   canDrawAgainNextAround(): boolean;
-  declareRiichi(seat: SeatPosition, isFirstAround: boolean): IBoard;
   discardDrawnTile(seat: SeatPosition): readonly [Tile, IBoard];
   discardFromConcealed(tile: Tile, seat: SeatPosition): IBoard;
   drawFromDeadWall(seat: SeatPosition): readonly [Tile, IBoard];
   drawFromLiveWall(seat: SeatPosition): readonly [Tile, IBoard];
-  establishPendingRiichi(): readonly [SeatPosition | undefined, IBoard];
   getAllDiscardedTilesOf(seat: SeatPosition): readonly Tile[];
   getAllHands(): readonly IHand[];
   getHandOf(seat: SeatPosition): IHand;
   hasLiveWallTile(): boolean;
   hasPendingDoraIndicatorAddition(): boolean;
   hasTakableDeadWallTile(): boolean;
-  isRiichiOf(seat: SeatPosition): boolean;
   meldAddedQuadruplet(
     reference: MeldReference,
     addTile: Tile,

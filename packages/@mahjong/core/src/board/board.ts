@@ -34,14 +34,6 @@ export class Board implements IBoard {
     return this.wall.reamingTileCount > this.hands.size;
   }
 
-  public declareRiichi(seat: SeatPosition, isFirstAround: boolean): Board {
-    const hand = this.hands.get(seat);
-    const nextHand = hand.declareRiichi(isFirstAround);
-    const nextHands = this.hands.replace(nextHand);
-
-    return new Board(this.wall, nextHands, this.discardHistory);
-  }
-
   public discardDrawnTile(seat: SeatPosition): readonly [Tile, Board] {
     const hand = this.hands.get(seat);
 
@@ -92,20 +84,6 @@ export class Board implements IBoard {
     return [takenTile, new Board(nextWall, nextHands, this.discardHistory)];
   }
 
-  public establishPendingRiichi(): readonly [SeatPosition | undefined, Board] {
-    const hand = this.hands.find((hand) => hand.isPendingRiichi());
-
-    if (hand === undefined) return [undefined, this];
-
-    const nextHand = hand.establishRiichi();
-    const nextHands = this.hands.replace(nextHand);
-
-    return [
-      nextHand.seat,
-      new Board(this.wall, nextHands, this.discardHistory),
-    ];
-  }
-
   public getAllDiscardedTilesOf(seat: SeatPosition): readonly Tile[] {
     return this.discardHistory.allDiscardedTiles(seat);
   }
@@ -128,12 +106,6 @@ export class Board implements IBoard {
 
   public hasTakableDeadWallTile(): boolean {
     throw new Error('Method not implemented.');
-  }
-
-  public isRiichiOf(seat: SeatPosition): boolean {
-    const hand = this.hands.get(seat);
-
-    return hand.isRiichi();
   }
 
   public meldAddedQuadruplet(

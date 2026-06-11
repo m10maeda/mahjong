@@ -13,7 +13,6 @@ export interface IHand {
   findAllSerialPairCandidatesWith(tile: Tile): readonly SerialPair[];
   findAllWinningHandShapes(): readonly WinningHandShape[];
   findAllWinningHandShapesWith(tile: Tile): readonly WinningHandShape[];
-  isRiichi(): boolean;
   isTenpai(): boolean;
   owns(seat: SeatPosition): boolean;
 }
