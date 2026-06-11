@@ -11,12 +11,12 @@ export class Pair extends IncompleteTileGroup {
     return this.tiles[0].type;
   }
 
-  public compose(tile: TileType): boolean {
+  public composes(tile: TileType): boolean {
     return this.composeTile.equals(tile);
   }
 
   public extend(tile: Tile): Triplet {
-    if (!this.compose(tile.type)) throw new TypeError();
+    if (!this.composes(tile.type)) throw new TypeError();
 
     return Triplet.openOf(...this.tiles, tile);
   }

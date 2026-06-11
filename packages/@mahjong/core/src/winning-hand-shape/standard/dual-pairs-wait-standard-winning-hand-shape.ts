@@ -43,7 +43,7 @@ export class DualPairsWaitStandardWinningHandShape extends StandardWinningHandSh
     super();
 
     if (pair.isSameTileGroupAs(waitPair)) throw new TypeError();
-    if (!waitPair.compose(winningTile.type)) throw new TypeError();
+    if (!waitPair.composes(winningTile.type)) throw new TypeError();
 
     this._groups = groups;
     this.pair = pair;
