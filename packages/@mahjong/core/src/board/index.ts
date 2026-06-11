@@ -7,9 +7,6 @@ export {
   Melds,
   type IConcealedHand,
   TileGroupDecomposition,
-  HandAnalysisContext,
-  type IHandAnalyzer,
-  type IHandAnalysis,
   InvalidTileNotHeldError,
 } from './hand';
 export { DiscardHistory } from './discard-history';
