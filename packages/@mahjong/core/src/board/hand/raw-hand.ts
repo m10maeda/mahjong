@@ -1,3 +1,4 @@
+import { type ConcealedHand } from './concealed-hand';
 import {
   ClosedQuadrupletMeld,
   OpenQuadrupletMeld,
@@ -7,13 +8,12 @@ import {
 import { SerialPair, type Pair } from '../../winning-hand-shape';
 import { InvalidMeldNotFoundError } from '../invalid-meld-not-found-error';
 
-import type { IConcealedHand } from './concealed-hand';
 import type { Melds } from './melds';
 import type { Meld, MeldReference } from '../../round-session';
 import type { Tile } from '../../tile';
 
 export class RawHand {
-  public readonly concealed: IConcealedHand;
+  public readonly concealed: ConcealedHand;
 
   private readonly _melds: Melds;
 
@@ -53,36 +53,35 @@ export class RawHand {
     if (meld === undefined) throw new InvalidMeldNotFoundError();
     if (!TripletMeld.isTripletMeld(meld)) throw new TypeError();
 
-    const extendedMeld = TripletMeld.extend(meld, addTile);
+    const nextConcealed = this.concealed.consume(addTile);
 
+    const extendedMeld = TripletMeld.extend(meld, addTile);
     const nextMelds = this._melds.replace(reference, extendedMeld);
 
-    return new RawHand(this.concealed.consume(addTile), nextMelds);
+    return new RawHand(nextConcealed, nextMelds);
   }
 
   public meldClosedQuadruplet(
     consumeTiles: readonly [Tile, Tile, Tile, Tile],
   ): readonly [MeldReference, RawHand] {
+    const nextConcealed = this.concealed.consume(...consumeTiles);
+
     const meld = new ClosedQuadrupletMeld(consumeTiles);
     const [reference, nextMelds] = this._melds.add(meld);
 
-    return [
-      reference,
-      new RawHand(this.concealed.consume(...consumeTiles), nextMelds),
-    ];
+    return [reference, new RawHand(nextConcealed, nextMelds)];
   }
 
   public meldOpenQuadruplet(
     claimTile: Tile,
     consumeTiles: readonly [Tile, Tile, Tile],
   ): readonly [MeldReference, RawHand] {
+    const nextConcealed = this.concealed.consume(...consumeTiles);
+
     const meld = new OpenQuadrupletMeld(consumeTiles, claimTile);
     const [reference, nextMelds] = this._melds.add(meld);
 
-    return [
-      reference,
-      new RawHand(this.concealed.consume(...consumeTiles), nextMelds),
-    ];
+    return [reference, new RawHand(nextConcealed, nextMelds)];
   }
 
   public meldOpenSequence(
@@ -103,13 +102,14 @@ export class RawHand {
     consumeTiles: readonly [Tile, Tile],
   ): readonly [MeldReference, RawHand] {
     const [pair, nextConcealed] = this.concealed.createPair(...consumeTiles);
+
     const meld = new TripletMeld(pair, claimTile);
     const [reference, nextMelds] = this._melds.add(meld);
 
     return [reference, new RawHand(nextConcealed, nextMelds)];
   }
 
-  public constructor(concealed: IConcealedHand, melds: Melds) {
+  public constructor(concealed: ConcealedHand, melds: Melds) {
     this.concealed = concealed;
     this._melds = melds;
   }

@@ -5,7 +5,7 @@ export {
   Hand,
   RawHand,
   Melds,
-  type IConcealedHand,
+  ConcealedHand,
   InvalidTileNotHeldError,
 } from './hand';
 export { DiscardHistory } from './discard-history';
