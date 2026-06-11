@@ -25,6 +25,10 @@ export class HonorType extends TileType {
     return true;
   }
 
+  public isSuit(): boolean {
+    return false;
+  }
+
   public isTerminal(): boolean {
     return false;
   }
