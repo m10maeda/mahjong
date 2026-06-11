@@ -1,24 +1,14 @@
-import { HandAnalysisContext } from './analysis';
 import { Melds } from './melds';
 import { RawHand } from './raw-hand';
 
-import type { IHandAnalysis, IHandAnalyzer } from './analysis';
 import type { IConcealedHand } from './concealed-hand';
 import type { IHand, Meld, MeldReference } from '../../round-session';
 import type { SeatPosition } from '../../table';
-import type { Tile, TileType } from '../../tile';
-import type {
-  Pair,
-  SerialPair,
-  WinningHandShape,
-} from '../../winning-hand-shape';
+import type { Tile } from '../../tile';
+import type { Pair, SerialPair } from '../../winning-hand-shape';
 
 export class Hand implements IHand {
   public readonly seat: SeatPosition;
-
-  private readonly analysis: IHandAnalysis;
-
-  private readonly analyzer: IHandAnalyzer;
 
   private readonly raw: RawHand;
 
@@ -34,32 +24,22 @@ export class Hand implements IHand {
     return this.raw.melds;
   }
 
-  public get waitTiles(): readonly TileType[] {
-    return this.analysis.waitTiles;
-  }
-
   public discardDrawnTile(): readonly [Tile, Hand] {
     const [discardTile, nextRawHand] = this.raw.discardDrawnTile();
-    const analysis = this.analyze();
 
-    return [
-      discardTile,
-      new Hand(this.seat, nextRawHand, analysis, this.analyzer),
-    ];
+    return [discardTile, new Hand(this.seat, nextRawHand)];
   }
 
   public discardFromConcealed(tile: Tile): Hand {
     const nextRawHand = this.raw.discardFromConcealed(tile);
-    const analysis = this.analyze();
 
-    return new Hand(this.seat, nextRawHand, analysis, this.analyzer);
+    return new Hand(this.seat, nextRawHand);
   }
 
   public draw(tile: Tile): Hand {
     const nextRawHand = this.raw.draw(tile);
-    const analysis = this.analyze();
 
-    return new Hand(this.seat, nextRawHand, analysis, this.analyzer);
+    return new Hand(this.seat, nextRawHand);
   }
 
   public equals(other: Hand): boolean {
@@ -74,24 +54,10 @@ export class Hand implements IHand {
     return this.raw.findAllSerialPairCandidatesWith(tile);
   }
 
-  public findAllWinningHandShapes(): readonly WinningHandShape[] {
-    return this.analysis.findAllWinningHandShapes();
-  }
-
-  public findAllWinningHandShapesWith(tile: Tile): readonly WinningHandShape[] {
-    return this.analysis.findAllWinningHandShapesWith(tile);
-  }
-
-  public isTenpai(): boolean {
-    throw new Error('Method not implemented.');
-  }
-
   public meldAddedQuadruplet(reference: MeldReference, addTile: Tile): Hand {
     const nextRawHand = this.raw.meldAddedQuadruplet(reference, addTile);
 
-    const analysis = this.analyze();
-
-    return new Hand(this.seat, nextRawHand, analysis, this.analyzer);
+    return new Hand(this.seat, nextRawHand);
   }
 
   public meldClosedQuadruplet(
@@ -100,12 +66,7 @@ export class Hand implements IHand {
     const [reference, nextRawHand] =
       this.raw.meldClosedQuadruplet(consumeTiles);
 
-    const analysis = this.analyze();
-
-    return [
-      reference,
-      new Hand(this.seat, nextRawHand, analysis, this.analyzer),
-    ];
+    return [reference, new Hand(this.seat, nextRawHand)];
   }
 
   public meldOpenQuadruplet(
@@ -117,12 +78,7 @@ export class Hand implements IHand {
       consumeTiles,
     );
 
-    const analysis = this.analyze();
-
-    return [
-      reference,
-      new Hand(this.seat, nextRawHand, analysis, this.analyzer),
-    ];
+    return [reference, new Hand(this.seat, nextRawHand)];
   }
 
   public meldOpenSequence(
@@ -134,12 +90,7 @@ export class Hand implements IHand {
       consumeTiles,
     );
 
-    const analysis = this.analyze();
-
-    return [
-      reference,
-      new Hand(this.seat, nextRawHand, analysis, this.analyzer),
-    ];
+    return [reference, new Hand(this.seat, nextRawHand)];
   }
 
   public meldOpenTriplet(
@@ -151,46 +102,21 @@ export class Hand implements IHand {
       consumeTiles,
     );
 
-    const analysis = this.analyze();
-
-    return [
-      reference,
-      new Hand(this.seat, nextRawHand, analysis, this.analyzer),
-    ];
+    return [reference, new Hand(this.seat, nextRawHand)];
   }
 
   public owns(seat: SeatPosition): boolean {
     return this.seat.equals(seat);
   }
 
-  private analyze(): IHandAnalysis {
-    const context = new HandAnalysisContext(this.raw.concealed, this.melds);
-
-    return this.analyzer.analyze(context);
-  }
-
-  public constructor(
-    seat: SeatPosition,
-    raw: RawHand,
-    analysis: IHandAnalysis,
-    analyzer: IHandAnalyzer,
-  ) {
+  public constructor(seat: SeatPosition, raw: RawHand) {
     this.seat = seat;
     this.raw = raw;
-    this.analyzer = analyzer;
-    this.analysis = analysis;
   }
 
-  public static new(
-    seat: SeatPosition,
-    concealed: IConcealedHand,
-    analyzer: IHandAnalyzer,
-  ): Hand {
+  public static new(seat: SeatPosition, concealed: IConcealedHand): Hand {
     const melds = new Melds();
-    const analysis = analyzer.analyze(
-      new HandAnalysisContext(concealed, [...melds]),
-    );
 
-    return new Hand(seat, new RawHand(concealed, melds), analysis, analyzer);
+    return new Hand(seat, new RawHand(concealed, melds));
   }
 }
