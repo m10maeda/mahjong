@@ -1,8 +1,8 @@
 import { ClaimedMeld } from './claimed-meld';
 import { MeldType } from './meld';
+import { Sequence, type SerialPair } from '../../winning-hand-shape';
 
 import type { Tile, TileType } from '../../tile';
-import type { SerialPair } from '../../winning-hand-shape';
 
 export class SequenceMeld extends ClaimedMeld {
   private readonly claimedTile: Tile;
@@ -15,6 +15,10 @@ export class SequenceMeld extends ClaimedMeld {
 
   protected get tiles(): readonly [Tile, Tile, Tile] {
     return [...this.serialPair.tiles, this.claimedTile];
+  }
+
+  public toCompleteTileGroup(): Sequence {
+    return Sequence.openOf(...this.tiles);
   }
 
   public constructor(serialPair: SerialPair, claimedTile: Tile) {

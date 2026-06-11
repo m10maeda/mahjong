@@ -1,4 +1,5 @@
 import { Meld, MeldType } from './meld';
+import { Quadruplet } from '../../winning-hand-shape';
 
 import type { Tile } from '../../tile';
 
@@ -9,8 +10,12 @@ export class AddedQuadrupletMeld extends Meld {
 
   private readonly consumedTile: readonly [Tile, Tile];
 
-  protected get tiles(): readonly Tile[] {
+  protected get tiles(): readonly [Tile, Tile, Tile, Tile] {
     return [...this.consumedTile, this.claimedTile, this.addedTile];
+  }
+
+  public toCompleteTileGroup(): Quadruplet {
+    return Quadruplet.openOf(...this.tiles);
   }
 
   public constructor(
