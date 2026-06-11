@@ -1,5 +1,5 @@
-import type { Tile, TileType } from '../../../tile';
-import type { WinningHandShape } from '../../../winning-hand-shape';
+import type { Tile, TileType } from '../tile';
+import type { WinningHandShape } from '../winning-hand-shape';
 
 export interface IHandAnalysis {
   get waitTiles(): readonly TileType[];
