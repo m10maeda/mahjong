@@ -1,9 +1,9 @@
 import { AddedQuadrupletMeld } from './added-quadruplet-meld';
 import { ClaimedMeld } from './claimed-meld';
 import { Meld, MeldType } from './meld';
+import { Triplet, type Pair } from '../../winning-hand-shape';
 
 import type { Tile, TileType } from '../../tile';
-import type { Pair } from '../../winning-hand-shape';
 
 export class TripletMeld extends ClaimedMeld {
   private readonly claimedTile: Tile;
@@ -16,6 +16,10 @@ export class TripletMeld extends ClaimedMeld {
 
   protected get tiles(): readonly [Tile, Tile, Tile] {
     return [...this.pair.tiles, this.claimedTile];
+  }
+
+  public toCompleteTileGroup(): Triplet {
+    return Triplet.openOf(...this.tiles);
   }
 
   public constructor(pair: Pair, claimedTile: Tile) {
