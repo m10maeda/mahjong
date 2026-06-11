@@ -1,16 +1,10 @@
 import { HandAnalysisContext } from './analysis';
 import { Melds } from './melds';
 import { RawHand } from './raw-hand';
-import { RiichiStatus } from './riichi-status';
 
 import type { IHandAnalysis, IHandAnalyzer } from './analysis';
 import type { IConcealedHand } from './concealed-hand';
-import type {
-  IHand,
-  Meld,
-  MeldReference,
-  RiichiContext,
-} from '../../round-session';
+import type { IHand, Meld, MeldReference } from '../../round-session';
 import type { SeatPosition } from '../../table';
 import type { Tile, TileType } from '../../tile';
 import type {
@@ -28,8 +22,6 @@ export class Hand implements IHand {
 
   private readonly raw: RawHand;
 
-  private readonly riichiStatus: RiichiStatus;
-
   public get concealed(): readonly Tile[] {
     return [...this.raw.concealed];
   }
@@ -46,86 +38,32 @@ export class Hand implements IHand {
     return this.analysis.waitTiles;
   }
 
-  public createRiichiContext(): RiichiContext {
-    return this.riichiStatus.createContext();
-  }
-
-  public declareRiichi(isFirstAround: boolean): Hand {
-    return new Hand(
-      this.seat,
-      this.raw,
-      this.riichiStatus.declare(isFirstAround),
-      this.analysis,
-      this.analyzer,
-    );
-  }
-
-  public disableOneShotEligible(): Hand {
-    return new Hand(
-      this.seat,
-      this.raw,
-      this.riichiStatus.disableOneShotEligible(),
-      this.analysis,
-      this.analyzer,
-    );
-  }
-
   public discardDrawnTile(): readonly [Tile, Hand] {
     const [discardTile, nextRawHand] = this.raw.discardDrawnTile();
     const analysis = this.analyze();
 
     return [
       discardTile,
-      new Hand(
-        this.seat,
-        nextRawHand,
-        this.riichiStatus,
-        analysis,
-        this.analyzer,
-      ),
+      new Hand(this.seat, nextRawHand, analysis, this.analyzer),
     ];
   }
 
   public discardFromConcealed(tile: Tile): Hand {
-    if (this.riichiStatus.isEstablished()) throw new TypeError();
-
     const nextRawHand = this.raw.discardFromConcealed(tile);
     const analysis = this.analyze();
 
-    return new Hand(
-      this.seat,
-      nextRawHand,
-      this.riichiStatus,
-      analysis,
-      this.analyzer,
-    );
+    return new Hand(this.seat, nextRawHand, analysis, this.analyzer);
   }
 
   public draw(tile: Tile): Hand {
     const nextRawHand = this.raw.draw(tile);
     const analysis = this.analyze();
 
-    return new Hand(
-      this.seat,
-      nextRawHand,
-      this.riichiStatus,
-      analysis,
-      this.analyzer,
-    );
+    return new Hand(this.seat, nextRawHand, analysis, this.analyzer);
   }
 
   public equals(other: Hand): boolean {
     return this.seat.equals(other.seat);
-  }
-
-  public establishRiichi(): Hand {
-    return new Hand(
-      this.seat,
-      this.raw,
-      this.riichiStatus.establish(),
-      this.analysis,
-      this.analyzer,
-    );
   }
 
   public findAllPairCandidatesWith(tile: Tile): readonly Pair[] {
@@ -144,14 +82,6 @@ export class Hand implements IHand {
     return this.analysis.findAllWinningHandShapesWith(tile);
   }
 
-  public isPendingRiichi(): boolean {
-    return this.riichiStatus.isPending();
-  }
-
-  public isRiichi(): boolean {
-    return this.riichiStatus.isEstablished();
-  }
-
   public isTenpai(): boolean {
     throw new Error('Method not implemented.');
   }
@@ -161,13 +91,7 @@ export class Hand implements IHand {
 
     const analysis = this.analyze();
 
-    return new Hand(
-      this.seat,
-      nextRawHand,
-      this.riichiStatus,
-      analysis,
-      this.analyzer,
-    );
+    return new Hand(this.seat, nextRawHand, analysis, this.analyzer);
   }
 
   public meldClosedQuadruplet(
@@ -180,13 +104,7 @@ export class Hand implements IHand {
 
     return [
       reference,
-      new Hand(
-        this.seat,
-        nextRawHand,
-        this.riichiStatus,
-        analysis,
-        this.analyzer,
-      ),
+      new Hand(this.seat, nextRawHand, analysis, this.analyzer),
     ];
   }
 
@@ -203,13 +121,7 @@ export class Hand implements IHand {
 
     return [
       reference,
-      new Hand(
-        this.seat,
-        nextRawHand,
-        this.riichiStatus,
-        analysis,
-        this.analyzer,
-      ),
+      new Hand(this.seat, nextRawHand, analysis, this.analyzer),
     ];
   }
 
@@ -226,13 +138,7 @@ export class Hand implements IHand {
 
     return [
       reference,
-      new Hand(
-        this.seat,
-        nextRawHand,
-        this.riichiStatus,
-        analysis,
-        this.analyzer,
-      ),
+      new Hand(this.seat, nextRawHand, analysis, this.analyzer),
     ];
   }
 
@@ -249,13 +155,7 @@ export class Hand implements IHand {
 
     return [
       reference,
-      new Hand(
-        this.seat,
-        nextRawHand,
-        this.riichiStatus,
-        analysis,
-        this.analyzer,
-      ),
+      new Hand(this.seat, nextRawHand, analysis, this.analyzer),
     ];
   }
 
@@ -272,13 +172,11 @@ export class Hand implements IHand {
   public constructor(
     seat: SeatPosition,
     raw: RawHand,
-    riichiStatus: RiichiStatus,
     analysis: IHandAnalysis,
     analyzer: IHandAnalyzer,
   ) {
     this.seat = seat;
     this.raw = raw;
-    this.riichiStatus = riichiStatus;
     this.analyzer = analyzer;
     this.analysis = analysis;
   }
@@ -293,12 +191,6 @@ export class Hand implements IHand {
       new HandAnalysisContext(concealed, [...melds]),
     );
 
-    return new Hand(
-      seat,
-      new RawHand(concealed, melds),
-      RiichiStatus.new(),
-      analysis,
-      analyzer,
-    );
+    return new Hand(seat, new RawHand(concealed, melds), analysis, analyzer);
   }
 }

@@ -7,7 +7,6 @@ export {
   Melds,
   type IConcealedHand,
   TileGroupDecomposition,
-  RiichiStatus,
   HandAnalysisContext,
   type IHandAnalyzer,
   type IHandAnalysis,

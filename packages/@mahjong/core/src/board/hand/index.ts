@@ -4,8 +4,6 @@ export { RawHand } from './raw-hand';
 export { Melds } from './melds';
 export { type IConcealedHand, TileGroupDecomposition } from './concealed-hand';
 
-export { RiichiStatus } from './riichi-status';
-
 export {
   HandAnalysisContext,
   type IHandAnalyzer,

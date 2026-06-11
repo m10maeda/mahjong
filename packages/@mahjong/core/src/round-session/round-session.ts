@@ -9,6 +9,7 @@ import type { Around, Turn } from './turn';
 import type { Round } from '../round/round';
 import type { SeatPosition } from '../table';
 import type { Tile } from '../tile';
+import type { RiichiStatuses } from './riichi-statuses';
 
 export class RoundSession {
   public readonly round: Round;
@@ -16,6 +17,8 @@ export class RoundSession {
   private readonly board: IBoard;
 
   private readonly callResolution: ICallResolution;
+
+  private readonly riichiStatuses: RiichiStatuses;
 
   private readonly turn: Turn;
 
@@ -34,7 +37,13 @@ export class RoundSession {
 
     return [
       result,
-      new RoundSession(this.board, this.turn, nextCallResolution, this.round),
+      new RoundSession(
+        this.board,
+        this.turn,
+        nextCallResolution,
+        this.riichiStatuses,
+        this.round,
+      ),
     ];
   }
 
@@ -43,6 +52,7 @@ export class RoundSession {
       this.board.addDoraIndicator(),
       this.turn,
       this.callResolution,
+      this.riichiStatuses,
       this.round,
     );
   }
@@ -57,9 +67,10 @@ export class RoundSession {
 
   public declareRiichi(seat: SeatPosition): RoundSession {
     return new RoundSession(
-      this.board.declareRiichi(seat, this.isFirstAround()),
+      this.board,
       this.turn,
       this.callResolution,
+      this.riichiStatuses.declare(seat, this.isFirstAround()),
       this.round,
     );
   }
@@ -72,7 +83,13 @@ export class RoundSession {
 
     return [
       tile,
-      new RoundSession(nextBoard, this.turn, nextCallResolution, this.round),
+      new RoundSession(
+        nextBoard,
+        this.turn,
+        nextCallResolution,
+        this.riichiStatuses,
+        this.round,
+      ),
     ];
   }
 
@@ -86,7 +103,13 @@ export class RoundSession {
 
     return [
       discardTile,
-      new RoundSession(nextBoard, this.turn, nextCallResolution, this.round),
+      new RoundSession(
+        nextBoard,
+        this.turn,
+        nextCallResolution,
+        this.riichiStatuses,
+        this.round,
+      ),
     ];
   }
 
@@ -95,7 +118,13 @@ export class RoundSession {
 
     return [
       drawnTile,
-      new RoundSession(nextBoard, this.turn, this.callResolution, this.round),
+      new RoundSession(
+        nextBoard,
+        this.turn,
+        this.callResolution,
+        this.riichiStatuses,
+        this.round,
+      ),
     ];
   }
 
@@ -104,7 +133,13 @@ export class RoundSession {
 
     return [
       drawnTile,
-      new RoundSession(nextBoard, this.turn, this.callResolution, this.round),
+      new RoundSession(
+        nextBoard,
+        this.turn,
+        this.callResolution,
+        this.riichiStatuses,
+        this.round,
+      ),
     ];
   }
 
@@ -112,23 +147,30 @@ export class RoundSession {
     SeatPosition | undefined,
     RoundSession,
   ] {
-    const [declarer, nextBoard] = this.board.establishPendingRiichi();
+    const [declarer, nextRiichiStatuses] = this.riichiStatuses.establish();
 
     return [
       declarer,
-      new RoundSession(nextBoard, this.turn, this.callResolution, this.round),
+      new RoundSession(
+        this.board,
+        this.turn,
+        this.callResolution,
+        nextRiichiStatuses,
+        this.round,
+      ),
     ];
   }
 
   public establishRiichi(declarer: SeatPosition): RoundSession {
-    const [, nextBoard] = this.board
-      .declareRiichi(declarer, this.isFirstAround())
-      .establishPendingRiichi();
+    const [, nextRiichiStatuses] = this.riichiStatuses
+      .declare(declarer, this.isFirstAround())
+      .establish();
 
     return new RoundSession(
-      nextBoard,
+      this.board,
       this.turn,
       this.callResolution,
+      nextRiichiStatuses,
       this.round,
     );
   }
@@ -162,7 +204,7 @@ export class RoundSession {
   }
 
   public isRiichiOf(seat: SeatPosition): boolean {
-    return this.board.isRiichiOf(seat);
+    return this.riichiStatuses.establishOf(seat);
   }
 
   public isTurnOf(seat: SeatPosition): boolean {
@@ -185,6 +227,7 @@ export class RoundSession {
       this.board.meldAddedQuadruplet(reference, consumeTile, seat),
       this.turn,
       nextCallResolution,
+      this.riichiStatuses,
       this.round,
     );
   }
@@ -207,7 +250,13 @@ export class RoundSession {
 
     return [
       reference,
-      new RoundSession(nextBoard, this.turn, nextCallResolution, this.round),
+      new RoundSession(
+        nextBoard,
+        this.turn,
+        nextCallResolution,
+        this.riichiStatuses,
+        this.round,
+      ),
     ];
   }
 
@@ -226,7 +275,13 @@ export class RoundSession {
 
     return [
       reference,
-      new RoundSession(nextBoard, this.turn, this.callResolution, this.round),
+      new RoundSession(
+        nextBoard,
+        this.turn,
+        this.callResolution,
+        this.riichiStatuses,
+        this.round,
+      ),
     ];
   }
 
@@ -245,7 +300,13 @@ export class RoundSession {
 
     return [
       reference,
-      new RoundSession(nextBoard, this.turn, this.callResolution, this.round),
+      new RoundSession(
+        nextBoard,
+        this.turn,
+        this.callResolution,
+        this.riichiStatuses,
+        this.round,
+      ),
     ];
   }
 
@@ -264,7 +325,13 @@ export class RoundSession {
 
     return [
       reference,
-      new RoundSession(nextBoard, this.turn, this.callResolution, this.round),
+      new RoundSession(
+        nextBoard,
+        this.turn,
+        this.callResolution,
+        this.riichiStatuses,
+        this.round,
+      ),
     ];
   }
 
@@ -273,6 +340,7 @@ export class RoundSession {
       this.board,
       this.turn.next(),
       this.callResolution,
+      this.riichiStatuses,
       this.round,
     );
   }
@@ -282,6 +350,7 @@ export class RoundSession {
       this.board,
       this.turn.skipTo(seat),
       this.callResolution,
+      this.riichiStatuses,
       this.round,
     );
   }
@@ -302,11 +371,13 @@ export class RoundSession {
     board: IBoard,
     turn: Turn,
     callResolution: ICallResolution,
+    riichiStatuses: RiichiStatuses,
     round: Round,
   ) {
     this.board = board;
     this.turn = turn;
     this.callResolution = callResolution;
+    this.riichiStatuses = riichiStatuses;
     this.round = round;
   }
 }

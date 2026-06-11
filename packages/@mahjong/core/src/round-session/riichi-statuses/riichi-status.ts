@@ -1,4 +1,4 @@
-import { RiichiContext } from '../../round-session';
+import { RiichiContext } from '../board';
 
 enum RiichiState {
   None,
