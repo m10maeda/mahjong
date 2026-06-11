@@ -7,16 +7,10 @@ export class ConcealedHand implements Iterable<Tile> {
 
   private readonly tiles: readonly Tile[];
 
-  public consume(...tiles: readonly Tile[]): ConcealedHand {
-    if (!this.has(...tiles)) throw new InvalidNoTilesError();
-
-    return this.remove(...tiles);
-  }
-
   public discard(tile: Tile): ConcealedHand {
     if (!this.has(tile)) throw new InvalidNoTilesError();
 
-    return this.remove(tile);
+    return this.removeAll(tile);
   }
 
   public discardDrawnTile(): readonly [Tile, ConcealedHand] {
@@ -29,6 +23,24 @@ export class ConcealedHand implements Iterable<Tile> {
     return new ConcealedHand(this.tiles, tile);
   }
 
+  public remove(tile: Tile): ConcealedHand {
+    let nextTiles = [...this];
+    const index = nextTiles.findIndex((_tile) => _tile.equals(tile));
+
+    if (index === -1) throw new InvalidNoTilesError();
+
+    nextTiles = [...nextTiles.slice(0, index), ...nextTiles.slice(index + 1)];
+
+    return new ConcealedHand(nextTiles, this.drawnTile);
+  }
+
+  public removeAll(...tiles: readonly Tile[]): ConcealedHand {
+    return tiles.reduce<ConcealedHand>(
+      (concealed, tile) => concealed.remove(tile),
+      this,
+    );
+  }
+
   public [Symbol.iterator](): Iterator<Tile> {
     return (
       this.drawnTile === undefined
@@ -37,32 +49,8 @@ export class ConcealedHand implements Iterable<Tile> {
     )[Symbol.iterator]();
   }
 
-  private has(...tiles: readonly Tile[]): boolean {
-    let clone = [...this];
-
-    for (const tile of tiles) {
-      const index = clone.findIndex((_tile) => _tile.equals(tile));
-
-      if (index === -1) return false;
-
-      clone = [...clone.slice(0, index), ...clone.slice(index)];
-    }
-
-    return true;
-  }
-
-  private remove(...tiles: readonly Tile[]): ConcealedHand {
-    let nextTiles = [...this];
-
-    for (const tile of tiles) {
-      const index = nextTiles.findIndex((_tile) => _tile.equals(tile));
-
-      if (index === -1) throw new RangeError();
-
-      nextTiles = [...nextTiles.slice(0, index), ...nextTiles.slice(index + 1)];
-    }
-
-    return new ConcealedHand(nextTiles);
+  private has(tile: Tile): boolean {
+    return this.tiles.find((_tile) => _tile.equals(tile)) !== undefined;
   }
 
   public constructor(tiles: readonly Tile[], drawnTile?: Tile) {
