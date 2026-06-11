@@ -50,6 +50,10 @@ export class SuitType extends TileType {
     return false;
   }
 
+  public isSuit(): boolean {
+    return true;
+  }
+
   public isTerminal(): boolean {
     return this.rank.isEdge();
   }

@@ -23,6 +23,10 @@ export class Tile {
     return this.modifier === TileModifier.Red;
   }
 
+  public isSuit(): boolean {
+    return this.type.isSuit();
+  }
+
   public isTerminal(): boolean {
     return this.type.isTerminal();
   }
