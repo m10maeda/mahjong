@@ -6,7 +6,7 @@ executors:
       - image: cimg/node:24.15.0-browsers
 
 orbs:
-  codecov: codecov/codecov@5.4.3
+  codecov: codecov/codecov@6.0.0
 
 commands:
   prepare-dependencies:
