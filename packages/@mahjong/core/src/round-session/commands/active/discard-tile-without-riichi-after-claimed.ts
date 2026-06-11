@@ -13,7 +13,7 @@ export class DiscardTileWithoutRiichiAfterClaimed extends DiscardTile {
 
     if (
       claimedMeld.prohibitedDiscardTiles.some((_tile) =>
-        _tile.hasSameTypeAs(tile),
+        _tile.equals(tile.type),
       )
     )
       throw new TypeError('Can not discard prohibited tiles.');

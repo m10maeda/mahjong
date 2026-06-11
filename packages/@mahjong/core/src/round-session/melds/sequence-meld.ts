@@ -1,26 +1,26 @@
 import { ClaimedMeld } from './claimed-meld';
 import { MeldType } from './meld';
 
-import type { Tile } from '../../tile';
+import type { Tile, TileType } from '../../tile';
+import type { SerialPair } from '../../winning-hand-shape';
 
 export class SequenceMeld extends ClaimedMeld {
   private readonly claimedTile: Tile;
 
-  private readonly consumedTile: readonly [Tile, Tile];
+  private readonly serialPair: SerialPair;
 
-  public get prohibitedDiscardTiles(): readonly Tile[] {
-    // FIXME: スジの食い変え禁止のための処理を追加
-    return [this.claimedTile];
+  public get prohibitedDiscardTiles(): readonly TileType[] {
+    return this.serialPair.receivableTiles;
   }
 
   protected get tiles(): readonly [Tile, Tile, Tile] {
-    return [...this.consumedTile, this.claimedTile];
+    return [...this.serialPair.tiles, this.claimedTile];
   }
 
-  public constructor(consumedTile: readonly [Tile, Tile], claimedTile: Tile) {
+  public constructor(serialPair: SerialPair, claimedTile: Tile) {
     super(MeldType.Sequence);
 
-    this.consumedTile = consumedTile;
+    this.serialPair = serialPair;
     this.claimedTile = claimedTile;
   }
 }
