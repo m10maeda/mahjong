@@ -1,19 +1,32 @@
-import type { SeatPosition } from './seat-position';
+import { SeatPosition } from './seat-position';
 
 export interface ITable extends Iterable<SeatPosition> {}
 
-export abstract class Table implements ITable {
+export class Table implements ITable {
+  public static readonly FourPlayersTable = new Table(
+    SeatPosition.East,
+    SeatPosition.South,
+    SeatPosition.West,
+    SeatPosition.North,
+  );
+  public static readonly ThreePlayersTable = new Table(
+    SeatPosition.East,
+    SeatPosition.South,
+    SeatPosition.West,
+  );
+  public static readonly TwoPlayersTable = new Table(
+    SeatPosition.East,
+    SeatPosition.South,
+    SeatPosition.West,
+  );
+
   private readonly seats: readonly SeatPosition[];
 
   public [Symbol.iterator](): Iterator<SeatPosition> {
     return this.seats[Symbol.iterator]();
   }
 
-  protected constructor(...seats: readonly SeatPosition[]) {
-    const uniqueSeats = new Set(seats);
-
-    if (seats.length !== uniqueSeats.size) throw new RangeError();
-
+  private constructor(...seats: readonly SeatPosition[]) {
     this.seats = seats;
   }
 }
