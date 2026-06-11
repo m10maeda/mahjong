@@ -3,6 +3,23 @@ import { describe, expect, it } from 'vitest';
 import { RoundWind } from './round-wind';
 
 describe('RoundWind', () => {
+  describe('advance', () => {
+    describe('自身の次の場風を返すこと', () => {
+      it.each`
+        sut                | expected           | description
+        ${RoundWind.East}  | ${RoundWind.South} | ${'東場の場合、南場を返すこと'}
+        ${RoundWind.South} | ${RoundWind.West}  | ${'南場の場合、西場を返すこと'}
+        ${RoundWind.West}  | ${RoundWind.North} | ${'西場の場合、北場を返すこと'}
+        ${RoundWind.North} | ${RoundWind.East}  | ${'北場の場合、東場を返すこと'}
+      `(
+        '$description',
+        ({ sut, expected }: { expected: RoundWind; sut: RoundWind }) => {
+          expect(sut.advance()).toEqual(expected);
+        },
+      );
+    });
+  });
+
   describe('compareTo', () => {
     it('自身と同じ値を与えられた場合、0 を返すこと', () => {
       expect(RoundWind.East.compareTo(RoundWind.East)).toBe(0);
