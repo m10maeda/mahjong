@@ -64,7 +64,7 @@ describe('Pair', () => {
         new Tile(SuitType.Character5, TileModifier.Normal),
       );
 
-      expect(result.compose(SuitType.Character5)).toBe(true);
+      expect(result.composes(SuitType.Character5)).toBe(true);
       expect(result.isOpen()).toBe(true);
     });
 

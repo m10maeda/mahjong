@@ -7,5 +7,4 @@ export interface IHand {
   get drawnTile(): Tile | undefined;
   get concealed(): readonly Tile[];
   get melds(): readonly Meld[];
-  owns(seat: SeatPosition): boolean;
 }
