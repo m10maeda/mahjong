@@ -17,3 +17,11 @@ export {
   SuitDecomposer,
   HonorDecomposer,
 } from './concealed-hand-decomposer';
+
+export {
+  type IWinningHandShapeResolver,
+  ComplexWinningHandShapeResolver,
+  StandardWinningHandShapeResolver,
+  SevenPairsWinningHandShapeResolver,
+  ThirteenOrphansWinningHandShapeResolver,
+} from './winning-hand-shape-resolver';
