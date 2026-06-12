@@ -20,17 +20,14 @@ export class Turn {
       seat.equals(this.activeSeat),
     );
 
-    const nextSeat = [...this.table][index];
-
-    if (
-      lastSeat === undefined ||
-      firstSeat === undefined ||
-      nextSeat === undefined
-    )
-      throw new Error();
+    if (lastSeat === undefined || firstSeat === undefined) throw new Error();
 
     if (this.activeSeat.equals(lastSeat))
       return new Turn(this.around.advance(), firstSeat, this.table);
+
+    const nextSeat = [...this.table][index + 1];
+
+    if (nextSeat === undefined) throw new Error();
 
     return new Turn(this.around, nextSeat, this.table);
   }
