@@ -1,5 +1,5 @@
 import { TileCode } from './tile-code';
-import { type Tile } from '../tile';
+import { Tile } from '../tile';
 import { TileCodeTranslator } from './tile-code-translator';
 
 export class TileCounter implements Iterable<Tile> {
@@ -29,6 +29,16 @@ export class TileCounter implements Iterable<Tile> {
         ),
       ),
     );
+  }
+
+  public find(
+    predicate: (tiles: readonly Tile[], code: TileCode) => boolean,
+  ): readonly Tile[] | undefined {
+    const candidate = [...this.tiles.entries()].find(([code, tiles]) =>
+      predicate(tiles, code),
+    );
+
+    return candidate?.[1];
   }
 
   public findAll(
