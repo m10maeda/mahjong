@@ -14,7 +14,7 @@ export class Triplet extends CompleteTileGroup {
     return this.tiles[0].type;
   }
 
-  public compose(tile: TileType): boolean {
+  public composes(tile: TileType): boolean {
     return this.composeTile.equals(tile);
   }
 
