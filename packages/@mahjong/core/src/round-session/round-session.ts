@@ -360,11 +360,24 @@ export class RoundSession {
     type: CallResolutionType,
     target: Tile,
   ): CallResolutionContext {
+    const reactableHandCandidates = this.board
+      .getAllHands()
+      .filter((hand) => !hand.seat.equals(this.activeSeat))
+      .filter((hand) => !this.isRiichiOf(hand.seat));
+
+    const discards = new Map(
+      reactableHandCandidates.map((hand) => [
+        hand.seat,
+        this.board.getAllDiscardedTilesOf(hand.seat),
+      ]),
+    );
+
     return new CallResolutionContext(
       type,
       target,
       this.activeSeat,
-      this.board.getAllHands(),
+      reactableHandCandidates,
+      discards,
     );
   }
 

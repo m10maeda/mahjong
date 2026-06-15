@@ -9,9 +9,11 @@ export enum CallResolutionType {
 }
 
 export class CallResolutionContext {
+  public readonly discards: ReadonlyMap<SeatPosition, readonly Tile[]>;
+
   public readonly from: SeatPosition;
 
-  public readonly hands: readonly IHand[];
+  public readonly reactionHandCandidates: readonly IHand[];
 
   public readonly target: Tile;
 
@@ -21,11 +23,13 @@ export class CallResolutionContext {
     type: CallResolutionType,
     target: Tile,
     from: SeatPosition,
-    hands: readonly IHand[],
+    reactionHandCandidates: readonly IHand[],
+    discards: ReadonlyMap<SeatPosition, readonly Tile[]>,
   ) {
     this.type = type;
     this.target = target;
     this.from = from;
-    this.hands = hands;
+    this.reactionHandCandidates = reactionHandCandidates;
+    this.discards = discards;
   }
 }
