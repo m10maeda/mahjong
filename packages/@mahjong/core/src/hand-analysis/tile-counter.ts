@@ -15,6 +15,10 @@ export class TileCounter implements Iterable<Tile> {
     return firstTile;
   }
 
+  public get size(): number {
+    return [...this].length;
+  }
+
   public count(code: TileCode): number {
     return this.tiles.get(code)?.length ?? 0;
   }
