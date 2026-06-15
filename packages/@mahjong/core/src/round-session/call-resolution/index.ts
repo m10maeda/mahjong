@@ -8,8 +8,5 @@ export {
   PendingCallResolutionResult,
   RonCallResolutionResult,
   ClaimCallResolutionResult,
-  KanCallResolutionResult,
-  PonCallResolutionResult,
-  ChiiCallResolutionResult,
   AllPassCallResolutionResult,
 } from './call-resolution-result';

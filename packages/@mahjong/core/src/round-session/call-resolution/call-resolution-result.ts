@@ -1,5 +1,5 @@
 import type { SeatPosition } from '../../table';
-import type { ChiiCall, OpenKanCall, PonCall } from '../commands';
+import type { ReactiveRoundSessionCommand } from '../commands';
 import type { RonType } from '../events/won/won-with-ron';
 
 export abstract class CallResolutionResult {
@@ -34,42 +34,18 @@ export class RonCallResolutionResult extends ResolvedResolutionResult {
   }
 }
 
-export abstract class ClaimCallResolutionResult extends ResolvedResolutionResult {
+export class ClaimCallResolutionResult extends ResolvedResolutionResult {
   public readonly claimer: SeatPosition;
 
-  public constructor(claimer: SeatPosition) {
+  public readonly resolvedCommand: ReactiveRoundSessionCommand;
+
+  public constructor(
+    claimer: SeatPosition,
+    resolvedCommand: ReactiveRoundSessionCommand,
+  ) {
     super();
 
     this.claimer = claimer;
-  }
-}
-
-export class KanCallResolutionResult extends ClaimCallResolutionResult {
-  public readonly resolvedCommand: OpenKanCall;
-
-  public constructor(claimer: SeatPosition, resolvedCommand: OpenKanCall) {
-    super(claimer);
-
-    this.resolvedCommand = resolvedCommand;
-  }
-}
-
-export class PonCallResolutionResult extends ClaimCallResolutionResult {
-  public readonly resolvedCommand: PonCall;
-
-  public constructor(claimer: SeatPosition, resolvedCommand: PonCall) {
-    super(claimer);
-
-    this.resolvedCommand = resolvedCommand;
-  }
-}
-
-export class ChiiCallResolutionResult extends ClaimCallResolutionResult {
-  public readonly resolvedCommand: ChiiCall;
-
-  public constructor(claimer: SeatPosition, resolvedCommand: ChiiCall) {
-    super(claimer);
-
     this.resolvedCommand = resolvedCommand;
   }
 }
