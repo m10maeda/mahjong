@@ -4,3 +4,4 @@ packages:
   - 'packages/@mahjong/*'
 allowBuilds:
   esbuild: true
+  sharp: true
