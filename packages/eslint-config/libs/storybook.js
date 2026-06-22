@@ -7,7 +7,7 @@ export default [
   ...storybookPlugin.configs['flat/addon-interactions'],
 
   {
-    files: ['.storybook/*.ts', '**/*.stories.tsx'],
+    files: ['.storybook/*.tsx', '.storybook/*.ts', '**/*.stories.tsx'],
     rules: {
       // Require default export.
       'import/prefer-default-export': 'error',

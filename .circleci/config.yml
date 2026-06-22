@@ -32,7 +32,7 @@ commands:
       - run:
           name: Install Playwright Browsers
           command: |
-            pnpm --filter @mahjong/standalone exec playwright install chromium
+            pnpm --filter @mahjong/standalone --filter @mahjong/ui exec playwright install chromium
 
       - save_cache:
           name: Save pnpm Package Cache
