@@ -29,6 +29,11 @@ commands:
           command: |
             pnpm install
 
+      - run:
+          name: Install Playwright Browsers
+          command: |
+            pnpm --filter @mahjong/standalone exec playwright install chromium
+
       - save_cache:
           name: Save pnpm Package Cache
           key: pnpm-packages-{{ checksum "pnpm-lock.yaml" }}

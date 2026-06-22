@@ -40,3 +40,6 @@ yarn-error.log*
 # Caches
 .eslintcache
 .stylelintcache
+
+*storybook.log
+storybook-static
